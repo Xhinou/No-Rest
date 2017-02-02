@@ -43,7 +43,7 @@ public class QuestManager : MonoBehaviour
         else if (sceneID == 2)
         {
             GameObject sailor = GameObject.Find("SailorBody");
-            GameObject player = GameObject.FindWithTag("Player");
+            //GameObject player = GameObject.FindWithTag("Player");
             sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = player.transform.position;
             while (introStep == 0)
             {
@@ -80,7 +80,7 @@ public class QuestManager : MonoBehaviour
 
     public void RunQuest(int npcID)
     {
-        npc = GameObject.FindWithTag("talking");
+        //npc = GameObject.FindWithTag("talking");
         if (sceneID == 2)
         {
             if (npcID == 1)
@@ -121,9 +121,10 @@ public class QuestManager : MonoBehaviour
             return;
         }
     }
-
+    #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
-
+    #endregion World 1
+    #region World 2
     //*------------------------------ WORLD 2 - THE CAPTAIN ------------------------------*//
 
     int sailorStep = 0;
@@ -613,6 +614,8 @@ public class QuestManager : MonoBehaviour
         npc.GetComponent<NpcManager>().canvas[0].SetActive(true);
         //npc.tag = "Untagged";
     }
-
+    #endregion World 2
+    #region World 3
     //*------------------------------ WORLD 3 - THE OFFICER ------------------------------*//
+    #endregion World 3
 }
