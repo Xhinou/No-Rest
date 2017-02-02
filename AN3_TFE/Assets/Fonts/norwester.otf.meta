@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b8c0c3a62186d5045808538b16b9ab71
+timeCreated: 1482411532
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Norwester
+  fontNames:
+  - Norwester
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

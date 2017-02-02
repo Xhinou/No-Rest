@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a9a360cc9b19a214e8e5e2da8c978541
+timeCreated: 1482411784
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ticketing
+  fontNames:
+  - Ticketing
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
