@@ -80168,6 +80168,7 @@ MonoBehaviour:
   hasClicked: 0
   isPlayerTrigger: 0
   canSkipDial: 1
+  anim: {fileID: 0}
 --- !u!4 &1373758663 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 72981280b0e90354ba13f3da8b9efc68, type: 3}
@@ -88729,6 +88730,11 @@ Prefab:
       propertyPath: agent
       value: 
       objectReference: {fileID: 1373677474}
+    - target: {fileID: 114616512490062602, guid: f220b5de0b3529d49a81bb303916d182,
+        type: 2}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 2009278025}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f220b5de0b3529d49a81bb303916d182, type: 2}
   m_IsPrefabParent: 0
@@ -111452,6 +111458,11 @@ GameObject:
 --- !u!4 &2009278020 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4815988463532194, guid: f220b5de0b3529d49a81bb303916d182,
+    type: 2}
+  m_PrefabInternal: {fileID: 1607384244}
+--- !u!95 &2009278025 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95228278107723672, guid: f220b5de0b3529d49a81bb303916d182,
     type: 2}
   m_PrefabInternal: {fileID: 1607384244}
 --- !u!4 &2009613965 stripped
