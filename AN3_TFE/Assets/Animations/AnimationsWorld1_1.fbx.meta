@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6c9731837bd8eed48979cb738f897e95
-timeCreated: 1486377406
+guid: 3a1544513c2e7504a93a56ea76701eb6
+timeCreated: 1486379097
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -276,6 +276,8 @@ ModelImporter:
     4300036: polySurface28
     4300038: polySurface5
     4300040: head
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -338,7 +340,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
