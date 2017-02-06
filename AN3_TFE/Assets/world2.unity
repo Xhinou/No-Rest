@@ -85236,6 +85236,16 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1678816748}
+    - target: {fileID: 223973072328838308, guid: 45179878998a3294abadf332b3c9c87b,
+        type: 2}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223973072328838308, guid: 45179878998a3294abadf332b3c9c87b,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45179878998a3294abadf332b3c9c87b, type: 2}
   m_IsPrefabParent: 0

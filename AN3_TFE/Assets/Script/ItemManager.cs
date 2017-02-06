@@ -110,6 +110,6 @@ public class ItemManager : MonoBehaviour
     {
         itemInfo.text = "<b>" + gameObject.name + "</b>" + getItem;
         itemInfoText.GetComponent<Text>().canvasRenderer.SetAlpha(1f);
-        itemInfoText.GetComponent<Text>().CrossFadeAlpha(0f, 2f, false);
+        itemInfoText.GetComponent<Text>().CrossFadeAlpha(0f, 4f, false);
     }
 }
