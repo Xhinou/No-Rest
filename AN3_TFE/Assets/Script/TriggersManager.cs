@@ -8,6 +8,7 @@ public class TriggersManager : MonoBehaviour
     QuestManager qManager;
     CharacterClickingController controller;
     public GameObject player;
+    bool isEntering;
 
     void Awake()
     {
@@ -17,21 +18,44 @@ public class TriggersManager : MonoBehaviour
         controller = player.GetComponent<CharacterClickingController>();
     }
 
-    void Update()
-    {
-
+    void OnTriggerEnter(Collider colr)
+    {       
+        if (colr.gameObject.tag == "Player")
+        {
+            isEntering = true;
+            StartCoroutine(TriggerQuest());
+        }
     }
 
-    void OnTriggerEnter(Collider colr)
+    void OnTriggerExit(Collider colr)
     {
         if (colr.gameObject.tag == "Player")
         {
+            isEntering = false;
             StartCoroutine(TriggerQuest());
         }
     }
 
     public IEnumerator TriggerQuest()
     {
+        if (qManager.sceneID == 0)
+        {
+            GameObject door = GameObject.Find("Door");
+            float x = door.transform.position.x;
+            float z = door.transform.position.z;
+            if (name == "DoorTrigger")
+            {
+                if (isEntering)
+                {
+                    door.transform.position = new Vector3 (x, -3.75f, z);
+                } else
+                {
+                    door.transform.position = new Vector3(x, 2.38f, z);
+                }
+            }
+        }
+
+        #region World 2
         if (qManager.sceneID == 2)
         {
             GameObject sailor = GameObject.Find("SailorBody");
@@ -105,5 +129,6 @@ public class TriggersManager : MonoBehaviour
                 qManager.RunQuest(1);
             }
         }
+        #endregion World 2
     }
 }
