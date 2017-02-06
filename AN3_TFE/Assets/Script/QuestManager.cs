@@ -35,6 +35,7 @@ public class QuestManager : MonoBehaviour
         if (sceneID == 0)
         {
             yield return new WaitForSeconds(2);
+            //ANIM EMBODY "SPIRIT FORM"
             controller.hasControl = true;
         }
         else if (sceneID == 1)
@@ -82,10 +83,6 @@ public class QuestManager : MonoBehaviour
     public void RunQuest(int npcID)
     {
         //npc = GameObject.FindWithTag("talking");
-        if (sceneID == 0)
-        {
-
-        }
         if (sceneID == 2)
         {
             if (npcID == 1)
@@ -126,9 +123,25 @@ public class QuestManager : MonoBehaviour
             return;
         }
     }
+
+    #region World 0
+    //*------------------------------ WORLD 0 - LOBBY ------------------------------*//
+
+    int karmaStep = 0;
+
+    public void karmaQuest(int step)
+    {
+        if (karmaStep == 0)
+        {
+            //TALK WITH THE ENTITY BETWEEN THE WORLDS
+        }
+    }
+    #endregion World 0
+
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
     #endregion World 1
+
     #region World 2
     //*------------------------------ WORLD 2 - THE CAPTAIN ------------------------------*//
 
@@ -620,6 +633,7 @@ public class QuestManager : MonoBehaviour
         //npc.tag = "Untagged";
     }
     #endregion World 2
+
     #region World 3
     //*------------------------------ WORLD 3 - THE OFFICER ------------------------------*//
     #endregion World 3
