@@ -12,8 +12,6 @@ public class CharacterClickingController : MonoBehaviour
     public bool canSkipDial = true;
     LayerMask navMap;
     GameObject npc;
-    public Animator anim;
-    bool isMoving;
 
     void Start()
     {
@@ -44,14 +42,6 @@ public class CharacterClickingController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
         }
-        if (agent.velocity.x != 0 || agent.velocity.z != 0)
-        {
-            isMoving = true;
-        } else
-        {
-            isMoving = false;
-        }
-        anim.SetBool("isMoving", isMoving);
     }
 
     public void UnableControl()

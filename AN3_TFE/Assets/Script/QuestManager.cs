@@ -34,8 +34,7 @@ public class QuestManager : MonoBehaviour
     {
         if (sceneID == 0)
         {
-            yield return new WaitForSeconds(2);
-            controller.hasControl = true;
+
         }
         else if (sceneID == 1)
         {
@@ -82,10 +81,6 @@ public class QuestManager : MonoBehaviour
     public void RunQuest(int npcID)
     {
         //npc = GameObject.FindWithTag("talking");
-        if (sceneID == 0)
-        {
-
-        }
         if (sceneID == 2)
         {
             if (npcID == 1)
