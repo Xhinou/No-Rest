@@ -547,7 +547,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -764,10 +764,6 @@ ModelImporter:
       - path: Character1_Reference/Character1_Hips/Character1_Spine/Character1_RightShoulder/polySurface5
         weight: 1
       - path: Character1_Reference/Character1_Hips/hips
-        weight: 1
-      - path: polySurface12
-        weight: 1
-      - path: polySurface12/transform1
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}
