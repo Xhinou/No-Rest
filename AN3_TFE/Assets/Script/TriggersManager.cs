@@ -38,6 +38,8 @@ public class TriggersManager : MonoBehaviour
 
     public IEnumerator TriggerQuest()
     {
+
+        #region World 0
         if (qManager.sceneID == 0)
         {
             if (name == "DoorTrigger")
@@ -55,11 +57,21 @@ public class TriggersManager : MonoBehaviour
                     anim.SetBool("doorTrig", doorTriggered);
                 }
             }
-            if (name == "GodTalk")
+            if (name == "WhoTrigger")
             {
-                qManager.karmaQuest(0);
+               // GameObject mainCam = GameObject.Find("Main Camera");
+                GameObject cam2 = GameObject.Find("WhoCamera");
+                if (isEntering)
+                {
+                    cam2.GetComponent<Camera>().enabled = true;
+                } else
+                {
+                    cam2.GetComponent<Camera>().enabled = false;
+                }
+                //qManager.karmaQuest(0);
             }
         }
+        #endregion World 0
 
         #region World 2
         if (qManager.sceneID == 2)
