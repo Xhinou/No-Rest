@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class NpcManager : MonoBehaviour
 {
 
-    public int npcID;
-    public int canvasAmount;
+    public int
+        npcID,
+        canvasAmount;
     public GameObject[] canvas;
-    public bool isTalkable;
-    public bool isClicked;
-
-    public GameObject scriptSystem;
+    public bool
+        isTalkable,
+        isClicked;
+    public GameObject
+        scriptSystem,
+        player;
     QuestManager qManager;
     CharacterClickingController controller;
-    public GameObject player;
 
     void Awake()
     {

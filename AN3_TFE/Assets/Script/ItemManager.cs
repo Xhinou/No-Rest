@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
-
+    public GameObject player;
     public int itemID;
-    public bool isPickable = true;
-    public bool isClicked;
+    public bool
+        isPickable = true,
+        isClicked;
     GameObject itemInfoText;
     Text itemInfo;
     string getItem = " added to inventory";
-
+    Transform gOTransform;
     CharacterClickingController controller;
-    public GameObject player;
+    
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class ItemManager : MonoBehaviour
     {
         itemInfoText = GameObject.Find("ItemInfoText");
         itemInfo = itemInfoText.GetComponent<Text>();
+        gOTransform = gameObject.transform;
     }
 
     void OnCollisionEnter(Collision coln)
@@ -33,11 +34,12 @@ public class ItemManager : MonoBehaviour
         {
             if (controller.hasClicked && isPickable && isClicked)
             {
+                
                 if (!controller.isHolding)
                 {
-                    gameObject.transform.parent = GameObject.Find("Character1_RightHand").transform;
-                    gameObject.transform.localPosition = new Vector3(0.08f, -0.039f, 0);
-                    gameObject.transform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
+                    gOTransform.parent = GameObject.Find("Character1_RightHand").transform;
+                    gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
+                    gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
                     gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
@@ -53,9 +55,9 @@ public class ItemManager : MonoBehaviour
                     heldItem.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                     heldItem.transform.parent = GameObject.Find("Scene").transform;
                     heldItem.tag = "Untagged";
-                    gameObject.transform.parent = GameObject.Find("Character1_RightHand").transform;
-                    gameObject.transform.localPosition = new Vector3(0.08f, -0.039f, 0);
-                    gameObject.transform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
+                    gOTransform.parent = GameObject.Find("Character1_RightHand").transform;
+                    gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
+                    gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
                     gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
@@ -77,7 +79,7 @@ public class ItemManager : MonoBehaviour
             {
                 if (!controller.isHolding)
                 {
-                    gameObject.transform.parent = GameObject.FindWithTag("Player").transform;
+                    gOTransform.parent = GameObject.FindWithTag("Player").transform;
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
                     gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
@@ -93,7 +95,7 @@ public class ItemManager : MonoBehaviour
                     heldItem.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
                     heldItem.transform.parent = GameObject.Find("Scene").transform;
                     heldItem.tag = "Untagged";
-                    gameObject.transform.parent = GameObject.FindWithTag("Player").transform;
+                    gOTransform.parent = GameObject.FindWithTag("Player").transform;
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
                     gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;

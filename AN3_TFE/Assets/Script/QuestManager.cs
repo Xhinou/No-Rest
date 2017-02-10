@@ -5,21 +5,27 @@ using UnityEngine.SceneManagement;
 public class QuestManager : MonoBehaviour
 {
 
-    public int sceneID;
-    public int introStep = 0;
-    public int introEndStep;
+    public int
+        sceneID,
+        introStep = 0,
+        introEndStep;
     public GameObject introGoal;
     public bool hasFollowedSailor = true;
-    GameObject npc;
+    GameObject
+        npc,
+        player;
     public GameObject[] triggers = new GameObject[7];
     int karma = 0;
     CharacterClickingController controller;
-    GameObject player;
+    DialoguesSystem dialogSystem;
+    public GameObject scriptSystem;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
+        dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
         StartCoroutine(RunIntro());
         if (sceneID == 2) introEndStep = 3;
     }
@@ -87,7 +93,7 @@ public class QuestManager : MonoBehaviour
         {
             if (npcID == 1)
             {
-                StartCoroutine(SailorQuest(sailorStep));
+                StartCoroutine(SailorQuest(sailorStep, npcID));
             }
             else if (npcID == 2)
             {
@@ -145,17 +151,19 @@ public class QuestManager : MonoBehaviour
     #region World 2
     //*------------------------------ WORLD 2 - THE CAPTAIN ------------------------------*//
 
-    int sailorStep = 0;
-    int greedStep = 0;
-    int killerStep = 0;
-    int harshStep = 0;
+    int
+        sailorStep = 0,
+        greedStep = 0,
+        killerStep = 0,
+        harshStep = 0;
     bool goldGet = false;
 
-    public IEnumerator SailorQuest(int step)
+    public IEnumerator SailorQuest(int step, int npcID)
     {
         npc = GameObject.FindWithTag("talking");
         if (step == 0)
         {
+            dialogSystem.DisplayText(npcID, step);
             sailorStep = 0;
             if (hasFollowedSailor)
             {

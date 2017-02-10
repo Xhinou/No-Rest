@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class NpcTriggers : MonoBehaviour
 {
 
     GameObject npcParent;
+    NpcManager npcManager;
 
     void Start()
     {
         npcParent = gameObject.transform.parent.gameObject;
+        npcManager = npcParent.GetComponent<NpcManager>();
     }
 
     void OnTriggerEnter(Collider colr)
     {
         if (colr.gameObject.tag == "Player")
         {
-            npcParent.GetComponent<NpcManager>().TriggerEnter();
+            npcManager.TriggerEnter();
         }
     }
 
@@ -23,7 +24,7 @@ public class NpcTriggers : MonoBehaviour
     {
         if (colr.gameObject.tag == "Player")
         {
-            npcParent.GetComponent<NpcManager>().TriggerStay();
+            npcManager.TriggerStay();
         }
     }
 
@@ -31,7 +32,7 @@ public class NpcTriggers : MonoBehaviour
     {
         if (colr.gameObject.tag == "Player")
         {
-            npcParent.GetComponent<NpcManager>().TriggerExit();
+            npcManager.TriggerExit();
         }
     }
 }

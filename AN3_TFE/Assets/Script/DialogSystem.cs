@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
 {
 
-    public GameObject textBox;
     public Text theText;
     public TextAsset textFile;
-    public string[] textLines;
-    public string[] textAsk;
-    public int currentLine;
-    public int endAtLine;
+    public string[]
+        textLines, textAsk;
+    public int
+        currentLine,
+        endAtLine;
     public GameObject[] buttons;
-    public GameObject buttonResume;
+    public GameObject
+        textBox,
+        buttonResume,
+        canvas,
+        scriptSystem,
+        player;
     public bool endDialog;
-    public GameObject canvas;
     public static bool mousePressed;
-
-    public GameObject scriptSystem;
     QuestManager qManager;
     CharacterClickingController controller;
-    public GameObject player;
 
     void Awake()
     {

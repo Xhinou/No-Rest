@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class TriggersManager : MonoBehaviour
 {
 
-    public GameObject scriptSystem;
+    public GameObject
+        scriptSystem,
+        player;
     QuestManager qManager;
     CharacterClickingController controller;
-    public GameObject player;
     bool isEntering;
 
     void Awake()
@@ -62,7 +64,6 @@ public class TriggersManager : MonoBehaviour
                // GameObject cam2 = GameObject.Find("WhoCamera");
                 if (isEntering)
                 {
-                    StartCoroutine(pute());
                     //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 280, Time.deltaTime * 2f);
                     //cam2.GetComponent<Camera>().enabled = true;
                 } else
@@ -79,32 +80,34 @@ public class TriggersManager : MonoBehaviour
         if (qManager.sceneID == 2)
         {
             GameObject sailor = GameObject.Find("SailorBody");
+            NpcManager sailorNpc = sailor.GetComponent<NpcManager>();
+            NavMeshAgent sailorNav = sailor.GetComponent<NavMeshAgent>();
             if (isEntering)
             {
                 if (name == "SailorGoRight")
                 {
                     qManager.hasFollowedSailor = true;
-                    sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                    sailorNav.enabled = false;
                     GameObject newPos = GameObject.Find("SailorPosA");
                     sailor.transform.position = newPos.transform.position;
-                    sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
-                    sailor.GetComponent<NpcManager>().isTalkable = true;
-                    sailor.GetComponent<NpcManager>().DisplayObject();
+                    sailorNav.enabled = true;
+                    sailorNpc.isTalkable = true;
+                    sailorNpc.DisplayObject();
                 }
                 else if (name == "SailorGoLeft")
                 {
                     qManager.hasFollowedSailor = false;
-                    sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                    sailorNav.enabled = false;
                     GameObject newPos = GameObject.Find("SailorPosB");
                     sailor.transform.position = newPos.transform.position;
-                    sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
-                    sailor.GetComponent<NpcManager>().isTalkable = true;
-                    sailor.GetComponent<NpcManager>().DisplayObject();
+                    sailorNav.enabled = true;
+                    sailorNpc.isTalkable = true;
+                    sailorNpc.DisplayObject();
                 }
                 else if (name == "SailorInterrupt")
                 {
                     sailor.tag = "talking";
-                    StartCoroutine(qManager.SailorQuest(0));
+                    StartCoroutine(qManager.SailorQuest(0, 1));
                 }
                 else if (name == "SailorBlock")
                 {
@@ -112,14 +115,14 @@ public class TriggersManager : MonoBehaviour
                     controller.agent.ResetPath();
                     controller.canSkipDial = false;
                     GameObject newPos = GameObject.Find("SailorBlockPos");
-                    sailor.GetComponent<NpcManager>().canvas[3].SetActive(true);
+                    sailorNpc.canvas[3].SetActive(true);
                     controller.agent.destination = newPos.transform.position;
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
-                    sailor.GetComponent<NpcManager>().canvas[3].SetActive(false);
+                    sailorNpc.canvas[3].SetActive(false);
                     controller.hasControl = true;
                     controller.canSkipDial = true;
-                    sailor.GetComponent<NpcManager>().isTalkable = true;
+                    sailorNpc.isTalkable = true;
                 }
                 else if (name == "ScrewThis")
                 {
@@ -137,8 +140,8 @@ public class TriggersManager : MonoBehaviour
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
                     sailor.tag = "talking";
-                    sailor.GetComponent<NpcManager>().isTalkable = true;
-                    StartCoroutine(qManager.SailorQuest(2));
+                    sailorNpc.isTalkable = true;
+                    StartCoroutine(qManager.SailorQuest(2, 1));
                 }
                 else if (name == "End")
                 {
@@ -153,11 +156,5 @@ public class TriggersManager : MonoBehaviour
             }
         }
         #endregion World 2
-    }
-
-    private IEnumerator pute()
-    {
-        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 280, Time.deltaTime * 2f);
-        yield return null;
     }
 }
