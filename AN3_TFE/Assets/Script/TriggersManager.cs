@@ -38,7 +38,6 @@ public class TriggersManager : MonoBehaviour
 
     public IEnumerator TriggerQuest()
     {
-
         #region World 0
         if (qManager.sceneID == 0)
         {
@@ -60,19 +59,22 @@ public class TriggersManager : MonoBehaviour
             if (name == "WhoTrigger")
             {
                // GameObject mainCam = GameObject.Find("Main Camera");
-                GameObject cam2 = GameObject.Find("WhoCamera");
+               // GameObject cam2 = GameObject.Find("WhoCamera");
                 if (isEntering)
                 {
-                    cam2.GetComponent<Camera>().enabled = true;
+                    StartCoroutine(pute());
+                    //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 280, Time.deltaTime * 2f);
+                    //cam2.GetComponent<Camera>().enabled = true;
                 } else
                 {
-                    cam2.GetComponent<Camera>().enabled = false;
+                    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, -280, Time.deltaTime * 2f);
+                    //cam2.GetComponent<Camera>().enabled = false;
                 }
                 //qManager.karmaQuest(0);
             }
         }
         #endregion World 0
-
+        
         #region World 2
         if (qManager.sceneID == 2)
         {
@@ -151,5 +153,11 @@ public class TriggersManager : MonoBehaviour
             }
         }
         #endregion World 2
+    }
+
+    private IEnumerator pute()
+    {
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 280, Time.deltaTime * 2f);
+        yield return null;
     }
 }
