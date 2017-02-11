@@ -7,7 +7,7 @@ public class DialogSystem : MonoBehaviour
     public Text theText;
     public TextAsset textFile;
     public string[]
-        textLines, textAsk;
+        textLines;
     public int
         currentLine,
         endAtLine;

@@ -62,6 +62,8 @@ public class QuestManager : MonoBehaviour
                 }
                 yield return null;
             }
+            dialogSystem.DisplayText(1, 0);
+            dialogSystem.choicesCount = 2;
             sailor.GetComponent<NpcManager>().canvas[0].SetActive(true);
             while (introStep == 1)
                 yield return null;

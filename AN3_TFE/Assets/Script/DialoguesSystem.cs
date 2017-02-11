@@ -7,11 +7,11 @@ public class DialoguesSystem : MonoBehaviour
     public Text theText;
     public TextAsset textFile;
     public string[]
-        textLines, textAsk;
+        textLines;
     public int
         currentLine,
         endAtLine;
-    public GameObject[] buttons;
+    public GameObject[] buttons = new GameObject[3];
     public GameObject
         textBox,
         buttonResume,
@@ -24,6 +24,7 @@ public class DialoguesSystem : MonoBehaviour
     public static bool mousePressed;
    // QuestManager qManager;
     CharacterClickingController controller;
+    public int choicesCount;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class DialoguesSystem : MonoBehaviour
     {
         if (isTextboxActive)
         {
+            theText.text = textLines[currentLine];
             if (controller.canSkipDial)
             {
                 if (mousePressed && currentLine >= endAtLine)
@@ -46,10 +48,12 @@ public class DialoguesSystem : MonoBehaviour
                     if (endDialog)
                     {
                         currentLine = 0;
+                        textBox.SetActive(false);
+                        isTextboxActive = false;
                     }
                     else
                     {
-                        for (int i = 0; i < buttons.Length; i++)
+                        for (int i = 0; i < choicesCount; i++)
                         {
                             buttons[i].SetActive(true);
                         }
@@ -72,19 +76,19 @@ public class DialoguesSystem : MonoBehaviour
     void OnEnable()
     {
         currentLine = 0;
-        buttonResume.SetActive(true);
+        //buttonResume.SetActive(true);
     }
 
     public void DisplayText(int npcID, int step)
     {
         textBox.SetActive(true);
         int order = 0;
-        var textFile = Resources.Load("Assets/Texts/" + npcID + step + order + ".txt") as TextAsset;
+        textFile = Resources.Load("Texts/00" + npcID + "_" + step + "_" + order) as TextAsset;
         if (textFile != null)
             textLines = (textFile.text.Split('\n'));
         if (endAtLine == 0)
             endAtLine = textLines.Length - 1;
-        theText.text = textLines[currentLine];
+       // theText.text = textLines[currentLine];
         isTextboxActive = true;
     }
 }
