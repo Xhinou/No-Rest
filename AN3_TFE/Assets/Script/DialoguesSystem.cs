@@ -24,7 +24,7 @@ public class DialoguesSystem : MonoBehaviour
     public static bool mousePressed;
    // QuestManager qManager;
     CharacterClickingController controller;
-    public int choicesCount;
+    public int choicesCount, sceneID, npcID, step, order;
 
     void Awake()
     {
@@ -79,16 +79,36 @@ public class DialoguesSystem : MonoBehaviour
         //buttonResume.SetActive(true);
     }
 
-    public void DisplayText(int npcID, int step)
+    public void DisplayText(int _sceneID, int _npcID, int _step)
     {
+        sceneID = _sceneID;
+        npcID = _npcID;
+        step = _step;
         textBox.SetActive(true);
-        int order = 0;
-        textFile = Resources.Load("Texts/00" + npcID + "_" + step + "_" + order) as TextAsset;
+        order = 0;
+        textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order) as TextAsset;
         if (textFile != null)
             textLines = (textFile.text.Split('\n'));
         if (endAtLine == 0)
             endAtLine = textLines.Length - 1;
        // theText.text = textLines[currentLine];
         isTextboxActive = true;
+    }
+
+
+    //A REFAIRE, TROUVER UN MOYEN DE LOAD TEXT DANS L'ORDRE
+    void choiceOne()
+    {
+        textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + "0") as TextAsset;
+    }
+
+    void choiceTwo()
+    {
+        textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + "1") as TextAsset;
+    }
+
+    void choiceThree()
+    {
+        textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + "00") as TextAsset;
     }
 }
