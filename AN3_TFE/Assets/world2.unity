@@ -11258,7 +11258,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 194930786}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1293650256}
+        m_MethodName: NextDialog
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &194930786
@@ -39199,7 +39210,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1293650256}
-        m_MethodName: nextDialog
+        m_MethodName: NextDialog
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -117364,7 +117375,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1293650256}
-        m_MethodName: nextDialog
+        m_MethodName: NextDialog
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

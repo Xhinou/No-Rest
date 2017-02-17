@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+//using System.Collections.Generic;
 
 public class QuestManager : MonoBehaviour
 {
-
+    //List<QuestManager> npcBro = new List<QuestManager>();
     public int
         sceneID,
         introStep = 0,
@@ -19,7 +20,7 @@ public class QuestManager : MonoBehaviour
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
     public GameObject scriptSystem;
-
+    
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -32,7 +33,7 @@ public class QuestManager : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log("Karma value is: " + karma);
+        //Debug.Log("Karma value is: " + karma);
         //Debug.Log(sailorStep);
     }
 
@@ -51,7 +52,6 @@ public class QuestManager : MonoBehaviour
         else if (sceneID == 2)
         {
             GameObject sailor = GameObject.Find("SailorBody");
-            //GameObject player = GameObject.FindWithTag("Player");
             sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = player.transform.position;
             while (introStep == 0)
             {
