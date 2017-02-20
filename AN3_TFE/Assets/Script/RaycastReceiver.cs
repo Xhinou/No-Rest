@@ -48,7 +48,7 @@ public class RaycastReceiver : MonoBehaviour
         if (isNpc)
         {
             if (gameObject.tag != "held" && controller.hasControl && gameObject.GetComponent<NpcManager>().isTalkable)
-            {
+            {            
                 controller.hasClicked = true;
                 gameObject.GetComponent<NpcManager>().isClicked = true;
             }

@@ -35,7 +35,7 @@ public class ItemManager : MonoBehaviour
             {              
                 if (!controller.isHolding)
                 {
-                    gOTransform.parent = GameObject.Find("Character1_RightHand").transform;
+                    gOTransform.parent = controller.rightHand.transform;
                     gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
                     gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -107,7 +107,9 @@ public class ItemManager : MonoBehaviour
 
     void DisplayText()
     {
-        itemInfo.text = "<b>" + gameObject.name + "</b>" + getItem;
+        string color = controller.pickedItem.ToString("#000000");
+        //controller.pickedItem
+        itemInfo.text = "<size=8>" + "<color=" + color + ">" + gameObject.name + "</color></size>" + getItem;
         itemInfoText.GetComponent<Text>().canvasRenderer.SetAlpha(1f);
         itemInfoText.GetComponent<Text>().CrossFadeAlpha(0f, 4f, false);
     }

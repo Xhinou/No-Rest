@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
 {
-    public Text theText;
+/*    public Text theText;
     public TextAsset textFile;
     public string[]
         textLines;
@@ -75,5 +75,5 @@ public class DialogSystem : MonoBehaviour
     {
         currentLine = 0;
         buttonResume.SetActive(true);
-    }
+    }*/
 }

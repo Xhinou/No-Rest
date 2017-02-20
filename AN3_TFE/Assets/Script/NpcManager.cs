@@ -55,8 +55,8 @@ public class NpcManager : MonoBehaviour
     public void TriggerExit()
     {
         controller.isPlayerTrigger = false;
-        for (int i = 0; i < canvasAmount; i++)
-            canvas[i].SetActive(false);
+        /*for (int i = 0; i < canvasAmount; i++)
+            canvas[i].SetActive(false);*/
         gameObject.tag = "Untagged";
     }
 

@@ -18,15 +18,15 @@ public class DialoguesSystem : MonoBehaviour
     public GameObject[] buttons = new GameObject[3];
     public GameObject
         textBox,
-        npcCam,
         player,
         scriptSystem;
-    Camera cam;
     public bool isDisabled;
     [Range(0,2)]public int karmaMod = 0;
     CharacterClickingController controller;
     QuestManager qManager;
     Button resume;
+    Camera mainCam;
+    [HideInInspector] public Camera dialCam;
 
     void Awake()
     {
@@ -34,7 +34,7 @@ public class DialoguesSystem : MonoBehaviour
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         qManager = scriptSystem.GetComponent<QuestManager>();
-        cam = npcCam.GetComponent<Camera>();
+        mainCam = Camera.main;
         textBox.SetActive(false);
         isDisabled = true;
         resume = textBox.GetComponent<Button>();
@@ -53,9 +53,11 @@ public class DialoguesSystem : MonoBehaviour
         sceneID = _sceneID;
         npcID = _npcID;
         step = _step;
+        dialCam = GameObject.Find("NPC" + npcID + "Cam" + step).GetComponent<Camera>();
+        mainCam.enabled = false;
+        dialCam.enabled = true;
         textBox.SetActive(true);
         isDisabled = false;
-        cam.enabled = true;
         order = 0;
         LoadFiles(0);
         string[] fileName;
@@ -99,6 +101,17 @@ public class DialoguesSystem : MonoBehaviour
         UpdateLine();
     }
 
+    public void EndDialog()
+    {
+        currentLine = 0;
+        textBox.SetActive(false);
+        isDisabled = true;
+        dialCam.enabled = false;
+        mainCam.enabled = true;
+        if (!qManager.intro)
+            controller.hasControl = true;
+    }
+
     void LoadFiles(int choice)
     {
         string strRange = "";
@@ -123,26 +136,20 @@ public class DialoguesSystem : MonoBehaviour
         endAtLine = textLines.Length - 1;
     }
 
-    public void ForceLine(int line, int? endLine)
+    public void ForceLine(int line, int? modLine, int? choice)
     {
         currentLine=line;
-        if (endLine != null)
-            endAtLine = currentLine + (int)endLine;
+        if (modLine != null)
+            endAtLine = currentLine + (int)modLine;
+        if (choice != null)
+            choicesCount = (int)choice;
         UpdateLine();
     }
 
     void UpdateLine()
     {
         theText.text = textLines[currentLine];
-    }
-
-    public void EndDialog()
-    {
-        currentLine = 0;
-        cam.enabled = false;
-        textBox.SetActive(false);
-        isDisabled = true;
-    }
+    }  
 
     public void KarmaMod ()
     {
@@ -150,5 +157,10 @@ public class DialoguesSystem : MonoBehaviour
             qManager.karma++;
         else if (karmaMod == 2)
             qManager.karma--;
+    }
+
+    public void OrderMod(int mod)
+    {
+        order += mod;
     }
 }

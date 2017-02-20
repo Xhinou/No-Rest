@@ -117,7 +117,7 @@ public class TriggersManager : MonoBehaviour
                     controller.canSkipDial = false;
                     GameObject newPos = GameObject.Find("SailorBlockPos");
                     dialogSystem.DisplayText(qManager.sceneID, 1, 2);
-                    dialogSystem.ForceLine(0, 0);
+                    dialogSystem.ForceLine(0, 0, null);
                     controller.agent.destination = newPos.transform.position;
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
@@ -143,7 +143,7 @@ public class TriggersManager : MonoBehaviour
                         yield return null;
                     sailor.tag = "talking";
                     sailorNpc.isTalkable = true;
-                    StartCoroutine(qManager.SailorQuest(2, 1));
+                    qManager.RunQuest(1);
                 }
                 else if (name == "End")
                 {

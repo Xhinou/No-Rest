@@ -14,12 +14,16 @@ public class CharacterClickingController : MonoBehaviour
     GameObject npc;
     public Animator anim;
     bool isMoving;
+    public Color pickedItem;
+    public GameObject rightHand;
+    Camera mainCam;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         navMap = LayerMask.GetMask("NavMap");
         npc = GameObject.FindWithTag("talking");
+        mainCam = Camera.main;
     }
 
     void Update()
@@ -27,7 +31,7 @@ public class CharacterClickingController : MonoBehaviour
         if (Input.GetMouseButton(0) && hasControl)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000, navMap.value))
+            if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, navMap.value))
             {
                 agent.destination = hit.point;
                 if (hit.transform.tag == "static")
