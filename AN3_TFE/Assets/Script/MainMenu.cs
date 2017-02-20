@@ -5,16 +5,10 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
-
     public int sceneID = 0;
     public GameObject fadeScreen;
     public Button[] buttons = new Button[2];
-    //Color goalColor = new Color(0,0,0,255);
     public float fadeDuration = 1f;
-
-    void Start()
-    {
-    }
 
     public void RunGame()
     {
@@ -26,11 +20,8 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Coroutine Started");
         for (int i = 0; i < buttons.Length; i++)
-        {
             buttons[i].interactable = false;
-        }
         fadeScreen.GetComponent<Image>().CrossFadeAlpha(255f, fadeDuration, false);
-        //Debug.Log(fadeScreen.GetComponent<Image>().color);
         yield return new WaitForSeconds(2);
         Debug.Log("PLAY");
     }

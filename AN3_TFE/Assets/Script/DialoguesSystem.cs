@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class DialoguesSystem : MonoBehaviour
 {
-
     public Text theText;
     TextAsset textFile;
     string[]
@@ -14,42 +13,39 @@ public class DialoguesSystem : MonoBehaviour
         sceneID,
         npcID,
         step,
-        order;
-    public int choicesCount;
+        order,
+        choicesCount;
     public GameObject[] buttons = new GameObject[3];
     public GameObject
         textBox,
-        player;
-    bool isTextboxActive;
+        npcCam,
+        player,
+        scriptSystem;
+    Camera cam;
+    public bool isDisabled;
+    [Range(0,2)]public int karmaMod = 0;
     CharacterClickingController controller;
-        
+    QuestManager qManager;
+    Button resume;
+
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
+        scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
+        qManager = scriptSystem.GetComponent<QuestManager>();
+        cam = npcCam.GetComponent<Camera>();
+        textBox.SetActive(false);
+        isDisabled = true;
+        resume = textBox.GetComponent<Button>();
     }
 
     void Update()
     {
-        if (isTextboxActive)
-            theText.text = textLines[currentLine];
-    }
-
-    public void ResumeDialog()
-    {        
-        if (choicesCount == 0)
-        {
-            currentLine = 0;
-            textBox.SetActive(false);
-            isTextboxActive = false;
-        }
-        if (currentLine >= endAtLine)
-        {
-            theText.enabled = false;
-            for (int i = 0; i < choicesCount; i++)
-                buttons[i].SetActive(true);
-        } else if (currentLine < endAtLine)
-            currentLine++;
+        if (controller.canSkipDial && theText.enabled == true)
+            resume.interactable = true;
+        else
+            resume.interactable = false;
     }
 
     public void DisplayText(int _sceneID, int _npcID, int _step)
@@ -58,27 +54,49 @@ public class DialoguesSystem : MonoBehaviour
         npcID = _npcID;
         step = _step;
         textBox.SetActive(true);
-        if (controller.canSkipDial)
-            textBox.GetComponent<Button>().interactable = true;
+        isDisabled = false;
+        cam.enabled = true;
         order = 0;
         LoadFiles(0);
         string[] fileName;
         fileName = textFile.name.Split('-');
-        choicesCount = int.Parse(fileName[1]);      
-        isTextboxActive = true;
+        choicesCount = int.Parse(fileName[1]);
+        UpdateLine();
     }
 
+    public void ResumeDialog()
+    {
+        currentLine++;      
+        if (currentLine > endAtLine)
+        {
+            if (choicesCount == 0)
+            {
+                EndDialog();
+            }
+            else
+            {
+                theText.enabled = false;
+                resume.interactable = false;
+                for (int i = 0; i < choicesCount; i++)
+                    buttons[i].SetActive(true);
+            }
+        } else
+            UpdateLine();
+    }
+    
     public void NextDialog(int choice)
     {
         order += 1;
         LoadFiles(choice);
         currentLine = 0;
-        theText.enabled = true;       
+        theText.enabled = true;
+        resume.interactable = true;
         for (int i = 0; i < choicesCount; i++)
             buttons[i].SetActive(false);
         string[] fileName;
         fileName = textFile.name.Split('-');
         choicesCount = int.Parse(fileName[1]);
+        UpdateLine();
     }
 
     void LoadFiles(int choice)
@@ -95,9 +113,42 @@ public class DialoguesSystem : MonoBehaviour
             textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-" + i) as TextAsset;
             if (textFile != null)
                 break;
+            else if (i > 3)
+            {
+                Debug.Log("Some files don't have a right name. Make sure using the template specified in the README");
+                break;
+            }
         }
         textLines = (textFile.text.Split('\n'));
-        if (endAtLine == 0)
-            endAtLine = textLines.Length - 1;
+        endAtLine = textLines.Length - 1;
+    }
+
+    public void ForceLine(int line, int? endLine)
+    {
+        currentLine=line;
+        if (endLine != null)
+            endAtLine = currentLine + (int)endLine;
+        UpdateLine();
+    }
+
+    void UpdateLine()
+    {
+        theText.text = textLines[currentLine];
+    }
+
+    public void EndDialog()
+    {
+        currentLine = 0;
+        cam.enabled = false;
+        textBox.SetActive(false);
+        isDisabled = true;
+    }
+
+    public void KarmaMod ()
+    {
+        if (karmaMod == 1)
+            qManager.karma++;
+        else if (karmaMod == 2)
+            qManager.karma--;
     }
 }

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class CanvasFollowNpc : MonoBehaviour
 {
-
     public GameObject refNpc;
 
     void Update()

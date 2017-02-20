@@ -10172,8 +10172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!208 &172713085
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -11407,8 +11407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!208 &195231256
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -14849,8 +14849,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &276433934
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17082,8 +17082,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &316372665
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25729,7 +25729,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4220053105676154, guid: e5ac843ea9e77214d80452e5fe3f9ddf, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114570201368172750, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
         type: 2}
@@ -32819,8 +32819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &570401295
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -38731,8 +38731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!135 &742439295
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -41285,8 +41285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &806944440
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -42121,7 +42121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &827366865
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42790,6 +42790,16 @@ Prefab:
         type: 2}
       propertyPath: textFile
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764020034580578, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: npcCam
+      value: 
+      objectReference: {fileID: 1154470583}
+    - target: {fileID: 114764020034580578, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: karmaMod
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
@@ -50161,8 +50171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &969860511
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -50299,8 +50309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &971808033
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -53309,8 +53319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!54 &1040288634
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58670,7 +58680,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4220053105676154, guid: e5ac843ea9e77214d80452e5fe3f9ddf, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114570201368172750, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
         type: 2}
@@ -60616,6 +60626,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1151692442}
+--- !u!1 &1154470583 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1607094802939978, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
+    type: 2}
+  m_PrefabInternal: {fileID: 453055152}
 --- !u!1001 &1154944219
 Prefab:
   m_ObjectHideFlags: 0
@@ -65937,8 +65952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!208 &1198120887
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -69989,8 +70004,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &1220568883
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -72912,8 +72927,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &1290590467
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -73054,8 +73069,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &1292932913
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -82292,7 +82307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1408605474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -87155,8 +87170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!114 &1535517503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89078,10 +89093,10 @@ Transform:
   - {fileID: 300291276}
   - {fileID: 832427810}
   - {fileID: 1019596470}
+  - {fileID: 453055153}
   - {fileID: 583283114}
   - {fileID: 1678816749}
   - {fileID: 1098552591}
-  - {fileID: 453055153}
   - {fileID: 1884338936}
   - {fileID: 1872432309}
   - {fileID: 1873291154}
@@ -89622,8 +89637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &1615793884
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -94364,7 +94379,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4220053105676154, guid: e5ac843ea9e77214d80452e5fe3f9ddf, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114570201368172750, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
         type: 2}
@@ -96650,8 +96665,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!23 &1735453284
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -100676,6 +100691,11 @@ Prefab:
     - target: {fileID: 1632337355190074, guid: 396e862ccfd6f0042b0dc841766ae926, type: 2}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114419416043795294, guid: 396e862ccfd6f0042b0dc841766ae926,
+        type: 2}
+      propertyPath: canSkipDial
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 396e862ccfd6f0042b0dc841766ae926, type: 2}
@@ -105472,7 +105492,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4122373561242822, guid: 7a7ad455c999e364bbbf9ef2c14025b0, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7ad455c999e364bbbf9ef2c14025b0, type: 2}
@@ -106105,8 +106125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &1820020645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -111710,8 +111730,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 0
   player: {fileID: 0}
+  isNpc: 0
 --- !u!54 &1975797256
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117135,8 +117155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlight: {fileID: 0}
-  isNpc: 1
   player: {fileID: 0}
+  isNpc: 1
 --- !u!23 &2140954352
 MeshRenderer:
   m_ObjectHideFlags: 0

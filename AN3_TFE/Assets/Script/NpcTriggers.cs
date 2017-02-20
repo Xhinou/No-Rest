@@ -2,7 +2,6 @@
 
 public class NpcTriggers : MonoBehaviour
 {
-
     GameObject npcParent;
     NpcManager npcManager;
 
@@ -23,16 +22,12 @@ public class NpcTriggers : MonoBehaviour
     void OnTriggerStay(Collider colr)
     {
         if (colr.gameObject.tag == "Player")
-        {
             npcManager.TriggerStay();
-        }
     }
 
     void OnTriggerExit(Collider colr)
     {
         if (colr.gameObject.tag == "Player")
-        {
             npcManager.TriggerExit();
-        }
     }
 }

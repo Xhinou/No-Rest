@@ -4,12 +4,12 @@ using UnityEngine.AI;
 
 public class TriggersManager : MonoBehaviour
 {
-
     public GameObject
         scriptSystem,
         player;
     QuestManager qManager;
     CharacterClickingController controller;
+    DialoguesSystem dialogSystem;
     bool isEntering;
 
     void Awake()
@@ -18,6 +18,7 @@ public class TriggersManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         qManager = scriptSystem.GetComponent<QuestManager>();
         controller = player.GetComponent<CharacterClickingController>();
+        dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
     }
 
     void OnTriggerEnter(Collider colr)
@@ -107,7 +108,7 @@ public class TriggersManager : MonoBehaviour
                 else if (name == "SailorInterrupt")
                 {
                     sailor.tag = "talking";
-                    StartCoroutine(qManager.SailorQuest(0, 1));
+                    qManager.RunQuest(1);
                 }
                 else if (name == "SailorBlock")
                 {
@@ -115,11 +116,12 @@ public class TriggersManager : MonoBehaviour
                     controller.agent.ResetPath();
                     controller.canSkipDial = false;
                     GameObject newPos = GameObject.Find("SailorBlockPos");
-                    sailorNpc.canvas[3].SetActive(true);
+                    dialogSystem.DisplayText(qManager.sceneID, 1, 2);
+                    dialogSystem.ForceLine(0, 0);
                     controller.agent.destination = newPos.transform.position;
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
-                    sailorNpc.canvas[3].SetActive(false);
+                    dialogSystem.EndDialog();
                     controller.hasControl = true;
                     controller.canSkipDial = true;
                     sailorNpc.isTalkable = true;

@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-//using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class QuestManager : MonoBehaviour
 {
-    //List<QuestManager> npcBro = new List<QuestManager>();
     public int
         sceneID,
         introStep = 0,
@@ -16,19 +15,20 @@ public class QuestManager : MonoBehaviour
         npc,
         player;
     public GameObject[] triggers = new GameObject[7];
-    int karma = 0;
+    [HideInInspector] public int karma = 0;
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
     public GameObject scriptSystem;
-    
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
-        StartCoroutine(RunIntro());
-        if (sceneID == 2) introEndStep = 3;
+        RunIntro();
+        if (sceneID == 2)
+            introEndStep = 3;
     }
 
     void Update()
@@ -37,11 +37,10 @@ public class QuestManager : MonoBehaviour
         //Debug.Log(sailorStep);
     }
 
-    IEnumerator RunIntro()
+    void RunIntro()
     {
         if (sceneID == 0)
         {
-            yield return new WaitForSeconds(2);
             //ANIM EMBODY "SPIRIT FORM"
             controller.hasControl = true;
         }
@@ -51,36 +50,7 @@ public class QuestManager : MonoBehaviour
         }
         else if (sceneID == 2)
         {
-            GameObject sailor = GameObject.Find("SailorBody");
-            sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = player.transform.position;
-            while (introStep == 0)
-            {
-                if (controller.isPlayerTrigger)
-                {
-                    sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().ResetPath();
-                    introStep++;
-                }
-                yield return null;
-            }
-            dialogSystem.DisplayText(sceneID, 1, 0);
-            dialogSystem.choicesCount = 2;
-            sailor.GetComponent<NpcManager>().canvas[0].SetActive(true);
-            while (introStep == 1)
-                yield return null;
-            if (introStep == 2)
-            {
-                sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = introGoal.transform.position;
-                while (sailor.transform.position.z >= introGoal.transform.position.z + 0.03f)
-                {
-                    //Debug.Log(sailor.transform.position.z);
-                    yield return null;
-                }
-                sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().ResetPath();
-                sailor.GetComponent<NpcManager>().HideObject();
-                controller.agent.ResetPath();
-                controller.hasControl = true;
-                introStep++;
-            }
+            RunQuest(1);
         }
         else if (sceneID == 3)
         {
@@ -163,96 +133,116 @@ public class QuestManager : MonoBehaviour
     public IEnumerator SailorQuest(int step, int npcID)
     {
         npc = GameObject.FindWithTag("talking");
+        GameObject sailor = GameObject.Find("SailorBody");
         if (step == 0)
         {
+            //anim réveil			
+            sailor.GetComponent<NavMeshAgent>().destination = player.transform.position;
             dialogSystem.DisplayText(sceneID, npcID, step);
-            sailorStep = 0;
+            int w = 0;
+            while (w == 0)
+            {
+                if (controller.isPlayerTrigger)
+                {
+                    sailor.GetComponent<NavMeshAgent>().ResetPath();
+                    w++;
+                }
+                yield return null;
+            }
+            dialogSystem.ForceLine(1, null);
+            controller.canSkipDial = true;
+            while (!dialogSystem.isDisabled)
+                yield return null;
+            sailor.GetComponent<NavMeshAgent>().destination = introGoal.transform.position;
+            while (sailor.transform.position.z >= introGoal.transform.position.z + 0.03f)
+                yield return null;
+            sailor.GetComponent<NavMeshAgent>().ResetPath();
+            sailor.GetComponent<NpcManager>().HideObject();
+            controller.agent.ResetPath();
+            controller.hasControl = true;
+            sailorStep = 1;
+        }
+        else if (step == 1)
+        {
+            dialogSystem.DisplayText(sceneID, npcID, step);
             if (hasFollowedSailor)
             {
                 karma += 1;
-                npc.GetComponent<NpcManager>().canvas[1].SetActive(true);
+                dialogSystem.ForceLine(0, 1);
                 for (int i = 0; i < 3; i++)
-                {
                     triggers[i].GetComponent<BoxCollider>().isTrigger = false;
-                }
-                sailorStep = 1;
+                sailorStep = 2;
             }
             else
             {
                 karma -= 1;
-                npc.GetComponent<NpcManager>().canvas[2].SetActive(true);
-                while (npc.GetComponent<NpcManager>().canvas[2].activeInHierarchy)
+                dialogSystem.ForceLine(2, null);
+                while (!dialogSystem.isDisabled)
                     yield return null;
                 npc.tag = "Untagged";
                 for (int i = 0; i < 3; i++)
-                {
                     triggers[i].GetComponent<BoxCollider>().isTrigger = false;
-                }
                 GameObject newPos = GameObject.Find("SailorPosA");
-                npc.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = newPos.transform.position;
+                npc.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
                 npc.GetComponent<NpcManager>().isTalkable = false;
                 while (npc.transform.position.z != newPos.transform.position.z)
                     yield return null;
                 npc.GetComponent<NpcManager>().isTalkable = true;
                 hasFollowedSailor = true;
-                sailorStep = 0;
+                sailorStep = 2;
             }
         }
-        else if (step == 1)
+        else if (step == 2)
         {
-            sailorStep = 1;
+            dialogSystem.DisplayText(sceneID, npcID, step);
             if (controller.isHolding)
             {
                 GameObject heldItem = GameObject.FindWithTag("held");
                 if (heldItem.name == "Stone")
                 {
                     karma -= 1;
-                    npc.GetComponent<NpcManager>().canvas[4].SetActive(true);
+                    dialogSystem.ForceLine(2, 0);
                     Destroy(heldItem);
                     controller.isHolding = false;
                 }
                 else if (heldItem.name == "Shell")
                 {
                     karma -= 1;
-                    npc.GetComponent<NpcManager>().canvas[5].SetActive(true);
+                    dialogSystem.ForceLine(3, 1);
                     Destroy(heldItem);
                     controller.isHolding = false;
                 }
                 else if (heldItem.name == "Charcoal")
                 {
                     karma += 1;
-                    npc.GetComponent<NpcManager>().canvas[6].SetActive(true);
+                    dialogSystem.ForceLine(5, null);
                     Destroy(heldItem);
                     controller.isHolding = false;
                 }
                 for (int i = 0; i < 4; i++)
-                {
                     triggers[i].GetComponent<BoxCollider>().isTrigger = false;
-                }
-                while (npc.GetComponent<NpcManager>().canvas[4].activeInHierarchy ||
-                npc.GetComponent<NpcManager>().canvas[5].activeInHierarchy ||
-                npc.GetComponent<NpcManager>().canvas[6].activeInHierarchy)
+                while (!dialogSystem.isDisabled)
                     yield return null;
                 npc.GetComponent<NpcManager>().isTalkable = false;
                 GameObject newPos = GameObject.Find("SailorPosVillage");
-                npc.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = newPos.transform.position;
+                npc.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
                 while (npc.transform.position.z != newPos.transform.position.z)
                     yield return null;
-                sailorStep = 2;
+                sailorStep = 3;
             }
             else
-                npc.GetComponent<NpcManager>().canvas[3].SetActive(true);
+                dialogSystem.ForceLine(0, 1);
         }
-        else if (step == 2)
+        else if (step == 3)
         {
-            sailorStep = 2;
             GameObject chief = GameObject.Find("ChiefBody");
             npc.tag = "Untagged";
+            dialogSystem.DisplayText(sceneID, npcID, step);
             if (greedStep == 0)
             {
-                npc.GetComponent<NpcManager>().canvas[7].SetActive(true);
-                while (npc.GetComponent<NpcManager>().canvas[7].activeInHierarchy)
+                while (dialogSystem.theText.enabled == true)
                     yield return null;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 chief.GetComponent<NpcManager>().canvas[0].SetActive(true);
                 while (chief.GetComponent<NpcManager>().canvas[0].activeInHierarchy)
                     yield return null;
@@ -287,17 +277,17 @@ public class QuestManager : MonoBehaviour
             GameObject newPos2 = GameObject.Find("SailorEndPos");
             chief.GetComponent<NpcManager>().isTalkable = false;
             npc.GetComponent<NpcManager>().isTalkable = false;
-            chief.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = newPos.transform.position;
-            npc.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = newPos2.transform.position;
+            chief.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
+            npc.GetComponent<NavMeshAgent>().destination = newPos2.transform.position;
             while (chief.transform.position.z != newPos.transform.position.z && npc.transform.position.z != newPos2.transform.position.z)
                 yield return null;
             chief.GetComponent<NpcManager>().isTalkable = true;
             npc.GetComponent<NpcManager>().isTalkable = true;
-            sailorStep = 3;
+            sailorStep = 4;
         }
-        else if (step == 3)
+        else if (step == 4)
         {
-            sailorStep = 3;
+            sailorStep = 4;
             karma += 1;
             GameObject chief = GameObject.Find("ChiefBody");
             chief.GetComponent<NpcManager>().canvas[3].SetActive(true);
@@ -331,9 +321,9 @@ public class QuestManager : MonoBehaviour
             }
             SceneManager.LoadScene(0);
         }
-        else if (step == 4)
+        else if (step == 5)
         {
-            sailorStep = 4;
+            sailorStep = 5;
             GameObject second = GameObject.Find("SecondBody");
             if (killerStep != 2)
             {
@@ -383,7 +373,7 @@ public class QuestManager : MonoBehaviour
 
     public void GreedQuest(int step)
     {
-       npc = GameObject.FindWithTag("talking");
+        npc = GameObject.FindWithTag("talking");
         if (step == 0)
         {
             greedStep = 0;
@@ -396,10 +386,10 @@ public class QuestManager : MonoBehaviour
             if (sailorStep != 3)
             {
                 GameObject sailor = GameObject.Find("SailorBody");
-                sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                sailor.GetComponent<NavMeshAgent>().enabled = false;
                 GameObject newPos = GameObject.Find("SailorPosVillage");
                 sailor.transform.position = newPos.transform.position;
-                sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                sailor.GetComponent<NavMeshAgent>().enabled = true;
             }
             bored = 0;
             karma -= 1;
@@ -509,8 +499,8 @@ public class QuestManager : MonoBehaviour
             sailorStep = 4;
             GameObject sailor = GameObject.Find("SailorBody");
             GameObject chief = GameObject.Find("ChiefBody");
-            sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-            chief.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+            sailor.GetComponent<NavMeshAgent>().enabled = false;
+            chief.GetComponent<NavMeshAgent>().enabled = false;
             GameObject newPos = GameObject.Find("SailorEndPos");
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
             sailor.transform.position = newPos.transform.position;
@@ -525,8 +515,8 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
-                npc.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = newPos.transform.position;
-                while (npc.GetComponent<UnityEngine.AI.NavMeshAgent>().transform.position.z != newPos.transform.position.z)
+                npc.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
+                while (npc.GetComponent<NavMeshAgent>().transform.position.z != newPos.transform.position.z)
                     yield return null;
                 npc.GetComponent<NpcManager>().HideObject();
                 controller.hasControl = true;
@@ -572,7 +562,7 @@ public class QuestManager : MonoBehaviour
 
     void NativeQuest(int step)
     {
-        npc = GameObject.FindWithTag ("talking");
+        npc = GameObject.FindWithTag("talking");
         if (step == 0)
         {
             if (sailorStep == 3)
@@ -594,8 +584,8 @@ public class QuestManager : MonoBehaviour
             sailorStep = 4;
             GameObject sailor = GameObject.Find("SailorBody");
             GameObject chief = GameObject.Find("ChiefBody");
-            sailor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-            chief.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+            sailor.GetComponent<NavMeshAgent>().enabled = false;
+            chief.GetComponent<NavMeshAgent>().enabled = false;
             GameObject newPos = GameObject.Find("SailorEndPos");
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
             sailor.transform.position = newPos.transform.position;

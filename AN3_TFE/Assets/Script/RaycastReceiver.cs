@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class RaycastReceiver : MonoBehaviour
 {
-
-    public GameObject highlight;
+    public GameObject
+        highlight,
+        player;
     public bool isNpc;
-
     CharacterClickingController controller;
-    public GameObject player;
 
     void Awake()
     {

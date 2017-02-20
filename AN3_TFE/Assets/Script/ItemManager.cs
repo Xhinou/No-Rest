@@ -14,7 +14,6 @@ public class ItemManager : MonoBehaviour
     Transform gOTransform;
     CharacterClickingController controller;
     
-
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
@@ -33,8 +32,7 @@ public class ItemManager : MonoBehaviour
         if (coln.gameObject.tag == "Player")
         {
             if (controller.hasClicked && isPickable && isClicked)
-            {
-                
+            {              
                 if (!controller.isHolding)
                 {
                     gOTransform.parent = GameObject.Find("Character1_RightHand").transform;
@@ -69,7 +67,6 @@ public class ItemManager : MonoBehaviour
             }
         }
     }
-
 
     void OnCollisionStay(Collision coln)
     {

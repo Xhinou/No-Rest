@@ -2,7 +2,6 @@
 
 public class NpcManager : MonoBehaviour
 {
-
     public int
         npcID,
         canvasAmount;
@@ -44,12 +43,9 @@ public class NpcManager : MonoBehaviour
         {
             controller.hasControl = false;
             controller.agent.ResetPath();
-
             Vector3 direction = (player.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
-
-            //gameObject.tag = "talking";
             qManager.RunQuest(npcID);
             controller.hasClicked = false;
             isClicked = false;

@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class CanvasManager : MonoBehaviour
 {
-
     public Camera cameraToLookAt;
     public bool noControlAtDisable = false;
-
-    public GameObject scriptSystem;
+    public GameObject
+        scriptSystem,
+        player;
     QuestManager qManager;
     CharacterClickingController controller;
-    public GameObject player;
 
     void Awake()
     {
@@ -27,7 +25,6 @@ public class CanvasManager : MonoBehaviour
 
     void Update()
     {
-        //transform.LookAt(cameraToLookAt.transform);
         transform.rotation = Quaternion.LookRotation(transform.position - cameraToLookAt.transform.position);
     }
 
@@ -39,6 +36,7 @@ public class CanvasManager : MonoBehaviour
 
     void OnDisable()
     {
-        if (qManager.introStep == qManager.introEndStep && !noControlAtDisable) controller.hasControl = true;
+        if (qManager.introStep == qManager.introEndStep && !noControlAtDisable)
+            controller.hasControl = true;
     }
 }
