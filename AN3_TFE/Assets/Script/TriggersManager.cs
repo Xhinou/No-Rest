@@ -132,7 +132,7 @@ public class TriggersManager : MonoBehaviour
                     greed.tag = "talking";
                     greed.GetComponent<NpcManager>().isTalkable = true;
                     controller.agent.ResetPath();
-                    qManager.GreedQuest(0);
+                    qManager.GreedQuest(0, 2);
                 }
                 else if (name == "Village")
                 {
