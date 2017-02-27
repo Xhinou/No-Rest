@@ -80,11 +80,11 @@ public class QuestManager : MonoBehaviour
             }
             else if (npcID == 5)
             {
-                StartCoroutine(AssassinQuest(killerStep));
+                StartCoroutine(AssassinQuest(killerStep, npcID));
             }
             else if (npcID == 6)
             {
-                StartCoroutine(HarshQuest(harshStep));
+                StartCoroutine(HarshQuest(harshStep, npcID));
             }
             else if (npcID == 8)
             {
@@ -143,7 +143,7 @@ public class QuestManager : MonoBehaviour
             intro = true;
             //anim réveil			
             sailor.GetComponent<NavMeshAgent>().destination = player.transform.position;
-            dialogSystem.DisplayText(sceneID, npcID, step);
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
             int w = 0;
             while (w == 0)
             {
@@ -169,10 +169,10 @@ public class QuestManager : MonoBehaviour
         }
         else if (step == 1)
         {
-            // QUEST: ITEM PICKING
-            dialogSystem.DisplayText(sceneID, npcID, step);
+            // QUEST: ITEM PICKING           
             if (hasFollowedSailor)
             {
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
                 karma += 1;
                 dialogSystem.ForceLine(0, 1, null);
                 for (int i = 0; i < 3; i++)
@@ -180,22 +180,20 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                dialogSystem.dialCam.enabled = false;
-                dialogSystem.dialCam = GameObject.Find("NPC1Cam1.5").GetComponent<Camera>();
-                dialogSystem.dialCam.enabled = true;
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1b");
                 karma -= 1;
                 dialogSystem.ForceLine(2, null, null);
                 while (!dialogSystem.isDisabled)
                     yield return null;
-                npc.tag = "Untagged";
+                sailor.tag = "Untagged";
                 for (int i = 0; i < 3; i++)
                     triggers[i].GetComponent<BoxCollider>().isTrigger = false;
                 GameObject newPos = GameObject.Find("SailorPosA");
-                npc.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
-                npc.GetComponent<NpcManager>().isTalkable = false;
-                while (npc.transform.position.z != newPos.transform.position.z)
+                sailor.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
+                sailor.GetComponent<NpcManager>().isTalkable = false;
+                while (sailor.transform.position.z != newPos.transform.position.z)
                     yield return null;
-                npc.GetComponent<NpcManager>().isTalkable = true;
+                sailor.GetComponent<NpcManager>().isTalkable = true;
                 hasFollowedSailor = true;
             }
             sailorStep = 2;
@@ -203,7 +201,7 @@ public class QuestManager : MonoBehaviour
         else if (step == 2)
         {
             // QUEST: ITEM GIVING
-            dialogSystem.DisplayText(sceneID, npcID, step);
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
             if (controller.isHolding)
             {
                 GameObject heldItem = GameObject.FindWithTag("held");
@@ -245,8 +243,8 @@ public class QuestManager : MonoBehaviour
         else if (step == 3)
         {
             // QUEST: VILLAGE
-            
-            dialogSystem.DisplayText(sceneID, npcID, step);
+
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2");
             if (greedStep == 0)
                 dialogSystem.ForceLine(0, 2, null);
             else
@@ -354,10 +352,10 @@ public class QuestManager : MonoBehaviour
     public void GreedQuest(int step, int npcID)
     {
         npc = GameObject.Find("GreedSailorBody");
+        dialogSystem.DisplayText(sceneID, npcID, step, "Cam2.0");
         if (step == 0)
         {
-            // QUEST: GOLD DIGGER
-            dialogSystem.DisplayText(sceneID, npcID, step);
+            // QUEST: GOLD DIGGER            
             for (int i = 0; i < 5; i++)
                 triggers[i].GetComponent<BoxCollider>().isTrigger = false;
             if (sailorStep < 3)
@@ -367,6 +365,7 @@ public class QuestManager : MonoBehaviour
                 GameObject newPos = GameObject.Find("SailorPosVillage");
                 sailor.transform.position = newPos.transform.position;
                 sailor.GetComponent<NavMeshAgent>().enabled = true;
+                sailorStep = 3;
             }
             bored = 0;
             karma -= 1;
@@ -374,8 +373,7 @@ public class QuestManager : MonoBehaviour
         }        
         else if (step == 1)
         {
-            // QUEST: PICKAXE
-            dialogSystem.DisplayText(2, npcID, step);          
+            // QUEST: PICKAXE          
             if (controller.isHolding)
             {
                 GameObject heldItem = GameObject.FindWithTag("held");
@@ -417,12 +415,13 @@ public class QuestManager : MonoBehaviour
                 else
                     dialogSystem.ForceLine(bored, 1, null);
                 bored += 1;
+                if (bored > 2)
+                    bored = 2;
             }
         }
         else if (step == 2)
         {
             // QUEST: DONE
-            dialogSystem.DisplayText(sceneID, npcID, step);
         }
     }
 
@@ -451,9 +450,10 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    IEnumerator AssassinQuest(int step)
+    IEnumerator AssassinQuest(int step, int npcID)
     {
-        npc = GameObject.FindWithTag("talking");
+        npc = GameObject.Find("AssassinBody");
+        dialogSystem.DisplayText(sceneID, npcID, step, "Cam5");
         if (step == 0)
         {
             sailorStep = 4;
@@ -466,12 +466,12 @@ public class QuestManager : MonoBehaviour
             sailor.transform.position = newPos.transform.position;
             chief.transform.position = newPos2.transform.position;
             npc.GetComponent<NpcManager>().canvas[0].SetActive(true);
-            while (npc.GetComponent<NpcManager>().canvas[0].activeInHierarchy)
+            while (!dialogSystem.isDisabled)
                 yield return null;
             controller.hasControl = false;
             if (npc.GetComponent<NpcManager>().canvas[1].activeInHierarchy)
             {
-                while (npc.GetComponent<NpcManager>().canvas[1].activeInHierarchy)
+                while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
@@ -509,15 +509,14 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
-                    npc.GetComponent<NpcManager>().canvas[2].SetActive(true);
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam5");
                 }
             }
             else
             {
-                npc.GetComponent<NpcManager>().canvas[2].SetActive(true);
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam5");
             }
         }
-        npc.tag = "Untagged";
     }
 
     void NativeQuest(int step)
@@ -536,7 +535,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    IEnumerator HarshQuest(int step)
+    IEnumerator HarshQuest(int step, int npcID)
     {
         npc = GameObject.FindWithTag("talking");
         if (step == 0)
@@ -588,9 +587,9 @@ public class QuestManager : MonoBehaviour
 
     void SideQuest(int npcID)
     {
-        npc = GameObject.FindWithTag("talking");
-        dialogSystem.DisplayText(sceneID, npcID, 0);
+        dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera");
     }
+
     #endregion World 2
 
     #region World 3

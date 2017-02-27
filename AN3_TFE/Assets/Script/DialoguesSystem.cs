@@ -25,8 +25,9 @@ public class DialoguesSystem : MonoBehaviour
     CharacterClickingController controller;
     QuestManager qManager;
     Button resume;
-    Camera mainCam;
-    [HideInInspector] public Camera dialCam;
+    Camera
+        mainCam,
+        dialCam;
 
     void Awake()
     {
@@ -48,12 +49,12 @@ public class DialoguesSystem : MonoBehaviour
             resume.interactable = false;
     }
 
-    public void DisplayText(int _sceneID, int _npcID, int _step)
+    public void DisplayText(int _sceneID, int _npcID, int _step, string cam)
     {
         sceneID = _sceneID;
         npcID = _npcID;
         step = _step;
-        dialCam = GameObject.Find("NPC" + npcID + "Cam" + step).GetComponent<Camera>();
+        dialCam = GameObject.Find(cam).GetComponent<Camera>();
         mainCam.enabled = false;
         dialCam.enabled = true;
         textBox.SetActive(true);
@@ -128,7 +129,7 @@ public class DialoguesSystem : MonoBehaviour
                 break;
             else if (i > 3)
             {
-                Debug.Log("Some files don't have a right name. Make sure using the template specified in the README");
+                Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
                 break;
             }
         }

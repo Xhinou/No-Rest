@@ -116,7 +116,7 @@ public class TriggersManager : MonoBehaviour
                     controller.agent.ResetPath();
                     controller.canSkipDial = false;
                     GameObject newPos = GameObject.Find("SailorBlockPos");
-                    dialogSystem.DisplayText(qManager.sceneID, 1, 2);
+                    dialogSystem.DisplayText(qManager.sceneID, 1, 2, "Main Camera");
                     dialogSystem.ForceLine(0, 0, null);
                     controller.agent.destination = newPos.transform.position;
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
@@ -129,7 +129,6 @@ public class TriggersManager : MonoBehaviour
                 else if (name == "ScrewThis")
                 {
                     GameObject greed = GameObject.Find("GreedSailorBody");
-                    greed.tag = "talking";
                     greed.GetComponent<NpcManager>().isTalkable = true;
                     controller.agent.ResetPath();
                     qManager.GreedQuest(0, 2);
@@ -141,7 +140,6 @@ public class TriggersManager : MonoBehaviour
                     controller.agent.destination = newPos.transform.position;
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
-                    sailor.tag = "talking";
                     sailorNpc.isTalkable = true;
                     qManager.RunQuest(1);
                 }
@@ -152,7 +150,6 @@ public class TriggersManager : MonoBehaviour
                     controller.agent.destination = newPos.transform.position;
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
-                    sailor.tag = "talking";
                     qManager.RunQuest(1);
                 }
             }
