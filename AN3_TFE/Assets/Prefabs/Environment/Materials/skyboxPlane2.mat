@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: skyboxPlane2
-  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
+  m_Shader: {fileID: 10, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -54,7 +54,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: cc240b82e7ba40e4ba55f4dd2ed9e49d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -75,7 +75,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Tex
+      second:
+        m_Texture: {fileID: 8900000, guid: b995d4bd9d11078d11005b9844295342, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - first:
+        name: _AtmosphereThickness
+      second: 1
     - first:
         name: _BumpScale
       second: 1
@@ -92,11 +101,14 @@ Material:
         name: _Emission
       second: 1
     - first:
+        name: _Exposure
+      second: 0.64
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 1
+      second: 0
     - first:
         name: _GlossyReflections
       second: 0
@@ -113,6 +125,9 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _Rotation
+      second: 0
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -122,6 +137,12 @@ Material:
         name: _SrcBlend
       second: 1
     - first:
+        name: _SunDisk
+      second: 2
+    - first:
+        name: _SunSize
+      second: 0.04
+    - first:
         name: _UVSec
       second: 0
     - first:
@@ -130,7 +151,16 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 0.8088235, b: 0.8088235, a: 1}
+      second: {r: 0.081801474, g: 0.09103701, b: 0.125, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0.508, g: 0.508, b: 0.508, a: 1}
+    - first:
+        name: _GroundColor
+      second: {r: 0.70980394, g: 0.5176471, b: 0.48627454, a: 1}
+    - first:
+        name: _SkyTint
+      second: {r: 0.21344413, g: 0.19269031, b: 0.32352942, a: 1}
+    - first:
+        name: _Tint
+      second: {r: 0.20891002, g: 0.21870297, b: 0.41176468, a: 0.5}
