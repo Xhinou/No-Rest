@@ -21,7 +21,10 @@ public class DialoguesSystem : MonoBehaviour
         player,
         scriptSystem;
     public bool isDisabled;
-    [Range(0,2)]public int karmaMod = 0;
+    [HideInInspector] /*&&*/ [Range(0,2)]
+    public int
+        karmaMod = 0,
+        lastChoice;
     CharacterClickingController controller;
     QuestManager qManager;
     Button resume;
@@ -90,6 +93,7 @@ public class DialoguesSystem : MonoBehaviour
     public void NextDialog(int choice)
     {
         order += 1;
+        lastChoice = choice;
         LoadFiles(choice);
         currentLine = 0;
         theText.enabled = true;
