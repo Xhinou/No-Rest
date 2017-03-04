@@ -30,7 +30,6 @@ public class NpcManager : MonoBehaviour
         {
             controller.hasControl = false;
             controller.agent.ResetPath();
-            gameObject.tag = "talking";
             qManager.RunQuest(npcID);
             controller.hasClicked = false;
             isClicked = false;
@@ -57,7 +56,6 @@ public class NpcManager : MonoBehaviour
         controller.isPlayerTrigger = false;
         /*for (int i = 0; i < canvasAmount; i++)
             canvas[i].SetActive(false);*/
-        gameObject.tag = "Untagged";
     }
 
     public void DisplayObject()
