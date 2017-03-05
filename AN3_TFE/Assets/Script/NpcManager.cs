@@ -25,11 +25,11 @@ public class NpcManager : MonoBehaviour
 
     public void TriggerEnter()
     {
+        tag = "closeToPlayer";
+        controller.npc = GameObject.FindWithTag("closeToPlayer");
         controller.isPlayerTrigger = true;
         if (controller.hasClicked && isClicked)
         {
-            controller.hasControl = false;
-            controller.agent.ResetPath();
             qManager.RunQuest(npcID);
             controller.hasClicked = false;
             isClicked = false;
@@ -39,9 +39,7 @@ public class NpcManager : MonoBehaviour
     public void TriggerStay()
     {
         if (controller.hasClicked && isClicked)
-        {
-            controller.hasControl = false;
-            controller.agent.ResetPath();
+        {            
             Vector3 direction = (player.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
@@ -52,21 +50,10 @@ public class NpcManager : MonoBehaviour
     }
 
     public void TriggerExit()
-    {
+    {        
         controller.isPlayerTrigger = false;
+        tag = "Untagged";
         /*for (int i = 0; i < canvasAmount; i++)
             canvas[i].SetActive(false);*/
-    }
-
-    public void DisplayObject()
-    {
-        gameObject.GetComponent<Collider>().enabled = true;
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
-    }
-
-    public void HideObject()
-    {
-        gameObject.GetComponent<Collider>().enabled = false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 }

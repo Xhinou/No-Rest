@@ -1,7 +1,7 @@
-Greedy Jackie: Hey Captain! Have you found a pickaxe?
-Greedy Jackie: HAVE YOU FOUND a pickaxe???
-Greedy Jackie: But seriously, stop talking to me!
+<i>Greedy Jackie</i>: Hey Captain! Have you found a pickaxe?
+<i>Greedy Jackie</i>: HAVE YOU FOUND a pickaxe???
+<i>Greedy Jackie</i>: But seriously, stop talking to me!
 Go find a pickaxe or finish the level, dude!
-Greedy Jackie: Perfect, Captain! So... I don't have a pickaxe but you can get the gold!
+<i>Greedy Jackie</i>: Perfect, Captain! So... I don't have a pickaxe but you can get the gold!
 Just mine it on the gold seams right there.
 See you later, eh? I'll be around if you look for me.

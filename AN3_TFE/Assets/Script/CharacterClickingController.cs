@@ -11,9 +11,9 @@ public class CharacterClickingController : MonoBehaviour
         isPlayerTrigger,
         canSkipDial = false;
     LayerMask navMap;
-    GameObject npc;
+    public GameObject npc;
     public Animator anim;
-    bool isMoving;
+    public bool isMoving;
     public Color pickedItem;
     public GameObject rightHand;
     Camera mainCam;
@@ -22,7 +22,7 @@ public class CharacterClickingController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         navMap = LayerMask.GetMask("NavMap");
-        npc = GameObject.FindWithTag("talking");
+        
         mainCam = Camera.main;
     }
 
@@ -44,11 +44,24 @@ public class CharacterClickingController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
         }
-        if (agent.velocity.x != 0 || agent.velocity.z != 0)
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    agent.ResetPath();
+                    isMoving = false;
+                    anim.SetBool("isMoving", isMoving);
+                }
+
+            }
+            else {
             isMoving = true;
-        else
-            isMoving = false;
-        anim.SetBool("isMoving", isMoving);
+            anim.SetBool("isMoving", isMoving);
+            }
+        }
+        
     }
 
     public void UnableControl()

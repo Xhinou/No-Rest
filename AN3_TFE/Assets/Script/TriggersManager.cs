@@ -80,34 +80,31 @@ public class TriggersManager : MonoBehaviour
         #region World 2
         if (qManager.sceneID == 2)
         {
-            GameObject sailor = GameObject.Find("SailorBody");
-            NpcManager sailorNpc = sailor.GetComponent<NpcManager>();
-            NavMeshAgent sailorNav = sailor.GetComponent<NavMeshAgent>();
+            NpcManager sailorNpc = qManager.sailor.GetComponent<NpcManager>();
             if (isEntering)
             {
                 if (name == "SailorGoRight")
                 {
                     qManager.hasFollowedSailor = true;
-                    sailorNav.enabled = false;
+                    qManager.sailorNav.enabled = false;
                     GameObject newPos = GameObject.Find("SailorPosA");
-                    sailor.transform.position = newPos.transform.position;
-                    sailorNav.enabled = true;
+                    qManager.sailorTr.position = newPos.transform.position;
+                    qManager.sailorNav.enabled = true;
                     sailorNpc.isTalkable = true;
-                    sailorNpc.DisplayObject();
+                    qManager.sailor.SetActive(true);
                 }
                 else if (name == "SailorGoLeft")
                 {
                     qManager.hasFollowedSailor = false;
-                    sailorNav.enabled = false;
+                    qManager.sailorNav.enabled = false;
                     GameObject newPos = GameObject.Find("SailorPosB");
-                    sailor.transform.position = newPos.transform.position;
-                    sailorNav.enabled = true;
+                    qManager.sailorTr.position = newPos.transform.position;
+                    qManager.sailorNav.enabled = true;
                     sailorNpc.isTalkable = true;
-                    sailorNpc.DisplayObject();
+                    qManager.sailor.SetActive(true);
                 }
                 else if (name == "SailorInterrupt")
                 {
-                    sailor.tag = "talking";
                     qManager.RunQuest(1);
                 }
                 else if (name == "SailorBlock")
@@ -122,7 +119,6 @@ public class TriggersManager : MonoBehaviour
                     while (controller.agent.transform.position.z != newPos.transform.position.z)
                         yield return null;
                     dialogSystem.EndDialog();
-                    controller.hasControl = true;
                     controller.canSkipDial = true;
                     sailorNpc.isTalkable = true;
                 }

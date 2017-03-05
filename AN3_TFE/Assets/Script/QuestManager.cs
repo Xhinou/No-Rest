@@ -109,7 +109,6 @@ public class QuestManager : MonoBehaviour
     {
         if (step == 0)
         {
-            // QUEST: INTRODUCTION
             intro = true;
             //anim réveil			
             sailorNav.destination = player.transform.position;
@@ -132,14 +131,13 @@ public class QuestManager : MonoBehaviour
             while (sailorTr.position.z >= introGoal.transform.position.z + 0.03f)
                 yield return null;
             sailorNav.ResetPath();
-            sailorScript.HideObject();
+            sailor.SetActive(false);
             controller.hasControl = true;
             intro = false;
             sailorStep = 1;
         }
         else if (step == 1)
-        {
-            // QUEST: ITEM PICKING           
+        {      
             if (hasFollowedSailor)
             {
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
@@ -169,8 +167,7 @@ public class QuestManager : MonoBehaviour
             sailorStep = 2;
         }
         else if (step == 2)
-        {
-            // QUEST: ITEM GIVING           
+        {        
             if (controller.isHolding)
             {
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
@@ -215,13 +212,11 @@ public class QuestManager : MonoBehaviour
         }
         else if (step == 3)
         {
-            // QUEST: VILLAGE
-
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2");
             if (greedStep == 0)
                 dialogSystem.ForceLine(0, 2, null);
             if (killerStep == 2)
-                dialogSystem.ForceLine(6, null, null);
+                dialogSystem.ForceLine(3, null, null);
             else
                 dialogSystem.ForceLine(3, 2, 0);
             triggers[5].GetComponent<BoxCollider>().isTrigger = false;
@@ -239,25 +234,16 @@ public class QuestManager : MonoBehaviour
             sailorScript.isTalkable = true;
             sailorStep = 4;
         }
-        //!
         else if (step == 4)
         {
-            // QUEST: END - CHIEF IS ALIVE
             karma += 1;
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
-            while (chief.GetComponent<NpcManager>().canvas[3].activeInHierarchy)
-                yield return null;
-            if (!sailor.GetComponent<NpcManager>().canvas[11].activeInHierarchy)
-            {
-                sailor.GetComponent<NpcManager>().canvas[11].SetActive(true);
-                while (sailor.GetComponent<NpcManager>().canvas[11].activeInHierarchy)
-                    yield return null;
-            }
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4");
+            if (killerStep == 2 || harshStep > 0)
+                dialogSystem.ForceLine(0, 4, null);
             else
-            {
-                while (sailor.GetComponent<NpcManager>().canvas[11].activeInHierarchy)
-                    yield return null;
-            }
+                dialogSystem.ForceLine(5, null, null);
+            while (!dialogSystem.isDisabled)
+                yield return null;
             GameObject newPos = GameObject.Find("PlayerEndPos2");
             controller.agent.destination = newPos.transform.position;
             triggers[6].GetComponent<BoxCollider>().isTrigger = false;
@@ -277,34 +263,7 @@ public class QuestManager : MonoBehaviour
         }
         else if (step == 5)
         {
-            // QUEST: END - CHIEF IS DEAD
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
-            GameObject second = GameObject.Find("SecondBody");
-            if (killerStep != 2)
-            {
-                sailor.GetComponent<NpcManager>().canvas[14].SetActive(true);
-                while (sailor.GetComponent<NpcManager>().canvas[14].activeInHierarchy)
-                    yield return null;
-                second.GetComponent<NpcManager>().canvas[0].SetActive(true);
-                while (!sailor.GetComponent<NpcManager>().canvas[16].activeInHierarchy)
-                    yield return null;
-                while (sailor.GetComponent<NpcManager>().canvas[16].activeInHierarchy)
-                    yield return null;
-            }
-            else if (killerStep == 2)
-            {
-                second.GetComponent<NpcManager>().canvas[1].SetActive(true);
-                while (second.GetComponent<NpcManager>().canvas[1].activeInHierarchy)
-                    yield return null;
-                sailor.GetComponent<NpcManager>().canvas[12].SetActive(true);
-                while (sailor.GetComponent<NpcManager>().canvas[12].activeInHierarchy)
-                    yield return null;
-                second.GetComponent<NpcManager>().canvas[2].SetActive(true);
-                while (!sailor.GetComponent<NpcManager>().canvas[13].activeInHierarchy)
-                    yield return null;
-                while (sailor.GetComponent<NpcManager>().canvas[13].activeInHierarchy)
-                    yield return null;
-            }
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4");
             GameObject newPos = GameObject.Find("PlayerEndPos2");
             controller.agent.destination = newPos.transform.position;
             triggers[6].GetComponent<BoxCollider>().isTrigger = false;
@@ -329,8 +288,7 @@ public class QuestManager : MonoBehaviour
     public void GreedQuest(int step, int npcID)
     {
         if (step == 0)
-        {
-            // QUEST: GOLD DIGGER   
+        { 
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam2");
             for (int i = 0; i < 5; i++)
                 triggers[i].GetComponent<BoxCollider>().isTrigger = false;
@@ -347,8 +305,7 @@ public class QuestManager : MonoBehaviour
             greedStep = 1;
         }        
         else if (step == 1)
-        {
-            // QUEST: PICKAXE          
+        {         
             if (controller.isHolding)
             {
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam2");
@@ -422,7 +379,7 @@ public class QuestManager : MonoBehaviour
         if (step == 0)
         {
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam5");
-            sailorStep = 4;
+            sailorStep = 5;
             triggers[5].GetComponent<BoxCollider>().isTrigger = false;
             sailorNav.enabled = false;
             chiefNav.enabled = false;
@@ -440,15 +397,14 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
-                killer.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
+                killerNav.destination = newPos.transform.position;
                 while (killerTr.position.z != newPos.transform.position.z)
                     yield return null;
-                killerScript.HideObject();
+                killer.SetActive(false);
                 controller.hasControl = true;
-                chiefScript.HideObject();
-                sailorStep = 5;
-                karma -= 1;
+                chief.SetActive(false);
                 killerStep = 2;
+                karma -= 1;
             }
             else
                 killerStep = 1;
@@ -464,9 +420,11 @@ public class QuestManager : MonoBehaviour
                     Destroy(heldItem);
                     // ASSASSIN FALLS
                     karma += 1;
-                    killerScript.HideObject();
+                    killer.SetActive(false);
                     killerScript.isTalkable = false;
                     controller.hasControl = true;
+                    sailorStep = 4;
+                    killerStep = 0;
                 }
                 else
                     dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
@@ -484,52 +442,40 @@ public class QuestManager : MonoBehaviour
         else
             dialogSystem.ForceLine(2, null, null);
     }
-    //!
+    
     IEnumerator HarshQuest(int step, int npcID)
     {
         if (step == 0)
         {
-            sailorStep = 4;
+            if (killerStep == 0)
+                sailorStep = 4;
+            else
+                sailorStep = 5;
             sailorNav.enabled = false;
             chiefNav.enabled = false;
             GameObject newPos = GameObject.Find("SailorEndPos");
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
             sailorTr.position = newPos.transform.position;
             chiefTr.position = newPos2.transform.position;
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam6");
             if (!goldGet)
-            {
-                npc.GetComponent<NpcManager>().canvas[0].SetActive(true);
-                while (npc.GetComponent<NpcManager>().canvas[0].activeInHierarchy)
-                    yield return null;
-            }
-            else
-            {
-                npc.GetComponent<NpcManager>().canvas[1].SetActive(true);
-                while (npc.GetComponent<NpcManager>().canvas[1].activeInHierarchy)
-                    yield return null;
-            }
-            if (npc.GetComponent<NpcManager>().canvas[2].activeInHierarchy)
-            {
+                dialogSystem.ForceLine(0, 0, 2);
+            while (dialogSystem.theText.enabled == true)
+                yield return null;
+            while (dialogSystem.theText.enabled == false)
+                yield return null;
+            if (dialogSystem.lastChoice == 0)
+                npc.GetComponent<NpcManager>().isTalkable = false;
+            else if (dialogSystem.lastChoice == 2)
                 harshStep = 1;
-            }
-            else if (npc.GetComponent<NpcManager>().canvas[3].activeInHierarchy)
+            else if (dialogSystem.lastChoice == 3)
             {
                 karma -= 1;
                 harshStep = 2;
             }
-            else
-            {
-                npc.GetComponent<NpcManager>().isTalkable = false;
-            }
         }
-        else if (step == 1)
-        {
-            npc.GetComponent<NpcManager>().canvas[2].SetActive(true);
-        }
-        else if (step == 2)
-        {
-            npc.GetComponent<NpcManager>().canvas[4].SetActive(true);
-        }
+        else if (step >= 1)
+            dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
     }
 
     void SideQuest(int npcID)
@@ -543,25 +489,29 @@ public class QuestManager : MonoBehaviour
     //*------------------------------ WORLD 3 - THE OFFICER ------------------------------*//
     #endregion World 3
 
+    #region NPCs Loading
     /*NPCs - WORLD 1*/
+    #region World 2 NPCs
     /*NPCs - WORLD 2*/
-    private GameObject
+    public GameObject
         sailor,
         chief,
         gold,
         killer;
-    private Transform
+    public Transform
         sailorTr,
         chiefTr,
         killerTr;
-    private NavMeshAgent
+    public NavMeshAgent
         sailorNav,
-        chiefNav;
-    private NpcManager
+        chiefNav,
+        killerNav;
+    public NpcManager
         sailorScript,
         chiefScript,
         goldScript,
         killerScript;
+    #endregion World 2 NPCs
     /*NPCs - WORLD 3*/
 
     void LoadNpc(int _sceneID)
@@ -585,6 +535,7 @@ public class QuestManager : MonoBehaviour
             killerTr = killer.transform;
             sailorNav = sailor.GetComponent<NavMeshAgent>();
             chiefNav = chief.GetComponent<NavMeshAgent>();
+            killerNav = killer.GetComponent<NavMeshAgent>();
             sailorScript = sailor.GetComponent<NpcManager>();
             chiefScript = chief.GetComponent<NpcManager>();
             goldScript = gold.GetComponent<NpcManager>();
@@ -600,4 +551,9 @@ public class QuestManager : MonoBehaviour
             return;
         }            
     }
+    #endregion NPCs Loading
 }
+
+// Dialogue chef village
+// Texte boutons
+// Modeles persos

@@ -1162,6 +1162,7 @@ GameObject:
   - component: {fileID: 195316075960786972}
   - component: {fileID: 95949669873487210}
   - component: {fileID: 114419416043795294}
+  - component: {fileID: 81428470659453878}
   m_Layer: 2
   m_Name: Player 1
   m_TagString: Player
@@ -2311,7 +2312,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632337355190074}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: -0.01, z: -1}
+  m_LocalPosition: {x: 0.4, y: 0.22, z: -1}
   m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
   m_Children:
   - {fileID: 4735862904505590}
@@ -3863,6 +3864,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!81 &81428470659453878
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632337355190074}
+  m_Enabled: 1
 --- !u!95 &95949669873487210
 Animator:
   serializedVersion: 3
@@ -3896,8 +3904,12 @@ MonoBehaviour:
   hasControl: 0
   hasClicked: 0
   isPlayerTrigger: 0
-  canSkipDial: 1
+  canSkipDial: 0
+  npc: {fileID: 0}
   anim: {fileID: 95949669873487210}
+  isMoving: 0
+  pickedItem: {r: 0, g: 0.87586236, b: 1, a: 0}
+  rightHand: {fileID: 1652459478463268}
 --- !u!136 &136187298491811490
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3923,7 +3935,7 @@ NavMeshAgent:
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 1200
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

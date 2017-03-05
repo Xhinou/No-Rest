@@ -58,6 +58,8 @@ public class DialoguesSystem : MonoBehaviour
         npcID = _npcID;
         step = _step;
         dialCam = GameObject.Find(cam).GetComponent<Camera>();
+        controller.hasControl = false;
+        controller.agent.ResetPath();
         mainCam.enabled = false;
         dialCam.enabled = true;
         textBox.SetActive(true);
