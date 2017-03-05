@@ -129,7 +129,7 @@ public class QuestManager : MonoBehaviour
             while (!dialogSystem.isDisabled)
                 yield return null;
             sailorNav.destination = introGoal.transform.position;
-            while (sailorPos.z >= introGoal.transform.position.z + 0.03f)
+            while (sailorTr.position.z >= introGoal.transform.position.z + 0.03f)
                 yield return null;
             sailorNav.ResetPath();
             sailorScript.HideObject();
@@ -161,7 +161,7 @@ public class QuestManager : MonoBehaviour
                 GameObject newPos = GameObject.Find("SailorPosA");
                 sailorNav.destination = newPos.transform.position;
                 sailorScript.isTalkable = false;
-                while (sailorPos.z != newPos.transform.position.z)
+                while (sailorTr.position.z != newPos.transform.position.z)
                     yield return null;
                 sailorScript.isTalkable = true;
                 hasFollowedSailor = true;
@@ -203,7 +203,7 @@ public class QuestManager : MonoBehaviour
                 sailorScript.isTalkable = false;
                 GameObject newPos = GameObject.Find("SailorPosVillage");
                 sailorNav.destination = newPos.transform.position;
-                while (sailorPos.z != newPos.transform.position.z)
+                while (sailorTr.position.z != newPos.transform.position.z)
                     yield return null;
                 sailorStep = 3;
             }
@@ -233,7 +233,7 @@ public class QuestManager : MonoBehaviour
             sailorScript.isTalkable = false;
             chiefNav.destination = newPos.transform.position;
             sailorNav.destination = newPos2.transform.position;
-            while (chiefPos.z != newPos.transform.position.z && sailorPos.z != newPos2.transform.position.z)
+            while (chiefTr.position.z != newPos.transform.position.z && sailorTr.position.z != newPos2.transform.position.z)
                 yield return null;
             chiefScript.isTalkable = true;
             sailorScript.isTalkable = true;
@@ -338,7 +338,7 @@ public class QuestManager : MonoBehaviour
             {
                 sailorNav.enabled = false;
                 GameObject newPos = GameObject.Find("SailorPosVillage");
-                sailorPos = newPos.transform.position;
+                sailorTr.position = newPos.transform.position;
                 sailorNav.enabled = true;
                 sailorStep = 3;
             }
@@ -361,8 +361,8 @@ public class QuestManager : MonoBehaviour
                     {
                         GameObject newPos = GameObject.Find("ChiefEndPos");
                         GameObject newPos2 = GameObject.Find("SailorEndPos");
-                        chiefPos = newPos.transform.position;
-                        sailorPos = newPos2.transform.position;
+                        chiefTr.position = newPos.transform.position;
+                        sailorTr.position = newPos2.transform.position;
                         chiefScript.isTalkable = true;
                         sailorScript.isTalkable = true;
                     }
@@ -428,8 +428,8 @@ public class QuestManager : MonoBehaviour
             chiefNav.enabled = false;
             GameObject newPos = GameObject.Find("SailorEndPos");
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
-            sailorPos = newPos.transform.position;
-            chiefPos = newPos2.transform.position;
+            sailorTr.position = newPos.transform.position;
+            chiefTr.position = newPos2.transform.position;
             while (dialogSystem.theText.enabled == true)
                 yield return null;
             while (dialogSystem.theText.enabled == false)
@@ -441,7 +441,7 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
                 killer.GetComponent<NavMeshAgent>().destination = newPos.transform.position;
-                while (killerPos.z != newPos.transform.position.z)
+                while (killerTr.position.z != newPos.transform.position.z)
                     yield return null;
                 killerScript.HideObject();
                 controller.hasControl = true;
@@ -494,8 +494,8 @@ public class QuestManager : MonoBehaviour
             chiefNav.enabled = false;
             GameObject newPos = GameObject.Find("SailorEndPos");
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
-            sailor.transform.position = newPos.transform.position;
-            chief.transform.position = newPos2.transform.position;
+            sailorTr.position = newPos.transform.position;
+            chiefTr.position = newPos2.transform.position;
             if (!goldGet)
             {
                 npc.GetComponent<NpcManager>().canvas[0].SetActive(true);
@@ -550,10 +550,10 @@ public class QuestManager : MonoBehaviour
         chief,
         gold,
         killer;
-    private Vector3
-        sailorPos,
-        chiefPos,
-        killerPos;
+    private Transform
+        sailorTr,
+        chiefTr,
+        killerTr;
     private NavMeshAgent
         sailorNav,
         chiefNav;
@@ -580,9 +580,9 @@ public class QuestManager : MonoBehaviour
             chief = GameObject.Find("ChiefBody");
             gold = GameObject.Find("GoldSeam");
             killer = GameObject.Find("AssassinBody");
-            sailorPos = sailor.transform.position;
-            chiefPos = chief.transform.position;
-            killerPos = killer.transform.position;
+            sailorTr = sailor.transform;
+            chiefTr = chief.transform;
+            killerTr = killer.transform;
             sailorNav = sailor.GetComponent<NavMeshAgent>();
             chiefNav = chief.GetComponent<NavMeshAgent>();
             sailorScript = sailor.GetComponent<NpcManager>();
