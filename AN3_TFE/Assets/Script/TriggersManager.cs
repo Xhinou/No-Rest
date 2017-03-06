@@ -109,7 +109,6 @@ public class TriggersManager : MonoBehaviour
                 }
                 else if (name == "SailorBlock")
                 {
-                    controller.hasControl = false;
                     controller.agent.ResetPath();
                     controller.canSkipDial = false;
                     GameObject newPos = GameObject.Find("SailorBlockPos");
@@ -127,7 +126,7 @@ public class TriggersManager : MonoBehaviour
                 }
                 else if (name == "ScrewThis")
                 {
-                    GameObject greed = GameObject.Find("GreedSailorBody");
+                    GameObject greed = GameObject.Find("GreedSailor");
                     greed.GetComponent<NpcManager>().isTalkable = true;
                     controller.agent.ResetPath();
                     qManager.GreedQuest(0, 2);
@@ -153,7 +152,6 @@ public class TriggersManager : MonoBehaviour
                 else if (name == "End")
                 {
                     GameObject newPos = GameObject.Find("PlayerEndPos");
-                    controller.hasControl = false;
                     StartCoroutine(qManager.ObjectToPos(player, newPos));
                     while (qManager.isCoroutineRunning)
                         yield return null;

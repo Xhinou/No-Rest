@@ -314,41 +314,31 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.ForceLine(5, null, null);
                 while (!dialogSystem.isDisabled)
                     yield return null;
-                 newPos = GameObject.Find("PlayerEndPos2");
-                //controller.agent.destination = newPos.transform.position;
-                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
-                controller.hasControl = false;
+                newPos = GameObject.Find("PlayerEndPos2");
                 StartCoroutine(ObjectToPos(player, newPos));
-                /*while (player.transform.position.z != newPos.transform.position.z)
-                    yield return null;*/
-                //END ANIMATION
+                while (isCoroutineRunning)
+                    yield return null;
+                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
                 if (karma >= 1)
-                {
                     Debug.Log("KARMA IS GOOD");
-                }
                 else
-                {
                     Debug.Log("KARMA IS BAD");
-                }
                 SceneManager.LoadScene(0);
                 break;
             case 5:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
-                 newPos = GameObject.Find("PlayerEndPos2");
-                controller.agent.destination = newPos.transform.position;
-                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
-                controller.hasControl = false;
-                while (player.transform.position.z != newPos.transform.position.z)
+                while (!dialogSystem.isDisabled)
                     yield return null;
+                newPos = GameObject.Find("PlayerEndPos2");
+                StartCoroutine(ObjectToPos(player, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
                 //END ANIMATION
                 if (karma >= 1)
-                {
                     Debug.Log("KARMA IS GOOD");
-                }
                 else
-                {
                     Debug.Log("KARMA IS BAD");
-                }
                 SceneManager.LoadScene(0);
                 break;
             default:
@@ -778,10 +768,10 @@ public class QuestManager : MonoBehaviour
         }
         else if (_sceneID == 2)
         {
-            sailor = GameObject.Find("SailorBody");
-            chief = GameObject.Find("ChiefBody");
+            sailor = GameObject.Find("Sailor");
+            chief = GameObject.Find("Chief");
             gold = GameObject.Find("GoldSeam");
-            killer = GameObject.Find("AssassinBody");
+            killer = GameObject.Find("Assassin");
             sailorTr = sailor.transform;
             chiefTr = chief.transform;
             killerTr = killer.transform;
@@ -808,13 +798,20 @@ public class QuestManager : MonoBehaviour
     public IEnumerator ObjectToPos(GameObject movable, GameObject newPos)
     {
         isCoroutineRunning = true;
-        controller.agent.destination = newPos.transform.position;
-        float dist = Vector3.Distance(player.transform.position, newPos.transform.position);
-        while (dist > 0.8f)
+        if (movable == player)
+            controller.hasControl = false;
+        NavMeshAgent movableAgent = movable.GetComponent<NavMeshAgent>();
+        movableAgent.destination = newPos.transform.position;
+        float dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
+        print(movable.name + " : " +  dist);
+        while (dist > 0.1f)
         {
-            dist = Vector3.Distance(player.transform.position, newPos.transform.position);
+            print(movable.name + " : " + dist);
+            dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
             yield return null;
         }
+        if (movable == player)
+            controller.hasControl = true;
         isCoroutineRunning = false;
     }
 }

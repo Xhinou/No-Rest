@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class ItemManager : MonoBehaviour
                     gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
                     gameObject.tag = "held";
                     controller.isHolding = true;
                 }
@@ -50,7 +51,7 @@ public class ItemManager : MonoBehaviour
                     heldItem.GetComponent<Rigidbody>().isKinematic = false;
                     heldItem.GetComponent<Rigidbody>().AddForce(10f, 10f, 10f);
                     heldItem.GetComponent<Collider>().enabled = true;
-                    heldItem.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
+                    heldItem.GetComponent<NavMeshObstacle>().enabled = true;
                     heldItem.transform.parent = GameObject.Find("Scene").transform;
                     heldItem.tag = "Untagged";
                     gOTransform.parent = GameObject.Find("Character1_RightHand").transform;
@@ -58,7 +59,7 @@ public class ItemManager : MonoBehaviour
                     gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
                     gameObject.tag = "held";
                 }
                 DisplayText();
@@ -79,7 +80,7 @@ public class ItemManager : MonoBehaviour
                     gOTransform.parent = GameObject.FindWithTag("Player").transform;
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
                     gameObject.tag = "held";
                     controller.isHolding = true;
                 }
@@ -89,13 +90,13 @@ public class ItemManager : MonoBehaviour
                     heldItem.GetComponent<Rigidbody>().isKinematic = false;
                     heldItem.GetComponent<Rigidbody>().AddForce(10f, 10f, 10f);
                     heldItem.GetComponent<Collider>().enabled = true;
-                    heldItem.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = true;
+                    heldItem.GetComponent<NavMeshObstacle>().enabled = true;
                     heldItem.transform.parent = GameObject.Find("Scene").transform;
                     heldItem.tag = "Untagged";
                     gOTransform.parent = GameObject.FindWithTag("Player").transform;
                     gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<UnityEngine.AI.NavMeshObstacle>().enabled = false;
+                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
                     gameObject.tag = "held";
                 }
                 DisplayText();
@@ -107,7 +108,7 @@ public class ItemManager : MonoBehaviour
 
     void DisplayText()
     {
-        string color = controller.pickedItem.ToString("#000000");
+        Color color = controller.pickedItem;
         //controller.pickedItem
         itemInfo.text = "<size=8>" + "<color=" + color + ">" + gameObject.name + "</color></size>" + getItem;
         itemInfoText.GetComponent<Text>().canvasRenderer.SetAlpha(1f);
