@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267536711274812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.275694, y: 2.5385928, z: -4.779119}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,20 +52,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b0aa265baed5d4692210818f9d83ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneID: 2
-  introStep: 0
-  introEndStep: 0
-  introGoal: {fileID: 0}
-  hasFollowedSailor: 1
+  sceneID: 0
   triggers:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  karma: 0
+  hasFollowedSailor: 1
+  intro: 0
+  isCoroutineRunning: 0
   scriptSystem: {fileID: 0}
+  sailor: {fileID: 0}
+  chief: {fileID: 0}
+  gold: {fileID: 0}
+  killer: {fileID: 0}
+  sailorTr: {fileID: 0}
+  chiefTr: {fileID: 0}
+  killerTr: {fileID: 0}
+  sailorNav: {fileID: 0}
+  chiefNav: {fileID: 0}
+  killerNav: {fileID: 0}
+  sailorScript: {fileID: 0}
+  chiefScript: {fileID: 0}
+  goldScript: {fileID: 0}
+  killerScript: {fileID: 0}
 --- !u!114 &114764020034580578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,16 +87,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theText: {fileID: 0}
-  textFile: {fileID: 0}
-  textLines: []
-  textAsk: []
-  currentLine: 0
-  endAtLine: 0
-  buttons: []
+  buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  buttonTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   textBox: {fileID: 0}
-  buttonResume: {fileID: 0}
-  canvas: {fileID: 0}
-  scriptSystem: {fileID: 0}
   player: {fileID: 0}
-  endDialog: 0
-  isTextboxActive: 0
+  scriptSystem: {fileID: 0}
+  isDisabled: 0
+  karmaMod: 0
+  lastChoice: 0

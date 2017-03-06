@@ -65,6 +65,7 @@ public class QuestManager : MonoBehaviour
         switch (sceneID)
         {
             case 0:
+                StartCoroutine(karmaQuest(karmaStep));
                 break;
             case 1:
                 break;
@@ -138,11 +139,14 @@ public class QuestManager : MonoBehaviour
 
     private int karmaStep = 0;
 
-    public void karmaQuest(int step)
+    public IEnumerator karmaQuest(int step)
     {
         if (karmaStep == 0)
         {
-            //TALK WITH THE ENTITY BETWEEN THE WORLDS
+            dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+            while (!dialogSystem.isDisabled)
+                yield return null;
+            SceneManager.LoadScene(2);
         }
     }
     #endregion World 0
@@ -821,7 +825,3 @@ public class QuestManager : MonoBehaviour
         isCoroutineRunning = false;
     }
 }
-
-// Dialogue chef village
-// Texte boutons
-// Modeles persos
