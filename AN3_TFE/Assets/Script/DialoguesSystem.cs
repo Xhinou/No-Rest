@@ -4,10 +4,13 @@ using UnityEngine.UI;
 public class DialoguesSystem : MonoBehaviour
 {
     public Text theText;
-    [HideInInspector] TextAsset textFile;
+    [HideInInspector] TextAsset
+        textFile,
+        buttonFile;
     private string modDial;
     string[]
-        textLines;
+        textLines,
+        buttonLines;
     int
         currentLine = 0,
         endAtLine,
@@ -16,7 +19,9 @@ public class DialoguesSystem : MonoBehaviour
         step,
         order,
         choicesCount;
-    public GameObject[] buttons = new GameObject[3];
+    public GameObject[]
+        buttons = new GameObject[3],
+        buttonTexts = new GameObject[3];
     public GameObject
         textBox,
         player,
@@ -88,7 +93,10 @@ public class DialoguesSystem : MonoBehaviour
                 theText.enabled = false;
                 resume.interactable = false;
                 for (int i = 0; i < choicesCount; i++)
+                {
                     buttons[i].SetActive(true);
+                    buttonTexts[i].GetComponent<Text>().text = buttonLines[i];
+                }
             }
         } else
             UpdateLine();
@@ -134,7 +142,18 @@ public class DialoguesSystem : MonoBehaviour
         {
             textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-" + i) as TextAsset;
             if (textFile != null)
+            {
+                if (i > 0)
+                {
+                    buttonFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-buttons") as TextAsset;
+                    buttonLines = buttonFile.text.Split('\n');
+                    if (buttonFile == null)
+                        Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
+                }
+                else
+                    buttonFile = null;
                 break;
+            }
             else if (i > 3)
             {
                 if (!toDial)
@@ -147,8 +166,8 @@ public class DialoguesSystem : MonoBehaviour
                     textFile = Resources.Load(modDial) as TextAsset;
                     break;
                 }
-            }
-        }
+            }            
+        }        
         textLines = (textFile.text.Split('\n'));
         endAtLine = textLines.Length - 1;
     }
