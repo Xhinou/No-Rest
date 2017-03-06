@@ -28445,6 +28445,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1598816611}
     m_Modifications:
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: triggers.Array.size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4622171297781240, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
       propertyPath: m_LocalPosition.x
       value: -4.275694
@@ -28552,6 +28557,11 @@ Prefab:
       propertyPath: textBox
       value: 
       objectReference: {fileID: 275634797}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: sceneID
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
   m_IsPrefabParent: 0
@@ -28573,7 +28583,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -57,6 +57,10 @@ public class DialoguesSystem : MonoBehaviour
             resume.interactable = true;
         else
             resume.interactable = false;
+        if (Input.GetKeyDown("space") && controller.canSkipDial && theText.enabled == true)
+        {
+            ResumeDialog();
+        }
     }
 
     public void DisplayText(int _sceneID, int _npcID, int _step, string cam)

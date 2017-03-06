@@ -17,16 +17,12 @@ public class CharacterClickingController : MonoBehaviour
     public Color pickedItem;
     public GameObject rightHand;
     Camera mainCam;
-    GameObject scriptSystem;
-    DialoguesSystem dialogSystem;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        navMap = LayerMask.GetMask("NavMap");        
+        navMap = LayerMask.GetMask("NavMap");
         mainCam = Camera.main;
-        scriptSystem = GameObject.Find("ScriptSystem");
-        dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
     }
 
     void Update()
@@ -41,20 +37,29 @@ public class CharacterClickingController : MonoBehaviour
                     hasClicked = false;
             }
         }
-        if (!dialogSystem.isDisabled)
+        if (isPlayerTrigger && !hasControl)
         {
-            if (npc != null)
+            Vector3 direction = (npc.transform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
+        }
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
-                Vector3 direction = (npc.transform.position - transform.position).normalized;
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    agent.ResetPath();
+                    isMoving = false;
+                    anim.SetBool("isMoving", isMoving);
+                }
+            }
+            else
+            {
+                isMoving = true;
+                anim.SetBool("isMoving", isMoving);
             }
         }
-        if (agent.velocity.x != 0 || agent.velocity.z != 0)
-            isMoving = true;
-        else
-            isMoving = false;
-        anim.SetBool("isMoving", isMoving);
     }
 
     public void UnableControl()
