@@ -10,15 +10,17 @@ public class CameraFollower : MonoBehaviour
         offset,
         velocity = Vector3.zero;
     public float smoothDuration = 0.8f;
+    NavMeshAgent playerAgent;
 
     void Start()
     {
         offset = transform.position - player.transform.position;
+        playerAgent = player.GetComponent<NavMeshAgent>();
     }
 
     void LateUpdate()
     {
-        if (player.GetComponent<NavMeshAgent>().velocity.x != 0f && player.GetComponent<NavMeshAgent>().velocity.z != 0f)
+        if (playerAgent.velocity.x != 0f && playerAgent.velocity.z != 0f)
             transform.position = Vector3.SmoothDamp(transform.position, camTarget.transform.position + offset, ref velocity, smoothDuration);
         else
             transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + offset, ref velocity, 1f);

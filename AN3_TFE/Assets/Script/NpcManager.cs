@@ -2,14 +2,11 @@
 
 public class NpcManager : MonoBehaviour
 {
-    public int
-        npcID,
-        canvasAmount;
-    public GameObject[] canvas;
+    public int npcID;
     public bool
         isTalkable,
         isClicked;
-    public GameObject
+    [HideInInspector] public GameObject
         scriptSystem,
         player;
     QuestManager qManager;

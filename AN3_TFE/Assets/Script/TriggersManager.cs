@@ -115,9 +115,12 @@ public class TriggersManager : MonoBehaviour
                     GameObject newPos = GameObject.Find("SailorBlockPos");
                     dialogSystem.DisplayText(qManager.sceneID, 1, 2, "Main Camera");
                     dialogSystem.ForceLine(0, 0, null);
-                    controller.agent.destination = newPos.transform.position;
-                    while (controller.agent.transform.position.z != newPos.transform.position.z)
+                    StartCoroutine(qManager.ObjectToPos(player, newPos));
+                    while (qManager.isCoroutineRunning)
                         yield return null;
+                    /*controller.agent.destination = newPos.transform.position;
+                    while (controller.agent.transform.position.z != newPos.transform.position.z)
+                        yield return null;*/
                     dialogSystem.EndDialog();
                     controller.canSkipDial = true;
                     sailorNpc.isTalkable = true;
@@ -132,20 +135,31 @@ public class TriggersManager : MonoBehaviour
                 else if (name == "Village")
                 {
                     GameObject newPos = GameObject.Find("PlayerPosVillage");
-                    controller.hasControl = false;
-                    controller.agent.destination = newPos.transform.position;
-                    while (controller.agent.transform.position.z != newPos.transform.position.z)
+                    /*controller.hasControl = false;
+                    controller.agent.destination = newPos.transform.position;*/
+                    StartCoroutine(qManager.ObjectToPos(player, newPos));
+                    while (qManager.isCoroutineRunning)
                         yield return null;
-                    sailorNpc.isTalkable = true;
+                   /* float dist = Vector3.Distance(controller.agent.transform.position, newPos.transform.position);
+                    while (dist > 0.8f)
+                    {
+                        dist = Vector3.Distance(controller.agent.transform.position, newPos.transform.position);
+                        yield return null;
+                    }*/
+                    /*while (player.transform.position.z != newPos.transform.position.z)
+                        yield return null;*/
                     qManager.RunQuest(1);
                 }
                 else if (name == "End")
                 {
                     GameObject newPos = GameObject.Find("PlayerEndPos");
                     controller.hasControl = false;
-                    controller.agent.destination = newPos.transform.position;
-                    while (controller.agent.transform.position.z != newPos.transform.position.z)
+                    StartCoroutine(qManager.ObjectToPos(player, newPos));
+                    while (qManager.isCoroutineRunning)
                         yield return null;
+                    /*controller.agent.destination = newPos.transform.position;
+                    while (controller.agent.transform.position.z != newPos.transform.position.z)
+                        yield return null;*/
                     qManager.RunQuest(1);
                 }
             }

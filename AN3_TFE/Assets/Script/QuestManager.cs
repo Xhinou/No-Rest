@@ -5,11 +5,7 @@ using UnityEngine.AI;
 
 public class QuestManager : MonoBehaviour
 {
-    public int
-        sceneID,
-        introStep = 0,
-        introEndStep;
-    public GameObject introGoal;    
+    public int sceneID;
     GameObject
         npc,
         player;
@@ -17,10 +13,11 @@ public class QuestManager : MonoBehaviour
     [HideInInspector] public int karma = 0;
     [HideInInspector] public bool
         hasFollowedSailor = true,
-        intro;
+        intro,
+        isCoroutineRunning;
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
-    public GameObject scriptSystem;
+    [HideInInspector] public GameObject scriptSystem;
 
     void Start()
     {
@@ -30,13 +27,27 @@ public class QuestManager : MonoBehaviour
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
         LoadNpc(sceneID);
         RunIntro(sceneID);
-        if (sceneID == 2)
-            introEndStep = 3;
     }
 
     void RunIntro(int _sceneID)
     {
-        if (_sceneID == 0)
+        switch (_sceneID)
+        {
+            case 0:
+                controller.hasControl = true;
+                break;
+            case 1:
+                break;
+            case 2:
+                RunQuest(1);
+                break;
+            case 3:
+                break;
+            default:
+                Debug.Log("Error in scene ID");
+                break;
+        }
+        /*if (_sceneID == 0)
             controller.hasControl = true;
         else if (_sceneID == 1) return;
         else if (_sceneID == 2)
@@ -46,12 +57,57 @@ public class QuestManager : MonoBehaviour
         {
             Debug.Log("Error in scene ID");
             return;
-        }           
+        }     */      
     }
 
     public void RunQuest(int npcID)
     {
-        if (sceneID == 2)
+        switch (sceneID)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                switch (npcID)
+                {
+                    case 0:
+                        Debug.Log("NPC ID must not be less than 1");
+                        break;
+                    case 1:
+                        StartCoroutine(SailorQuest(sailorStep, npcID));
+                        break;
+                    case 2:
+                        GreedQuest(greedStep, npcID);
+                        break;
+                    case 4:
+                        NativeQuest(0, npcID);
+                        break;
+                    case 5:
+                        StartCoroutine(AssassinQuest(killerStep, npcID));
+                        break;
+                    case 6:
+                        StartCoroutine(HarshQuest(harshStep, npcID));
+                        break;
+                    case 7:
+                        Debug.Log("How the hell did you talk to that guy ?");
+                        break;
+                    case 8:
+                        GoldDigging();
+                        break;
+                    default:
+                        SideQuest(npcID);
+                        break;
+                }
+                break;
+            case 3:
+                break;
+            default:
+                Debug.Log("Error in scene ID");
+                break;
+        }
+        
+        /*if (sceneID == 2)
         {
             if (npcID == 1)
                 StartCoroutine(SailorQuest(sailorStep, npcID));
@@ -74,7 +130,7 @@ public class QuestManager : MonoBehaviour
             }                
         }
         else
-            return;
+            return;*/
     }
 
     #region World 0
@@ -103,11 +159,202 @@ public class QuestManager : MonoBehaviour
         greedStep = 0,
         killerStep = 0,
         harshStep = 0;
-    private bool goldGet = false;
-
+    private bool goldGet = false;    
     public IEnumerator SailorQuest(int step, int npcID)
     {
-        if (step == 0)
+        GameObject newPos;
+        switch (step) {
+            case 0:
+                intro = true;
+                //anim réveil			
+                sailorNav.destination = player.transform.position;
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                int w = 0;
+                while (w == 0)
+                {
+                    if (controller.isPlayerTrigger)
+                    {
+                        sailorNav.ResetPath();
+                        w++;
+                    }
+                    yield return null;
+                }
+                dialogSystem.ForceLine(1, null, null);
+                controller.canSkipDial = true;
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                newPos = GameObject.Find("IntroGoal");
+                StartCoroutine(ObjectToPos(sailor, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                /*sailorNav.destination = introGoal.transform.position;
+                while (sailorTr.position.z >= introGoal.transform.position.z + 0.03f)
+                    yield return null;*/
+                sailorNav.ResetPath();
+                sailor.SetActive(false);
+                controller.hasControl = true;
+                intro = false;
+                sailorStep = 1;
+                break;
+            case 1:
+                if (hasFollowedSailor)
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
+                    karma += 1;
+                    dialogSystem.ForceLine(0, 1, null);
+                    for (int i = 0; i < 3; i++)
+                        triggers[i].GetComponent<BoxCollider>().isTrigger = false;
+                }
+                else
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1b");
+                    karma -= 1;
+                    dialogSystem.ForceLine(2, null, null);
+                    while (!dialogSystem.isDisabled)
+                        yield return null;
+                    sailor.tag = "Untagged";
+                    for (int i = 0; i < 3; i++)
+                        triggers[i].GetComponent<BoxCollider>().isTrigger = false;
+                     newPos = GameObject.Find("SailorPosA");
+                    sailorScript.isTalkable = false;
+                    StartCoroutine(ObjectToPos(sailor, newPos));
+                    while (isCoroutineRunning)
+                        yield return null;
+                    /*sailorNav.destination = newPos.transform.position;
+                    while (sailorTr.position.z != newPos.transform.position.z)
+                        yield return null;*/
+                    sailorScript.isTalkable = true;
+                    hasFollowedSailor = true;
+                }
+                sailorStep = 2;
+                break;
+            case 2:
+                if (controller.isHolding)
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
+                    GameObject heldItem = GameObject.FindWithTag("held");
+                    if (heldItem.name == "Stone")
+                    {
+                        karma -= 1;
+                        dialogSystem.ForceLine(2, 0, null);
+                        Destroy(heldItem);
+                        controller.isHolding = false;
+                    }
+                    else if (heldItem.name == "Shell")
+                    {
+                        karma -= 1;
+                        dialogSystem.ForceLine(3, 1, null);
+                        Destroy(heldItem);
+                        controller.isHolding = false;
+                    }
+                    else if (heldItem.name == "Charcoal")
+                    {
+                        karma += 1;
+                        dialogSystem.ForceLine(5, null, null);
+                        Destroy(heldItem);
+                        controller.isHolding = false;
+                    }
+                    for (int i = 0; i < 4; i++)
+                        triggers[i].GetComponent<BoxCollider>().isTrigger = false;
+                    while (!dialogSystem.isDisabled)
+                        yield return null;
+                    sailorScript.isTalkable = false;
+                     newPos = GameObject.Find("SailorPosVillage");
+                    StartCoroutine(ObjectToPos(sailor, newPos));
+                    while (isCoroutineRunning)
+                        yield return null;
+                    /*sailorNav.destination = newPos.transform.position;
+                    while (sailorTr.position.z != newPos.transform.position.z)
+                        yield return null;*/
+                    sailorStep = 3;
+                }
+                else
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+                    dialogSystem.ForceLine(0, 1, null);
+                }
+                break;
+            case 3:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2");
+                if (greedStep == 0 && killerStep == 0 && harshStep == 0)
+                {
+                    dialogSystem.ForceLine(0, 2, null);
+                    dialogSystem.SetToDial("2_1_3_10-2");
+                }
+                else
+                {
+                    dialogSystem.ForceLine(3, 2, 0);
+                    dialogSystem.SetToDial("");
+                }
+                triggers[5].GetComponent<BoxCollider>().isTrigger = false;
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                 newPos = GameObject.Find("ChiefEndPos");
+                GameObject newPos2 = GameObject.Find("SailorEndPos");
+                chiefScript.isTalkable = false;
+                sailorScript.isTalkable = false;
+                StartCoroutine(ObjectToPos(sailor, newPos));
+                StartCoroutine(ObjectToPos(chief, newPos2));
+                while (isCoroutineRunning)
+                    yield return null;
+                /*chiefNav.destination = newPos.transform.position;
+                sailorNav.destination = newPos2.transform.position;
+                while (chiefTr.position.z != newPos.transform.position.z && sailorTr.position.z != newPos2.transform.position.z)
+                    yield return null;*/
+                chiefScript.isTalkable = true;
+                sailorScript.isTalkable = true;
+                sailorStep = 4;
+                break;
+            case 4:
+                karma += 1;
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
+                if (killerStep == 2 || harshStep > 0)
+                    dialogSystem.ForceLine(0, 4, null);
+                else
+                    dialogSystem.ForceLine(5, null, null);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                 newPos = GameObject.Find("PlayerEndPos2");
+                //controller.agent.destination = newPos.transform.position;
+                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
+                controller.hasControl = false;
+                StartCoroutine(ObjectToPos(player, newPos));
+                /*while (player.transform.position.z != newPos.transform.position.z)
+                    yield return null;*/
+                //END ANIMATION
+                if (karma >= 1)
+                {
+                    Debug.Log("KARMA IS GOOD");
+                }
+                else
+                {
+                    Debug.Log("KARMA IS BAD");
+                }
+                SceneManager.LoadScene(0);
+                break;
+            case 5:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
+                 newPos = GameObject.Find("PlayerEndPos2");
+                controller.agent.destination = newPos.transform.position;
+                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
+                controller.hasControl = false;
+                while (player.transform.position.z != newPos.transform.position.z)
+                    yield return null;
+                //END ANIMATION
+                if (karma >= 1)
+                {
+                    Debug.Log("KARMA IS GOOD");
+                }
+                else
+                {
+                    Debug.Log("KARMA IS BAD");
+                }
+                SceneManager.LoadScene(0);
+                break;
+            default:
+                break;
+        }
+        /*if (step == 0)
         {
             intro = true;
             //anim réveil			
@@ -127,8 +374,9 @@ public class QuestManager : MonoBehaviour
             controller.canSkipDial = true;
             while (!dialogSystem.isDisabled)
                 yield return null;
-            sailorNav.destination = introGoal.transform.position;
-            while (sailorTr.position.z >= introGoal.transform.position.z + 0.03f)
+            GameObject newPos = GameObject.Find("IntroGoal");
+            StartCoroutine(ObjectToPos(sailor, newPos));
+            while (isCoroutineRunning)
                 yield return null;
             sailorNav.ResetPath();
             sailor.SetActive(false);
@@ -137,7 +385,7 @@ public class QuestManager : MonoBehaviour
             sailorStep = 1;
         }
         else if (step == 1)
-        {      
+        {
             if (hasFollowedSailor)
             {
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
@@ -157,9 +405,9 @@ public class QuestManager : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                     triggers[i].GetComponent<BoxCollider>().isTrigger = false;
                 GameObject newPos = GameObject.Find("SailorPosA");
-                sailorNav.destination = newPos.transform.position;
                 sailorScript.isTalkable = false;
-                while (sailorTr.position.z != newPos.transform.position.z)
+                StartCoroutine(ObjectToPos(sailor, newPos));
+                while (isCoroutineRunning)
                     yield return null;
                 sailorScript.isTalkable = true;
                 hasFollowedSailor = true;
@@ -167,7 +415,7 @@ public class QuestManager : MonoBehaviour
             sailorStep = 2;
         }
         else if (step == 2)
-        {        
+        {
             if (controller.isHolding)
             {
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
@@ -199,8 +447,8 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 sailorScript.isTalkable = false;
                 GameObject newPos = GameObject.Find("SailorPosVillage");
-                sailorNav.destination = newPos.transform.position;
-                while (sailorTr.position.z != newPos.transform.position.z)
+                StartCoroutine(ObjectToPos(sailor, newPos));
+                while (isCoroutineRunning)
                     yield return null;
                 sailorStep = 3;
             }
@@ -213,12 +461,16 @@ public class QuestManager : MonoBehaviour
         else if (step == 3)
         {
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2");
-            if (greedStep == 0)
+            if (greedStep == 0 && killerStep == 0 && harshStep == 0)
+            {
                 dialogSystem.ForceLine(0, 2, null);
-            if (killerStep == 2)
-                dialogSystem.ForceLine(3, null, null);
+                dialogSystem.SetToDial("2_1_3_10-2");
+            }
             else
+            {
                 dialogSystem.ForceLine(3, 2, 0);
+                dialogSystem.SetToDial("");
+            }
             triggers[5].GetComponent<BoxCollider>().isTrigger = false;
             while (!dialogSystem.isDisabled)
                 yield return null;
@@ -226,9 +478,9 @@ public class QuestManager : MonoBehaviour
             GameObject newPos2 = GameObject.Find("SailorEndPos");
             chiefScript.isTalkable = false;
             sailorScript.isTalkable = false;
-            chiefNav.destination = newPos.transform.position;
-            sailorNav.destination = newPos2.transform.position;
-            while (chiefTr.position.z != newPos.transform.position.z && sailorTr.position.z != newPos2.transform.position.z)
+            StartCoroutine(ObjectToPos(sailor, newPos));
+            StartCoroutine(ObjectToPos(chief, newPos));
+            while (isCoroutineRunning)
                 yield return null;
             chiefScript.isTalkable = true;
             sailorScript.isTalkable = true;
@@ -237,7 +489,7 @@ public class QuestManager : MonoBehaviour
         else if (step == 4)
         {
             karma += 1;
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
             if (killerStep == 2 || harshStep > 0)
                 dialogSystem.ForceLine(0, 4, null);
             else
@@ -245,11 +497,10 @@ public class QuestManager : MonoBehaviour
             while (!dialogSystem.isDisabled)
                 yield return null;
             GameObject newPos = GameObject.Find("PlayerEndPos2");
-            controller.agent.destination = newPos.transform.position;
+            //controller.agent.destination = newPos.transform.position;
             triggers[6].GetComponent<BoxCollider>().isTrigger = false;
             controller.hasControl = false;
-            while (player.transform.position.z != newPos.transform.position.z)
-                yield return null;
+            StartCoroutine(ObjectToPos(player, newPos));
             //END ANIMATION
             if (karma >= 1)
             {
@@ -263,7 +514,7 @@ public class QuestManager : MonoBehaviour
         }
         else if (step == 5)
         {
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
             GameObject newPos = GameObject.Find("PlayerEndPos2");
             controller.agent.destination = newPos.transform.position;
             triggers[6].GetComponent<BoxCollider>().isTrigger = false;
@@ -280,7 +531,7 @@ public class QuestManager : MonoBehaviour
                 Debug.Log("KARMA IS BAD");
             }
             SceneManager.LoadScene(0);
-        }
+        }*/
     }
 
     private int bored;
@@ -397,9 +648,10 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
-                killerNav.destination = newPos.transform.position;
-                while (killerTr.position.z != newPos.transform.position.z)
-                    yield return null;
+                /* killerNav.destination = newPos.transform.position;
+                 while (killerTr.position.z != newPos.transform.position.z)
+                     yield return null;*/
+                StartCoroutine(ObjectToPos(killer, newPos));
                 killer.SetActive(false);
                 controller.hasControl = true;
                 chief.SetActive(false);
@@ -493,20 +745,20 @@ public class QuestManager : MonoBehaviour
     /*NPCs - WORLD 1*/
     #region World 2 NPCs
     /*NPCs - WORLD 2*/
-    public GameObject
+    [HideInInspector] public GameObject
         sailor,
         chief,
         gold,
         killer;
-    public Transform
+    [HideInInspector] public Transform
         sailorTr,
         chiefTr,
         killerTr;
-    public NavMeshAgent
+    [HideInInspector] public NavMeshAgent
         sailorNav,
         chiefNav,
         killerNav;
-    public NpcManager
+    [HideInInspector] public NpcManager
         sailorScript,
         chiefScript,
         goldScript,
@@ -552,6 +804,19 @@ public class QuestManager : MonoBehaviour
         }            
     }
     #endregion NPCs Loading
+
+    public IEnumerator ObjectToPos(GameObject movable, GameObject newPos)
+    {
+        isCoroutineRunning = true;
+        controller.agent.destination = newPos.transform.position;
+        float dist = Vector3.Distance(player.transform.position, newPos.transform.position);
+        while (dist > 0.8f)
+        {
+            dist = Vector3.Distance(player.transform.position, newPos.transform.position);
+            yield return null;
+        }
+        isCoroutineRunning = false;
+    }
 }
 
 // Dialogue chef village

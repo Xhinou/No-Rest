@@ -9341,11 +9341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 5
-  canvasAmount: 3
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -11235,10 +11230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 4
-  canvasAmount: 2
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -22196,13 +22187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 6
-  canvasAmount: 3
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -25761,8 +25745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 8
-  canvasAmount: 0
-  canvas: []
   isTalkable: 0
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -26865,14 +26847,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 2
-  canvasAmount: 6
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -33692,9 +33666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 12
-  canvasAmount: 1
-  canvas:
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -33830,9 +33801,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 13
-  canvasAmount: 1
-  canvas:
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -48553,9 +48521,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 11
-  canvasAmount: 1
-  canvas:
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -50430,14 +50395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 3
-  canvasAmount: 6
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 0
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -50577,9 +50534,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 10
-  canvasAmount: 1
-  canvas:
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -54541,25 +54495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 1
-  canvasAmount: 17
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -63032,7 +62967,12 @@ Prefab:
     - target: {fileID: 198205096380751014, guid: a1b5327121e23eb43b331bb1f8919782,
         type: 2}
       propertyPath: randomSeed
-      value: 1478924545
+      value: 936479593
+      objectReference: {fileID: 0}
+    - target: {fileID: 198205096380751014, guid: a1b5327121e23eb43b331bb1f8919782,
+        type: 2}
+      propertyPath: prewarm
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1b5327121e23eb43b331bb1f8919782, type: 2}
@@ -64651,9 +64591,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 9
-  canvasAmount: 1
-  canvas:
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -73599,6 +73536,14 @@ Prefab:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4929944100938842, guid: 396e862ccfd6f0042b0dc841766ae926, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4929944100938842, guid: 396e862ccfd6f0042b0dc841766ae926, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.82
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 396e862ccfd6f0042b0dc841766ae926, type: 2}
   m_IsPrefabParent: 0
@@ -78326,12 +78271,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4989707629076520, guid: 7a7ad455c999e364bbbf9ef2c14025b0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.019
+      value: -0.005
       objectReference: {fileID: 0}
     - target: {fileID: 198401463626926222, guid: 7a7ad455c999e364bbbf9ef2c14025b0,
         type: 2}
       propertyPath: lengthInSec
       value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989707629076520, guid: 7a7ad455c999e364bbbf9ef2c14025b0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263297333435536, guid: 7a7ad455c999e364bbbf9ef2c14025b0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a7ad455c999e364bbbf9ef2c14025b0, type: 2}
@@ -78701,11 +78654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 7
-  canvasAmount: 3
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}
@@ -86163,25 +86111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 1
-  canvasAmount: 17
-  canvas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isTalkable: 1
   isClicked: 0
   scriptSystem: {fileID: 0}

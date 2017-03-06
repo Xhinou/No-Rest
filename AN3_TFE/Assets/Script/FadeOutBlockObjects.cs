@@ -6,7 +6,7 @@ public class FadeOutBlockObjects : MonoBehaviour
     private bool hitFlag;
     RaycastHit oldHit;
     public GameObject player;
-    Vector3 dir;
+    Vector3 dist;
     Camera mainCam;
 
     void Start()
@@ -18,8 +18,8 @@ public class FadeOutBlockObjects : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        dir = player.transform.position - mainCam.transform.position;
-        if (Physics.Raycast(mainCam.transform.position, dir, out hit, 1000, fadeOut.value))
+        dist = player.transform.position - mainCam.transform.position;
+        if (Physics.Raycast(mainCam.transform.position, dist, out hit, 1000, fadeOut.value))
         {
             hitFlag = true;
             Color colorA = hit.collider.GetComponent<Renderer>().material.color;

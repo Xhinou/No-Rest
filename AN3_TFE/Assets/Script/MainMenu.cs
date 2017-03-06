@@ -12,8 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void RunGame()
     {
-        StartCoroutine(FadeInAndPlay());
-        SceneManager.LoadScene (1);
+        StartCoroutine(FadeInAndPlay());        
     }
 
     IEnumerator FadeInAndPlay()
@@ -24,15 +23,11 @@ public class MainMenu : MonoBehaviour
         fadeScreen.GetComponent<Image>().CrossFadeAlpha(255f, fadeDuration, false);
         yield return new WaitForSeconds(2);
         Debug.Log("PLAY");
+        SceneManager.LoadScene(1);
     }
 
     public void ExitGame()
     {
-        /*fadeScreen.GetComponent<Image>().CrossFadeAlpha(1f, 1f, false);
-        while (fadeScreen.GetComponent<Image>().color.a != 1f)
-        {
-            return;
-        }*/
         Debug.Log("EXIT");
         Application.Quit();
     }

@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class DialoguesSystem : MonoBehaviour
 {
     public Text theText;
-    TextAsset textFile;
+    [HideInInspector] TextAsset textFile;
+    private string modDial;
     string[]
         textLines;
     int
@@ -21,6 +22,7 @@ public class DialoguesSystem : MonoBehaviour
         player,
         scriptSystem;
     public bool isDisabled;
+    bool toDial;
     [HideInInspector] /*&&*/ [Range(0,2)]
     public int
         karmaMod = 0,
@@ -135,8 +137,16 @@ public class DialoguesSystem : MonoBehaviour
                 break;
             else if (i > 3)
             {
-                Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
-                break;
+                if (!toDial)
+                {
+                    Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
+                    break;
+                }
+                else
+                {
+                    textFile = Resources.Load(modDial) as TextAsset;
+                    break;
+                }
             }
         }
         textLines = (textFile.text.Split('\n'));
@@ -166,8 +176,14 @@ public class DialoguesSystem : MonoBehaviour
             qManager.karma--;
     }
 
-    public void OrderMod(int mod)
+    public void SetToDial(string mod)
     {
-        order += mod;
+        if (mod != "")
+        {
+            toDial = true;
+            modDial = mod;
+        }
+        else
+            toDial = false;
     }
 }
