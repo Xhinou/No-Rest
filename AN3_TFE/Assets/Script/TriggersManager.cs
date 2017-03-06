@@ -61,18 +61,10 @@ public class TriggersManager : MonoBehaviour
             }
             if (name == "WhoTrigger")
             {
-               // GameObject mainCam = GameObject.Find("Main Camera");
-               // GameObject cam2 = GameObject.Find("WhoCamera");
-                if (isEntering)
-                {
-                    //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 280, Time.deltaTime * 2f);
-                    //cam2.GetComponent<Camera>().enabled = true;
-                } else
-                {
-                    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, -280, Time.deltaTime * 2f);
-                    //cam2.GetComponent<Camera>().enabled = false;
-                }
-                //qManager.karmaQuest(0);
+                GameObject newPos = GameObject.Find("WhoPos");
+                StartCoroutine(qManager.ObjectToPos(player, newPos));
+                while (qManager.isCoroutineRunning)
+                    yield return null;
             }
         }
         #endregion World 0
