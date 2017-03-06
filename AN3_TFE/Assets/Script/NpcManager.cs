@@ -5,7 +5,9 @@ public class NpcManager : MonoBehaviour
     public int npcID;
     public bool
         isTalkable,
-        isClicked;
+        isClicked,
+        notNpc,
+        isMoving;
     [HideInInspector] public GameObject
         scriptSystem,
         player;
@@ -20,11 +22,21 @@ public class NpcManager : MonoBehaviour
         controller = player.GetComponent<CharacterClickingController>();
     }
 
+    private void LateUpdate()
+    {
+        if (!notNpc && !isMoving)
+        {
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
+        }
+    }
+
     public void TriggerEnter()
     {
         tag = "closeToPlayer";
         controller.npc = GameObject.FindWithTag("closeToPlayer");
-        controller.isPlayerTrigger = true;
+        controller.isPlayerTrigger = true;        
         if (controller.hasClicked && isClicked)
         {
             qManager.RunQuest(npcID);
@@ -36,10 +48,7 @@ public class NpcManager : MonoBehaviour
     public void TriggerStay()
     {
         if (controller.hasClicked && isClicked)
-        {            
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
+        {                       
             qManager.RunQuest(npcID);
             controller.hasClicked = false;
             isClicked = false;

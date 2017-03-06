@@ -800,11 +800,15 @@ public class QuestManager : MonoBehaviour
         isCoroutineRunning = true;
         if (movable == player)
             controller.hasControl = false;
+        else
+            movable.GetComponent<NpcManager>().isMoving = true;
         NavMeshAgent movableAgent = movable.GetComponent<NavMeshAgent>();
         movableAgent.destination = newPos.transform.position;
+        while (movableAgent.pathPending)
+            yield return null;
         float dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
         print(movable.name + " : " +  dist);
-        while (dist > 0.1f)
+        while (dist > 0.2f)
         {
             print(movable.name + " : " + dist);
             dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
@@ -812,6 +816,8 @@ public class QuestManager : MonoBehaviour
         }
         if (movable == player)
             controller.hasControl = true;
+        else
+            movable.GetComponent<NpcManager>().isMoving = false;
         isCoroutineRunning = false;
     }
 }
