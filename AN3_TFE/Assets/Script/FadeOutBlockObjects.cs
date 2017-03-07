@@ -12,7 +12,7 @@ public class FadeOutBlockObjects : MonoBehaviour
     void Start()
     {
         fadeOut = LayerMask.GetMask("FadeOut");
-        mainCam = Camera.main;
+        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     void Update()

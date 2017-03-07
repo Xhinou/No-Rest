@@ -7,7 +7,8 @@ public class DialoguesSystem : MonoBehaviour
     [HideInInspector] TextAsset
         textFile,
         buttonFile;
-    private string modDial;
+    private string modDial, modDialButtons, modDialPrevString;
+    private int prevOrder;
     string[]
         textLines,
         buttonLines;
@@ -45,7 +46,7 @@ public class DialoguesSystem : MonoBehaviour
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         qManager = scriptSystem.GetComponent<QuestManager>();
-        mainCam = Camera.main;
+        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
         textBox.SetActive(false);
         isDisabled = true;
         resume = textBox.GetComponent<Button>();
@@ -76,7 +77,7 @@ public class DialoguesSystem : MonoBehaviour
         textBox.SetActive(true);
         isDisabled = false;
         order = 0;
-        LoadFiles(0);
+        LoadFiles(-1);
         string[] fileName;
         fileName = textFile.name.Split('-');
         choicesCount = int.Parse(fileName[1]);
@@ -108,7 +109,7 @@ public class DialoguesSystem : MonoBehaviour
     
     public void NextDialog(int choice)
     {
-        order += 1;
+        order += 1;        
         lastChoice = choice;
         LoadFiles(choice);
         currentLine = 0;
@@ -125,6 +126,7 @@ public class DialoguesSystem : MonoBehaviour
     public void EndDialog()
     {
         currentLine = 0;
+        prevChoiceString = "";
         textBox.SetActive(false);
         isDisabled = true;
         dialCam.enabled = false;
@@ -133,12 +135,19 @@ public class DialoguesSystem : MonoBehaviour
             controller.hasControl = true;
     }
 
+    private string
+        choiceString,
+        prevChoiceString;
+
     void LoadFiles(int choice)
     {
-        string strRange = "";
-        for (int i = 0; i < order; i++)
-            strRange += "0";
-        string choiceString = choice.ToString(strRange);
+       // string strRange = "";
+       if (choiceString != "")
+            prevChoiceString = choiceString;
+       /* for (int i = 0; i < order; i++)
+            strRange += "0";*/
+        if (choice != -1)
+            choiceString = prevChoiceString + choice;
         if (order == 0)
             choiceString = "";
         textFile = null;
@@ -158,20 +167,32 @@ public class DialoguesSystem : MonoBehaviour
                     buttonFile = null;
                 break;
             }
-            else if (i > 3)
+        }
+        if (textFile == null)
+        {
+            if (!toDial)
+                Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
+            else
             {
-                if (!toDial)
+                print(modDial);
+                textFile = Resources.Load("Texts/" + modDial) as TextAsset;
+                string[] fileName;
+                fileName = modDial.Split('-');
+                choicesCount = int.Parse(fileName[1]);
+                if (choicesCount != 0)
                 {
-                    Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
-                    break;
+                    buttonFile = Resources.Load("Texts/" + fileName[0] + "-buttons") as TextAsset;
+                    buttonLines = buttonFile.text.Split('\n');
                 }
                 else
-                {
-                    textFile = Resources.Load(modDial) as TextAsset;
-                    break;
-                }
-            }            
-        }        
+                    buttonFile = null;
+                choiceString = modDialPrevString;
+                order = prevOrder;
+                toDial = false;
+            }
+
+        }
+        
         textLines = (textFile.text.Split('\n'));
         endAtLine = textLines.Length - 1;
     }
@@ -199,11 +220,13 @@ public class DialoguesSystem : MonoBehaviour
             qManager.karma--;
     }
 
-    public void SetToDial(string mod)
+    public void SetToDial(string mod, int newOrder, string prev)
     {
         if (mod != "")
         {
             toDial = true;
+            modDialPrevString = prev;
+            prevOrder = newOrder;
             modDial = mod;
         }
         else

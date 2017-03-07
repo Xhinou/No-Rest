@@ -22,7 +22,7 @@ public class CharacterClickingController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         navMap = LayerMask.GetMask("NavMap");
-        mainCam = Camera.main;
+        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     void Update()

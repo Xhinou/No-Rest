@@ -283,12 +283,12 @@ public class QuestManager : MonoBehaviour
                 if (greedStep == 0 && killerStep == 0 && harshStep == 0)
                 {
                     dialogSystem.ForceLine(0, 2, null);
-                    dialogSystem.SetToDial("2_1_3_10-2");
+                    dialogSystem.SetToDial("2_1_3_10-2", 1, "0");
                 }
                 else
                 {
                     dialogSystem.ForceLine(3, 2, 0);
-                    dialogSystem.SetToDial("");
+                    dialogSystem.SetToDial("", 0, "");
                 }
                 triggers[5].GetComponent<BoxCollider>().isTrigger = false;
                 while (!dialogSystem.isDisabled)
@@ -811,10 +811,8 @@ public class QuestManager : MonoBehaviour
         while (movableAgent.pathPending)
             yield return null;
         float dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
-        print(movable.name + " : " +  dist);
         while (dist > 0.2f)
         {
-            print(movable.name + " : " + dist);
             dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
             yield return null;
         }
