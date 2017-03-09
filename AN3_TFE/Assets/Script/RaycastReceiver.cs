@@ -34,7 +34,7 @@ public class RaycastReceiver : MonoBehaviour
             }
             else if (!isNpc)
             {
-                if (gameObject.tag != "held" && controller.hasControl && gameObject.GetComponent<ItemManager>().isPickable)
+                if (gameObject.tag != "held" && controller.hasControl)
                 {
                     highlight.transform.position = gameObject.transform.position;
                     highlight.SetActive(true);
@@ -55,7 +55,7 @@ public class RaycastReceiver : MonoBehaviour
         }
         else if (!isNpc)
         {
-            if (gameObject.tag != "held" && controller.hasControl && gameObject.GetComponent<ItemManager>().isPickable)
+            if (gameObject.tag != "held" && controller.hasControl)
             {
                 controller.hasClicked = true;
                 gameObject.GetComponent<ItemManager>().isClicked = true;

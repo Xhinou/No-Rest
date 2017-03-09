@@ -151,7 +151,7 @@ public class DialoguesSystem : MonoBehaviour
         if (order == 0)
             choiceString = "";
         textFile = null;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-" + i) as TextAsset;
             if (textFile != null)
@@ -192,7 +192,6 @@ public class DialoguesSystem : MonoBehaviour
             }
 
         }
-        
         textLines = (textFile.text.Split('\n'));
         endAtLine = textLines.Length - 1;
     }

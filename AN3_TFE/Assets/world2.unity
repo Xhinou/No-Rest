@@ -5583,7 +5583,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
       propertyPath: m_RootOrder
-      value: 41
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -6511,7 +6511,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 322d02e839e1f164baace5d2b1496b2c, type: 3}
       propertyPath: m_RootOrder
-      value: 39
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 322d02e839e1f164baace5d2b1496b2c, type: 3}
       propertyPath: m_LocalScale.x
@@ -6562,7 +6562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 4
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!114 &172713084
 MonoBehaviour:
@@ -6584,7 +6584,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 172713082}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 14.000001, y: 14, z: 3.1}
@@ -6593,21 +6593,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -1, y: 2.8, z: 1}
   m_TimeToStationary: 0.5
---- !u!54 &172713086
-Rigidbody:
+--- !u!135 &172713086
+SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 172713082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Radius: 40
+  m_Center: {x: 2, y: 3, z: 0}
 --- !u!65 &172713087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7361,10 +7358,10 @@ GameObject:
   - component: {fileID: 195231253}
   - component: {fileID: 195231252}
   - component: {fileID: 195231258}
-  - component: {fileID: 195231257}
   - component: {fileID: 195231256}
   - component: {fileID: 195231255}
   - component: {fileID: 195231254}
+  - component: {fileID: 195231257}
   m_Layer: 8
   m_Name: Stone
   m_TagString: Untagged
@@ -7438,7 +7435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 2
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!114 &195231255
 MonoBehaviour:
@@ -7460,7 +7457,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 195231250}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: 19.4, y: 8, z: 19.4}
@@ -7469,21 +7466,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 7.0000005, y: 14.000001, z: -1.5000001}
   m_TimeToStationary: 0.5
---- !u!54 &195231257
-Rigidbody:
+--- !u!135 &195231257
+SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 195231250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Radius: 70
+  m_Center: {x: 7, y: 14, z: -1.4999999}
 --- !u!136 &195231258
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7492,7 +7486,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 195231250}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 17.8
   m_Height: 16
   m_Direction: 1
@@ -17871,7 +17865,7 @@ Transform:
   - {fileID: 566022261}
   - {fileID: 591298371}
   m_Father: {fileID: 1598816611}
-  m_RootOrder: 36
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &457543449
 Prefab:
@@ -19039,7 +19033,7 @@ Transform:
   - {fileID: 1537772041}
   - {fileID: 1487067324}
   m_Father: {fileID: 1598816611}
-  m_RootOrder: 37
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &521475215
 Prefab:
@@ -26031,7 +26025,7 @@ Transform:
   - {fileID: 661781461}
   - {fileID: 1524637138}
   m_Father: {fileID: 1598816611}
-  m_RootOrder: 38
+  m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &723155881 stripped
 Transform:
@@ -26711,7 +26705,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dd62a27af45ffa741b83120eae19dd7c, type: 3}
       propertyPath: m_RootOrder
-      value: 43
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dd62a27af45ffa741b83120eae19dd7c, type: 3}
       propertyPath: m_LocalScale.x
@@ -28452,15 +28446,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4622171297781240, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.275694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4622171297781240, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.5385928
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4622171297781240, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.779119
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4622171297781240, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -38946,7 +38940,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040288629}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 1, z: 0.55}
@@ -38968,7 +38962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 3
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!114 &1040288633
 MonoBehaviour:
@@ -38984,21 +38978,18 @@ MonoBehaviour:
   highlight: {fileID: 0}
   player: {fileID: 0}
   isNpc: 0
---- !u!54 &1040288634
-Rigidbody:
+--- !u!135 &1040288634
+SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040288629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1040288635
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39007,7 +38998,7 @@ BoxCollider:
   m_GameObject: {fileID: 1040288629}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.3044083, y: 1.5628134, z: 1.2224288}
   m_Center: {x: -0.042240623, y: 0.08140675, z: 0.022504047}
@@ -48713,10 +48704,10 @@ GameObject:
   - component: {fileID: 1198120891}
   - component: {fileID: 1198120890}
   - component: {fileID: 1198120889}
-  - component: {fileID: 1198120888}
   - component: {fileID: 1198120887}
   - component: {fileID: 1198120886}
   - component: {fileID: 1198120885}
+  - component: {fileID: 1198120888}
   m_Layer: 8
   m_Name: Charcoal
   m_TagString: Untagged
@@ -48750,7 +48741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 1
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!114 &1198120886
 MonoBehaviour:
@@ -48772,7 +48763,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1198120883}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 17.7, y: 8, z: 20.45}
@@ -48781,21 +48772,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 7.0000005, y: 14.000001, z: -1.5000001}
   m_TimeToStationary: 0.5
---- !u!54 &1198120888
-Rigidbody:
+--- !u!135 &1198120888
+SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1198120883}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Radius: 80
+  m_Center: {x: 7, y: 14, z: -1.4999999}
 --- !u!65 &1198120889
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48804,7 +48792,7 @@ BoxCollider:
   m_GameObject: {fileID: 1198120883}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 26.999998, y: 16.000002, z: 38.000004}
   m_Center: {x: 6.9999995, y: 14.000002, z: -1.5000002}
@@ -65307,7 +65295,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
       propertyPath: m_RootOrder
-      value: 42
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -65376,7 +65364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 3
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!65 &1535517504
 BoxCollider:
@@ -65386,7 +65374,7 @@ BoxCollider:
   m_GameObject: {fileID: 1535517501}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.3044083, y: 1.5628134, z: 1.2224288}
   m_Center: {x: -0.042240623, y: 0.08140675, z: 0.022504047}
@@ -65396,7 +65384,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1535517501}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.1, z: 0.55}
@@ -65405,21 +65393,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.1, z: 0}
   m_TimeToStationary: 0.5
---- !u!54 &1535517506
-Rigidbody:
+--- !u!135 &1535517506
+SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1535517501}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1537772040
 GameObject:
   m_ObjectHideFlags: 0
@@ -68100,14 +68085,14 @@ Transform:
   - {fileID: 1198120884}
   - {fileID: 1735453279}
   - {fileID: 195231251}
-  - {fileID: 455327511}
-  - {fileID: 516353801}
-  - {fileID: 723154705}
   - {fileID: 172713081}
   - {fileID: 1975797252}
   - {fileID: 1040288630}
   - {fileID: 1535517500}
   - {fileID: 743388381}
+  - {fileID: 455327511}
+  - {fileID: 516353801}
+  - {fileID: 723154705}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69001,7 +68986,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -69502,7 +69487,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1867748949
+  randomSeed: -349771611
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -74246,8 +74231,8 @@ GameObject:
   - component: {fileID: 1735453284}
   - component: {fileID: 1735453283}
   - component: {fileID: 1735453282}
-  - component: {fileID: 1735453281}
   - component: {fileID: 1735453280}
+  - component: {fileID: 1735453281}
   m_Layer: 8
   m_Name: Coconut
   m_TagString: Untagged
@@ -74275,7 +74260,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1735453278}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: 0.8, y: 0.5, z: 0.8}
@@ -74284,22 +74269,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!54 &1735453281
-Rigidbody:
+--- !u!135 &1735453281
+SphereCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 54000010830446836, guid: 1a08200cf3139204494ed3109e29968f,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1735453278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1735453282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74313,7 +74294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 5
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!114 &1735453283
 MonoBehaviour:
@@ -74371,7 +74352,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1735453278}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -88059,6 +88040,18 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
   m_PrefabInternal: {fileID: 1624336708}
+--- !u!135 &1975797251
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1975797248}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1975797252 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5c5c5f77c2e889843bad208a9636dadf, type: 3}
@@ -88069,7 +88062,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1975797248}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 1, z: 0.55}
@@ -88091,7 +88084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 3
-  isPickable: 1
+  isPicked: 0
   isClicked: 0
 --- !u!114 &1975797255
 MonoBehaviour:
@@ -88107,21 +88100,6 @@ MonoBehaviour:
   highlight: {fileID: 0}
   player: {fileID: 0}
   isNpc: 0
---- !u!54 &1975797256
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1975797248}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!65 &1975797257
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88130,7 +88108,7 @@ BoxCollider:
   m_GameObject: {fileID: 1975797248}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.3044083, y: 1.5628134, z: 1.2224288}
   m_Center: {x: -0.042240623, y: 0.08140675, z: 0.022504047}

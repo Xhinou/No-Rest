@@ -7,13 +7,15 @@ public class ItemManager : MonoBehaviour
     public GameObject player;
     public int itemID;
     public bool
-        isPickable = true,
+        isPicked,
         isClicked;
     GameObject itemInfoText;
     Text itemInfo;
     string getItem = " added to inventory";
     Transform gOTransform;
     CharacterClickingController controller;
+    GameObject heldItem;
+    Transform scene;
     
     void Awake()
     {
@@ -26,83 +28,53 @@ public class ItemManager : MonoBehaviour
         itemInfoText = GameObject.Find("ItemInfoText");
         itemInfo = itemInfoText.GetComponent<Text>();
         gOTransform = gameObject.transform;
+        scene = GameObject.Find("Scene").transform;
     }
 
-    void OnCollisionEnter(Collision coln)
+    void OnTriggerEnter(Collider colr)
     {
-        if (coln.gameObject.tag == "Player")
+        if (colr.gameObject.tag == "Player" && !isPicked)
         {
-            if (controller.hasClicked && isPickable && isClicked)
-            {              
-                if (!controller.isHolding)
-                {
-                    gOTransform.parent = controller.rightHand.transform;
-                    gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
-                    gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                    gameObject.tag = "held";
-                    controller.isHolding = true;
-                }
-                else if (controller.isHolding)
-                {
-                    GameObject heldItem = GameObject.FindWithTag("held");
-                    heldItem.GetComponent<Rigidbody>().isKinematic = false;
-                    heldItem.GetComponent<Rigidbody>().AddForce(10f, 10f, 10f);
-                    heldItem.GetComponent<Collider>().enabled = true;
-                    heldItem.GetComponent<NavMeshObstacle>().enabled = true;
-                    heldItem.transform.parent = GameObject.Find("Scene").transform;
-                    heldItem.tag = "Untagged";
-                    gOTransform.parent = GameObject.Find("Character1_RightHand").transform;
-                    gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
-                    gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                    gameObject.tag = "held";
-                }
-                DisplayText();
-                controller.hasClicked = false;
-                isClicked = false;
-            }
+            ItemPicking();
         }
     }
 
-    void OnCollisionStay(Collision coln)
+    void OnTriggerStay(Collider colr)
     {
-        if (coln.gameObject.tag == "Player")
+        if (colr.gameObject.tag == "Player" && !isPicked)
         {
-            if (controller.hasClicked && isPickable && isClicked)
+            ItemPicking();
+        }
+    }
+
+    void ItemPicking()
+    {
+        if (controller.hasClicked && isClicked)
+        {
+            if (!controller.isHolding)
             {
-                if (!controller.isHolding)
-                {
-                    gOTransform.parent = GameObject.FindWithTag("Player").transform;
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                    gameObject.tag = "held";
-                    controller.isHolding = true;
-                }
-                else if (controller.isHolding)
-                {
-                    GameObject heldItem = GameObject.FindWithTag("held");
-                    heldItem.GetComponent<Rigidbody>().isKinematic = false;
-                    heldItem.GetComponent<Rigidbody>().AddForce(10f, 10f, 10f);
-                    heldItem.GetComponent<Collider>().enabled = true;
-                    heldItem.GetComponent<NavMeshObstacle>().enabled = true;
-                    heldItem.transform.parent = GameObject.Find("Scene").transform;
-                    heldItem.tag = "Untagged";
-                    gOTransform.parent = GameObject.FindWithTag("Player").transform;
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-                    gameObject.tag = "held";
-                }
-                DisplayText();
-                controller.hasClicked = false;
-                isClicked = false;
+                gOTransform.parent = controller.rightHand.transform;
+                gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
+                gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
+                isPicked = true;
+                tag = "held";
+                controller.isHolding = true;
             }
+            else if (controller.isHolding)
+            {
+                heldItem = GameObject.FindWithTag("held");
+                heldItem.transform.parent = scene;
+                heldItem.GetComponent<ItemManager>().isPicked = false;
+                heldItem.tag = "Untagged";
+                gOTransform.parent = controller.rightHand.transform;
+                gOTransform.localPosition = new Vector3(0.08f, -0.039f, 0);
+                gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
+                isPicked = true;
+                tag = "held";
+            }
+            DisplayText();
+            controller.hasClicked = false;
+            isClicked = false;
         }
     }
 

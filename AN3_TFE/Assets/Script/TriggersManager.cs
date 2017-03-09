@@ -22,7 +22,7 @@ public class TriggersManager : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider colr)
-    {       
+    {
         if (colr.gameObject.tag == "Player")
         {
             isEntering = true;
@@ -41,120 +41,111 @@ public class TriggersManager : MonoBehaviour
 
     public IEnumerator TriggerQuest()
     {
-        #region World 0
-        if (qManager.sceneID == 0)
+        switch (qManager.sceneID)
         {
-            if (name == "DoorTrigger")
-            {
-                GameObject door = GameObject.Find("Door");
-                Animator anim = door.GetComponent<Animator>();
-                bool doorTriggered = false;
+            case 0:
+                switch (gameObject.name)
+                {
+                    case "DoorTrigger":
+                        GameObject door = GameObject.Find("Door");
+                        Animator anim = door.GetComponent<Animator>();
+                        bool doorTriggered = false;
+                        if (isEntering)
+                        {
+                            doorTriggered = true;
+                            anim.SetBool("doorTrig", doorTriggered);
+                        }
+                        else
+                        {
+                            doorTriggered = false;
+                            anim.SetBool("doorTrig", doorTriggered);
+                        }
+                        break;
+                    case "WhoTrigger":
+                        GameObject newPos = GameObject.Find("WhoPos");
+                        StartCoroutine(qManager.ObjectToPos(player, newPos));
+                        while (qManager.isCoroutineRunning)
+                            yield return null;
+                        qManager.RunQuest(0);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                NpcManager sailorNpc = qManager.sailor.GetComponent<NpcManager>();
                 if (isEntering)
                 {
-                    doorTriggered = true;
-                    anim.SetBool("doorTrig", doorTriggered);
-                } else
-                {
-                    doorTriggered = false;
-                    anim.SetBool("doorTrig", doorTriggered);
-                }
-            }
-            if (name == "WhoTrigger")
-            {
-                GameObject newPos = GameObject.Find("WhoPos");
-                StartCoroutine(qManager.ObjectToPos(player, newPos));
-                while (qManager.isCoroutineRunning)
-                    yield return null;
-                qManager.RunQuest(0);
-            }
-        }
-        #endregion World 0
-        
-        #region World 2
-        if (qManager.sceneID == 2)
-        {
-            NpcManager sailorNpc = qManager.sailor.GetComponent<NpcManager>();
-            if (isEntering)
-            {
-                if (name == "SailorGoRight")
-                {
-                    qManager.hasFollowedSailor = true;
-                    qManager.sailorNav.enabled = false;
-                    GameObject newPos = GameObject.Find("SailorPosA");
-                    qManager.sailorTr.position = newPos.transform.position;
-                    qManager.sailorNav.enabled = true;
-                    sailorNpc.isTalkable = true;
-                    qManager.sailor.SetActive(true);
-                }
-                else if (name == "SailorGoLeft")
-                {
-                    qManager.hasFollowedSailor = false;
-                    qManager.sailorNav.enabled = false;
-                    GameObject newPos = GameObject.Find("SailorPosB");
-                    qManager.sailorTr.position = newPos.transform.position;
-                    qManager.sailorNav.enabled = true;
-                    sailorNpc.isTalkable = true;
-                    qManager.sailor.SetActive(true);
-                }
-                else if (name == "SailorInterrupt")
-                {
-                    qManager.RunQuest(1);
-                }
-                else if (name == "SailorBlock")
-                {
-                    controller.agent.ResetPath();
-                    controller.canSkipDial = false;
-                    GameObject newPos = GameObject.Find("SailorBlockPos");
-                    dialogSystem.DisplayText(qManager.sceneID, 1, 2, "Main Camera");
-                    dialogSystem.ForceLine(0, 0, null);
-                    StartCoroutine(qManager.ObjectToPos(player, newPos));
-                    while (qManager.isCoroutineRunning)
-                        yield return null;
-                    /*controller.agent.destination = newPos.transform.position;
-                    while (controller.agent.transform.position.z != newPos.transform.position.z)
-                        yield return null;*/
-                    dialogSystem.EndDialog();
-                    controller.canSkipDial = true;
-                    sailorNpc.isTalkable = true;
-                }
-                else if (name == "ScrewThis")
-                {
-                    GameObject greed = GameObject.Find("GreedSailor");
-                    greed.GetComponent<NpcManager>().isTalkable = true;
-                    controller.agent.ResetPath();
-                    qManager.GreedQuest(0, 2);
-                }
-                else if (name == "Village")
-                {
-                    GameObject newPos = GameObject.Find("PlayerPosVillage");
-                    /*controller.hasControl = false;
-                    controller.agent.destination = newPos.transform.position;*/
-                    StartCoroutine(qManager.ObjectToPos(player, newPos));
-                    while (qManager.isCoroutineRunning)
-                        yield return null;
-                   /* float dist = Vector3.Distance(controller.agent.transform.position, newPos.transform.position);
-                    while (dist > 0.8f)
+                    GameObject newPos;
+                    switch (gameObject.name)
                     {
-                        dist = Vector3.Distance(controller.agent.transform.position, newPos.transform.position);
-                        yield return null;
-                    }*/
-                    /*while (player.transform.position.z != newPos.transform.position.z)
-                        yield return null;*/
-                    qManager.RunQuest(1);
+                        case "SailorGoRight":
+                            qManager.hasFollowedSailor = true;
+                            qManager.sailorNav.enabled = false;
+                            newPos = GameObject.Find("SailorPosA");
+                            qManager.sailorTr.position = newPos.transform.position;
+                            qManager.sailorNav.enabled = true;
+                            sailorNpc.isTalkable = true;
+                            qManager.sailor.SetActive(true);
+                            qManager.triggers[2].SetActive(false);
+                            break;
+                        case "SailorGoLeft":
+                            qManager.hasFollowedSailor = false;
+                            qManager.sailorNav.enabled = false;
+                            newPos = GameObject.Find("SailorPosB");
+                            qManager.sailorTr.position = newPos.transform.position;
+                            qManager.sailorNav.enabled = true;
+                            sailorNpc.isTalkable = false;
+                            qManager.sailor.SetActive(true);
+                            qManager.triggers[2].SetActive(true);
+                            break;
+                        case "SailorInterrupt":
+                            qManager.RunQuest(1);
+                            break;
+                        case "SailorBlock":
+                            controller.agent.ResetPath();
+                            controller.canSkipDial = false;
+                            newPos = GameObject.Find("SailorBlockPos");
+                            dialogSystem.DisplayText(qManager.sceneID, 1, 2, "Main Camera");
+                            dialogSystem.ForceLine(0, 0, null);
+                            StartCoroutine(qManager.ObjectToPos(player, newPos));
+                            while (qManager.isCoroutineRunning)
+                                yield return null;
+                            dialogSystem.EndDialog();
+                            controller.canSkipDial = true;
+                            sailorNpc.isTalkable = true;
+                            break;
+                        case "ScrewThis":
+                            GameObject greed = GameObject.Find("GreedSailor");
+                            greed.GetComponent<NpcManager>().isTalkable = true;
+                            controller.agent.ResetPath();
+                            qManager.GreedQuest(0, 2);
+                            break;
+                        case "Village":
+                            newPos = GameObject.Find("PlayerPosVillage");
+                            StartCoroutine(qManager.ObjectToPos(player, newPos));
+                            while (qManager.isCoroutineRunning)
+                                yield return null;
+                            qManager.RunQuest(1);
+                            break;
+                        case "End":
+                            newPos = GameObject.Find("PlayerEndPos");
+                            StartCoroutine(qManager.ObjectToPos(player, newPos));
+                            while (qManager.isCoroutineRunning)
+                                yield return null;
+                            qManager.RunQuest(1);
+                            break;
+                        default:
+                            Debug.Log("Can't find the trigger. Check for its name in the code");
+                            break;
+                    }
                 }
-                else if (name == "End")
-                {
-                    GameObject newPos = GameObject.Find("PlayerEndPos");
-                    StartCoroutine(qManager.ObjectToPos(player, newPos));
-                    while (qManager.isCoroutineRunning)
-                        yield return null;
-                    /*controller.agent.destination = newPos.transform.position;
-                    while (controller.agent.transform.position.z != newPos.transform.position.z)
-                        yield return null;*/
-                    qManager.RunQuest(1);
-                }
-            }
+                break;
+            default:
+                Debug.Log("Error in scene ID");
+                break;
         }
-        #endregion World 2
     }
 }

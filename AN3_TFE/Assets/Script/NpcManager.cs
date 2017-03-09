@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class NpcManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class NpcManager : MonoBehaviour
         player;
     QuestManager qManager;
     CharacterClickingController controller;
+    NavMeshAgent agent;
+    Animator anim;
 
     void Awake()
     {
@@ -20,6 +23,35 @@ public class NpcManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         qManager = scriptSystem.GetComponent<QuestManager>();
         controller = player.GetComponent<CharacterClickingController>();
+        if (!notNpc)
+        {
+            agent = gameObject.GetComponent<NavMeshAgent>();
+            anim = gameObject.GetComponent<Animator>();
+        }
+    }
+
+    private void Update()
+    {
+        if (!notNpc)
+        {
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        agent.ResetPath();
+                        isMoving = false;
+                        anim.SetBool("isMoving", isMoving);
+                    }
+                }
+                else
+                {
+                    isMoving = true;
+                    anim.SetBool("isMoving", isMoving);
+                }
+            }
+        }
     }
 
     private void LateUpdate()
