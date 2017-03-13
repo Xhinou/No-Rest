@@ -1,18 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
-    public int sceneID = 0;
-    public GameObject fadeScreen;
+    public Image
+        fadeScreen,
+        title;
     public Button[] buttons = new Button[2];
     public float fadeDuration = 1f;
+    public Text[] textToFade;
+    QuestManager qManager;
+    GameObject scriptSystem;
+
+    private void Awake()
+    {
+        scriptSystem = GameObject.Find("ScriptSystem");
+        qManager = scriptSystem.GetComponent<QuestManager>();
+
+    }
 
     public void RunGame()
     {
-        StartCoroutine(FadeInAndPlay());        
+        print("PLAY");
+        StartCoroutine(FadeInAndPlay());
     }
 
     IEnumerator FadeInAndPlay()
@@ -20,10 +31,12 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Coroutine Started");
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].interactable = false;
-        fadeScreen.GetComponent<Image>().CrossFadeAlpha(255f, fadeDuration, false);
+        for (int i = 0; i < textToFade.Length; i++)
+            textToFade[i].CrossFadeAlpha(0f, fadeDuration, false);          
+        title.CrossFadeAlpha(0f, fadeDuration, false);
+        fadeScreen.CrossFadeAlpha(0f, fadeDuration, false);
         yield return new WaitForSeconds(2);
-        Debug.Log("PLAY");
-        SceneManager.LoadScene(1);
+        qManager.RunIntro(qManager.sceneID);
     }
 
     public void ExitGame()

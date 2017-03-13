@@ -26,10 +26,11 @@ public class QuestManager : MonoBehaviour
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
         LoadNpc(sceneID);
-        RunIntro(sceneID);
+        if (sceneID != 0)
+            RunIntro(sceneID);
     }
 
-    void RunIntro(int _sceneID)
+    public void RunIntro(int _sceneID)
     {
         switch (_sceneID)
         {
