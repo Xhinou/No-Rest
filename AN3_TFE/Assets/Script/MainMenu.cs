@@ -4,6 +4,7 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject particles;
     public Image
         fadeScreen,
         title;
@@ -35,7 +36,8 @@ public class MainMenu : MonoBehaviour
             textToFade[i].CrossFadeAlpha(0f, fadeDuration, false);          
         title.CrossFadeAlpha(0f, fadeDuration, false);
         fadeScreen.CrossFadeAlpha(0f, fadeDuration, false);
-        yield return new WaitForSeconds(2);
+        particles.SetActive(false);
+        yield return new WaitForSeconds(2);       
         qManager.RunIntro(qManager.sceneID);
     }
 

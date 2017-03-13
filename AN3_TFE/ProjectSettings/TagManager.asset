@@ -10,6 +10,8 @@ TagManager:
   - trigger
   - pos
   - closeToPlayer
+  - talking
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - 
   - NavMap
   - FadeOut
-  - 
+  - Particle
   - 
   - 
   - 
