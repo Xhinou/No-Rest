@@ -44,6 +44,7 @@ public class MainMenu : MonoBehaviour
     {
         fadeScreenStart.CrossFadeAlpha(0f, fadeDuration, false);
         yield return new WaitForSeconds(2);
+        fadeScreenStart.color = new Color(0,0,0,0);
         fadeScreenStart.raycastTarget = false;
     }
 
@@ -58,6 +59,7 @@ public class MainMenu : MonoBehaviour
         title.CrossFadeAlpha(0f, fadeDuration, false);
         fadeScreenPlay.CrossFadeAlpha(0f, fadeDuration, false);
         particles.SetActive(false);
+        StartCoroutine(qManager.CameraZoom(true));
         yield return new WaitForSeconds(2);       
         qManager.RunIntro(qManager.sceneID);
     }

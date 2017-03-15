@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
         isCoroutineRunning;
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
+    Camera mainCam;
     [HideInInspector] public GameObject scriptSystem;
 
     void Start()
@@ -27,6 +28,7 @@ public class QuestManager : MonoBehaviour
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
+        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
         LoadNpc(sceneID);
         if (sceneID != 0)
             RunIntro(sceneID);
@@ -36,7 +38,7 @@ public class QuestManager : MonoBehaviour
     {
         switch (_sceneID)
         {
-            case 0:
+            case 0:                
                 controller.hasControl = true;
                 break;
             case 1:
@@ -575,6 +577,8 @@ public class QuestManager : MonoBehaviour
     }
     #endregion NPCs Loading
 
+    #region Methods
+
     public IEnumerator ObjectToPos(GameObject movable, GameObject newPos)
     {
         isCoroutineRunning = true;
@@ -604,4 +608,34 @@ public class QuestManager : MonoBehaviour
         theAudio.clip = audioClips[worldToLoad];
         SceneManager.LoadScene(worldToLoad);
     }
+
+    [Range(1,10)] public int smoothSpeed;
+    bool inInterpolation;
+
+    public IEnumerator CameraZoom(bool isZoomIn)
+    {
+        while (inInterpolation)
+            yield return null;
+        inInterpolation = true;
+        if (isZoomIn)
+        {
+            while (mainCam.fieldOfView > 14)
+            {
+                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 12, Time.deltaTime * smoothSpeed);
+                yield return null;
+            }
+        }
+        else
+        {
+            while (mainCam.fieldOfView < 40)
+            {
+                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 42, Time.deltaTime * smoothSpeed);
+                yield return null;
+            }
+        }
+        inInterpolation = false;
+        Debug.Log("End of Zoom");
+    }
+
+    #endregion Methods
 }

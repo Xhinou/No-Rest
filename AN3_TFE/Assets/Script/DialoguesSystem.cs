@@ -44,6 +44,7 @@ public class DialoguesSystem : MonoBehaviour
     void Awake()
     {
         language = "EN_";
+        print(language);
         player = GameObject.FindWithTag("Player");
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
@@ -160,7 +161,7 @@ public class DialoguesSystem : MonoBehaviour
             {
                 if (i > 0)
                 {
-                    buttonFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-buttons") as TextAsset;
+                    buttonFile = Resources.Load("Texts/" + language + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-buttons") as TextAsset;
                     buttonLines = buttonFile.text.Split('\n');
                     if (buttonFile == null)
                         Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
@@ -177,13 +178,13 @@ public class DialoguesSystem : MonoBehaviour
             else
             {
                 print(modDial);
-                textFile = Resources.Load("Texts/" + modDial) as TextAsset;
+                textFile = Resources.Load("Texts/" + language + modDial) as TextAsset;
                 string[] fileName;
                 fileName = modDial.Split('-');
                 choicesCount = int.Parse(fileName[1]);
                 if (choicesCount != 0)
                 {
-                    buttonFile = Resources.Load("Texts/" + fileName[0] + "-buttons") as TextAsset;
+                    buttonFile = Resources.Load("Texts/" + language + fileName[0] + "-buttons") as TextAsset;
                     buttonLines = buttonFile.text.Split('\n');
                 }
                 else

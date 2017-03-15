@@ -62,6 +62,7 @@ public class TriggersManager : MonoBehaviour
                         }
                         break;
                     case "WhoTrigger":
+                        StartCoroutine(qManager.CameraZoom(false));
                         GameObject newPos = GameObject.Find("WhoPos");
                         StartCoroutine(qManager.ObjectToPos(player, newPos));
                         while (qManager.isCoroutineRunning)

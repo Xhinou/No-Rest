@@ -17838,6 +17838,7 @@ Transform:
   - {fileID: 1764778787}
   - {fileID: 566022261}
   - {fileID: 591298371}
+  - {fileID: 1221651781}
   m_Father: {fileID: 1598816611}
   m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28556,6 +28557,11 @@ Prefab:
         type: 2}
       propertyPath: sceneID
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: smoothSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
@@ -52059,6 +52065,59 @@ Transform:
   m_Father: {fileID: 739610941}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1221651780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1221651781}
+  - component: {fileID: 1221651783}
+  - component: {fileID: 1221651782}
+  m_Layer: 0
+  m_Name: VillageZoom
+  m_TagString: trigger
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1221651781
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221651780}
+  m_LocalRotation: {x: -0, y: -0.0063069323, z: -0, w: 0.99998015}
+  m_LocalPosition: {x: -43.7, y: 4.7, z: -10.4}
+  m_LocalScale: {x: 74.33779, y: 6.1301594, z: 66.954506}
+  m_Children: []
+  m_Father: {fileID: 455327511}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: -0.70100003, z: 0}
+--- !u!114 &1221651782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221651780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4a556208191f144b3b4de51237d096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1221651783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221651780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1222031047
 Prefab:
   m_ObjectHideFlags: 0
@@ -73068,6 +73127,11 @@ Prefab:
         type: 2}
       propertyPath: blueChannel.m_Curve.Array.data[1].tangentMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20590776229882266, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
+        type: 2}
+      propertyPath: field of view
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5ac843ea9e77214d80452e5fe3f9ddf, type: 2}
