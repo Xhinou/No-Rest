@@ -611,30 +611,36 @@ public class QuestManager : MonoBehaviour
 
     [Range(1,10)] public int smoothSpeed;
     bool inInterpolation;
+    int numberOfZooms = 0;
 
     public IEnumerator CameraZoom(bool isZoomIn)
     {
-        while (inInterpolation)
-            yield return null;
-        inInterpolation = true;
-        if (isZoomIn)
+        if (numberOfZooms < 2)
         {
-            while (mainCam.fieldOfView > 14)
-            {
-                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 12, Time.deltaTime * smoothSpeed);
+            numberOfZooms++;
+            while (inInterpolation)
                 yield return null;
-            }
-        }
-        else
-        {
-            while (mainCam.fieldOfView < 40)
+            inInterpolation = true;
+            if (isZoomIn)
             {
-                mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 42, Time.deltaTime * smoothSpeed);
-                yield return null;
+                while (mainCam.fieldOfView > 14)
+                {
+                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 12, Time.deltaTime * smoothSpeed);
+                    yield return null;
+                }
             }
+            else
+            {
+                while (mainCam.fieldOfView < 40)
+                {
+                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 42, Time.deltaTime * smoothSpeed);
+                    yield return null;
+                }
+            }
+            inInterpolation = false;
+            numberOfZooms--;
+            Debug.Log("End of Zoom");
         }
-        inInterpolation = false;
-        Debug.Log("End of Zoom");
     }
 
     #endregion Methods
