@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class QuestManager : MonoBehaviour
 {
     public int sceneID;
+    public AudioClip[] audioClips;
+    public AudioSource theAudio;
     GameObject
         npc,
         player;
@@ -111,7 +113,7 @@ public class QuestManager : MonoBehaviour
             dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
             while (!dialogSystem.isDisabled)
                 yield return null;
-            SceneManager.LoadScene(2);
+            LoadWorld(2);
         }
     }
     #endregion World 0
@@ -595,5 +597,11 @@ public class QuestManager : MonoBehaviour
         else
             movable.GetComponent<NpcManager>().isMoving = false;
         isCoroutineRunning = false;
+    }
+
+    void LoadWorld(int worldToLoad)
+    {
+        theAudio.clip = audioClips[worldToLoad];
+        SceneManager.LoadScene(worldToLoad);
     }
 }

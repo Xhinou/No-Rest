@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class DialoguesSystem : MonoBehaviour
 {
+    public static string language;
     public Text theText;
     [HideInInspector] TextAsset
         textFile,
@@ -42,6 +43,7 @@ public class DialoguesSystem : MonoBehaviour
 
     void Awake()
     {
+        language = "EN_";
         player = GameObject.FindWithTag("Player");
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
@@ -153,7 +155,7 @@ public class DialoguesSystem : MonoBehaviour
         textFile = null;
         for (int i = 0; i < 4; i++)
         {
-            textFile = Resources.Load("Texts/" + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-" + i) as TextAsset;
+            textFile = Resources.Load("Texts/" + language +  sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-" + i) as TextAsset;
             if (textFile != null)
             {
                 if (i > 0)
@@ -230,5 +232,10 @@ public class DialoguesSystem : MonoBehaviour
         }
         else
             toDial = false;
+    }
+
+    public void ChangeLanguage(string _language)
+    {
+        language = _language;
     }
 }

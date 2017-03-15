@@ -1,7 +1,8 @@
 File name must have this template :
 
-"sceneID"_"npcID"_"questStep"_"depth"+"choice[equalto:depth]"-"buttonsCount(0 is endDialog)"
+language_sceneID_npcID_questStep_depth+choice[equalto:depth]-buttonsCount(0 is endDialog)/"buttons"(if is a button)
 
+language : string value for language
 sceneID : Match with the ID of the scene (specified in the QuestManager)
 npcID : Match with the Id of the npc the player's talking to (specified in the NpcManager attached to the npc)
 questStep : Match with the actual step of the quest of this npc (specified in the QuestManager)

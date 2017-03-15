@@ -6,10 +6,12 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject particles;
     public Image
-        fadeScreen,
+        fadeScreenStart,
+        fadeScreenPlay,
         title;
-    public Button[] buttons = new Button[2];
-    public float fadeDuration = 1f;
+    public GameObject[] buttons;
+    public Button[] theButtons;
+    public float fadeDuration;
     public Text[] textToFade;
     QuestManager qManager;
     GameObject scriptSystem;
@@ -18,24 +20,43 @@ public class MainMenu : MonoBehaviour
     {
         scriptSystem = GameObject.Find("ScriptSystem");
         qManager = scriptSystem.GetComponent<QuestManager>();
+        theButtons = new Button[buttons.Length];
+        textToFade = new Text[buttons.Length];
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            theButtons[i] = buttons[i].GetComponent<Button>();
+            textToFade[i] = buttons[i].GetComponent<Text>();
+        }
+    }
 
+    private void Start()
+    {
+        StartCoroutine(FadeOutStart());
     }
 
     public void RunGame()
     {
         print("PLAY");
-        StartCoroutine(FadeInAndPlay());
+        StartCoroutine(FadeOutAndPlay());
     }
 
-    IEnumerator FadeInAndPlay()
+    IEnumerator FadeOutStart()
+    {
+        fadeScreenStart.CrossFadeAlpha(0f, fadeDuration, false);
+        yield return new WaitForSeconds(2);
+        fadeScreenStart.raycastTarget = false;
+    }
+
+    IEnumerator FadeOutAndPlay()
     {
         Debug.Log("Coroutine Started");
         for (int i = 0; i < buttons.Length; i++)
-            buttons[i].interactable = false;
-        for (int i = 0; i < textToFade.Length; i++)
-            textToFade[i].CrossFadeAlpha(0f, fadeDuration, false);          
+        {
+            theButtons[i].interactable = false;
+            textToFade[i].CrossFadeAlpha(0f, fadeDuration, false);
+        }        
         title.CrossFadeAlpha(0f, fadeDuration, false);
-        fadeScreen.CrossFadeAlpha(0f, fadeDuration, false);
+        fadeScreenPlay.CrossFadeAlpha(0f, fadeDuration, false);
         particles.SetActive(false);
         yield return new WaitForSeconds(2);       
         qManager.RunIntro(qManager.sceneID);
