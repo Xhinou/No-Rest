@@ -8,7 +8,7 @@ public class QuestManager : MonoBehaviour
     public int sceneID;
     public AudioClip[] audioClips;
     public AudioSource theAudio;
-    GameObject
+    protected GameObject
         npc,
         player;
     public GameObject[] triggers = new GameObject[7];
@@ -17,8 +17,8 @@ public class QuestManager : MonoBehaviour
         hasFollowedSailor = true,
         intro,
         isCoroutineRunning;
-    CharacterClickingController controller;
-    DialoguesSystem dialogSystem;
+    protected CharacterClickingController controller;
+    protected DialoguesSystem dialogSystem;
     Camera mainCam;
     [HideInInspector] public GameObject scriptSystem;
 
@@ -126,7 +126,7 @@ public class QuestManager : MonoBehaviour
 
     #region World 2
     //*------------------------------ WORLD 2 - THE CAPTAIN ------------------------------*//
-
+    
     private int
         sailorStep = 0,
         greedStep = 0,
@@ -420,9 +420,6 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
-                /* killerNav.destination = newPos.transform.position;
-                 while (killerTr.position.z != newPos.transform.position.z)
-                     yield return null;*/
                 StartCoroutine(ObjectToPos(killer, newPos));
                 killer.SetActive(false);
                 controller.hasControl = true;
@@ -506,7 +503,7 @@ public class QuestManager : MonoBehaviour
     {
         dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera");
     }
-
+    
     #endregion World 2
 
     #region World 3
@@ -603,7 +600,7 @@ public class QuestManager : MonoBehaviour
         isCoroutineRunning = false;
     }
 
-    void LoadWorld(int worldToLoad)
+    protected void LoadWorld(int worldToLoad)
     {
         theAudio.clip = audioClips[worldToLoad];
         SceneManager.LoadScene(worldToLoad);
