@@ -1,0 +1,6 @@
+<i>Marin</i>: Cet un bel endroit. Et regardez ces petites huttes. Et ces gens adorables.
+Je parie qu'ils ne savent meme pas lire un traite, ah ah!
+<i>Le Chef</i>: Salutations, voyageurs. Qu'est-ce qui vous amene sur nos terres ancestrales en cette saison de la Luuuuune?
+<i>Marin</i>: Capitaine! Vous etes en retard! Nous n'avons plus trop le temps de signer le traite, donc parler-en rapidement avec le chef!
+<i>Le Chef</i>: Je suis desole, mais je ne peux vous parler maintenant. Je suis assez occupe avec la Ceremonie de la Luuuuune.
+Rejoignez-moi au Grand Autel ou nous pourrons discuter.
