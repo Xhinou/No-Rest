@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class DialoguesSystem : MonoBehaviour
 {
-    public static string language;
+    public string language;
     public Text theText;
     [HideInInspector] TextAsset
         textFile,
@@ -178,13 +178,13 @@ public class DialoguesSystem : MonoBehaviour
             else
             {
                 print(modDial);
-                textFile = Resources.Load("Texts/" + language + modDial) as TextAsset;
+                textFile = Resources.Load("Texts/" + modDial) as TextAsset;
                 string[] fileName;
                 fileName = modDial.Split('-');
                 choicesCount = int.Parse(fileName[1]);
                 if (choicesCount != 0)
                 {
-                    buttonFile = Resources.Load("Texts/" + language + fileName[0] + "-buttons") as TextAsset;
+                    buttonFile = Resources.Load("Texts/" + fileName[0] + "-buttons") as TextAsset;
                     buttonLines = buttonFile.text.Split('\n');
                 }
                 else
@@ -229,7 +229,7 @@ public class DialoguesSystem : MonoBehaviour
             toDial = true;
             modDialPrevString = prev;
             prevOrder = newOrder;
-            modDial = mod;
+            modDial = language + mod;
         }
         else
             toDial = false;
