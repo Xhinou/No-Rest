@@ -2963,7 +2963,7 @@ Transform:
   - {fileID: 1279121454}
   - {fileID: 1588500819}
   m_Father: {fileID: 1538076792}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &113758217
 GameObject:
@@ -6017,7 +6017,7 @@ Transform:
   - {fileID: 1587779332}
   - {fileID: 661288265}
   m_Father: {fileID: 1538076792}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &168202689
 Prefab:
@@ -36572,6 +36572,16 @@ Prefab:
       propertyPath: theAudio
       value: 
       objectReference: {fileID: 527122236}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: smoothSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: maxView
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
   m_IsPrefabParent: 0
@@ -51055,9 +51065,9 @@ Transform:
   - {fileID: 1513687063}
   - {fileID: 2024180746}
   - {fileID: 4900512}
-  - {fileID: 2013585007}
   - {fileID: 104408055}
   - {fileID: 161959475}
+  - {fileID: 2013585007}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
