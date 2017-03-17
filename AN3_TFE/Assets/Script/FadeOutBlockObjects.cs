@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class FadeOutBlockObjects : MonoBehaviour
 {
     LayerMask fadeOut;
     private bool hitFlag;
-    RaycastHit oldHit;
+    //RaycastHit oldHit;
     public Transform player;
     Vector3 dist;
     Camera mainCam;
-    public List<Material> materials;
-    public Color hideColor;
+    List<Material> materials;
+    public Color hiddenColor;
     public Color visibleColor;
 
     void Start()
@@ -28,25 +29,17 @@ public class FadeOutBlockObjects : MonoBehaviour
         if (Physics.Raycast(mainCam.transform.position, dist, out hit, 1000, fadeOut.value))
         {
             hitFlag = true;
-            /*
-            Color colorA = hit.collider.GetComponent<Renderer>().material.color;
-            colorA.a = 0.3f;
-            hit.collider.GetComponent<Renderer>().material.SetColor("_Color", colorA);
-            */
             foreach (Material mat in materials)
             {
-                mat.SetColor("_OutlineColor", visibleColor);
+                mat.SetColor("_OutlineColor", Color.Lerp(hiddenColor, visibleColor, Time.deltaTime * 0.5f));
             }
-            oldHit = hit;
         }
         else if (hitFlag)
         {
             hitFlag = false;
-            /*Color colorB = oldHit.collider.GetComponent<Renderer>().material.color;
-            colorB.a = 1f;
-            oldHit.collider.GetComponent<Renderer>().material.SetColor("_Color", colorB);*/
-            foreach (Material mat in materials) {
-                mat.SetColor("_OutlineColor", hideColor);
+            foreach (Material mat in materials)
+            {
+                mat.SetColor("_OutlineColor", Color.Lerp(visibleColor, hiddenColor, Time.deltaTime * 0.5f));
             }
         }
     }
