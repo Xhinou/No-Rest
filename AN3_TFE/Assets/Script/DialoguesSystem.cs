@@ -130,6 +130,8 @@ public class DialoguesSystem : MonoBehaviour
     {
         currentLine = 0;
         prevChoiceString = "";
+        choiceString = "";
+        modDialPrevString = "";
         textBox.SetActive(false);
         isDisabled = true;
         dialCam.enabled = false;
@@ -144,11 +146,8 @@ public class DialoguesSystem : MonoBehaviour
 
     void LoadFiles(int choice)
     {
-       // string strRange = "";
        if (choiceString != "")
             prevChoiceString = choiceString;
-       /* for (int i = 0; i < order; i++)
-            strRange += "0";*/
         if (choice != -1)
             choiceString = prevChoiceString + choice;
         if (order == 0)
@@ -177,7 +176,6 @@ public class DialoguesSystem : MonoBehaviour
                 Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
             else
             {
-                print(modDial);
                 textFile = Resources.Load("Texts/" + modDial) as TextAsset;
                 string[] fileName;
                 fileName = modDial.Split('-');

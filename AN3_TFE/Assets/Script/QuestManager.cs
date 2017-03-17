@@ -8,8 +8,8 @@ public class QuestManager : MonoBehaviour
     public int sceneID;
     public AudioClip[] audioClips;
     public AudioSource theAudio;
-    protected GameObject
-        npc,
+    GameObject
+       // npc,
         player;
     public GameObject[] triggers = new GameObject[7];
     [HideInInspector] public int karma = 0;
@@ -17,8 +17,8 @@ public class QuestManager : MonoBehaviour
         hasFollowedSailor = true,
         intro,
         isCoroutineRunning;
-    protected CharacterClickingController controller;
-    protected DialoguesSystem dialogSystem;
+    CharacterClickingController controller;
+    DialoguesSystem dialogSystem;
     Camera mainCam;
     [HideInInspector] public GameObject scriptSystem;
 
@@ -486,7 +486,7 @@ public class QuestManager : MonoBehaviour
             while (dialogSystem.theText.enabled == false)
                 yield return null;
             if (dialogSystem.lastChoice == 0)
-                npc.GetComponent<NpcManager>().isTalkable = false;
+                harshScript.isTalkable = false;
             else if (dialogSystem.lastChoice == 1)
                 harshStep = 1;
             else if (dialogSystem.lastChoice == 2)
@@ -518,7 +518,8 @@ public class QuestManager : MonoBehaviour
         sailor,
         chief,
         gold,
-        killer;
+        killer,
+        harsh;
     [HideInInspector] public Transform
         sailorTr,
         chiefTr,
@@ -531,7 +532,8 @@ public class QuestManager : MonoBehaviour
         sailorScript,
         chiefScript,
         goldScript,
-        killerScript;
+        killerScript,
+        harshScript;
     #endregion World 2 NPCs
     /*NPCs - WORLD 3*/
 
@@ -551,6 +553,7 @@ public class QuestManager : MonoBehaviour
             chief = GameObject.Find("Chief");
             gold = GameObject.Find("GoldSeam");
             killer = GameObject.Find("Assassin");
+            harsh = GameObject.Find("HarshNative");
             sailorTr = sailor.transform;
             chiefTr = chief.transform;
             killerTr = killer.transform;
@@ -561,6 +564,7 @@ public class QuestManager : MonoBehaviour
             chiefScript = chief.GetComponent<NpcManager>();
             goldScript = gold.GetComponent<NpcManager>();
             killerScript = killer.GetComponent<NpcManager>();
+            harshScript = harsh.GetComponent<NpcManager>();
         }
         else if (_sceneID == 3)
         {
@@ -606,7 +610,8 @@ public class QuestManager : MonoBehaviour
         SceneManager.LoadScene(worldToLoad);
     }
 
-    [Range(1,10)] public int smoothSpeed;
+    [Range(1,5)] public float smoothSpeed;
+    [Range(25, 40)] public int maxView;
     bool inInterpolation;
     int numberOfZooms = 0;
 
@@ -628,7 +633,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                while (mainCam.fieldOfView < 40)
+                while (mainCam.fieldOfView < maxView)
                 {
                     mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 42, Time.deltaTime * smoothSpeed);
                     yield return null;
