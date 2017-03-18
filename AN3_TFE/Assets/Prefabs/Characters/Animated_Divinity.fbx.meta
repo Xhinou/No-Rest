@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: ed75fc92bb2dec6408350d2bbd1a358b
+timeCreated: 1489850679
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Divinity:joint1
+    100004: Divinity:joint10
+    100006: Divinity:joint11
+    100008: Divinity:joint12
+    100010: Divinity:joint13
+    100012: Divinity:joint14
+    100014: Divinity:joint15
+    100016: Divinity:joint16
+    100018: Divinity:joint17
+    100020: Divinity:joint18
+    100022: Divinity:joint19
+    100024: Divinity:joint2
+    100026: Divinity:joint20
+    100028: Divinity:joint21
+    100030: Divinity:joint22
+    100032: Divinity:joint23
+    100034: Divinity:joint24
+    100036: Divinity:joint25
+    100038: Divinity:joint26
+    100040: Divinity:joint27
+    100042: Divinity:joint28
+    100044: Divinity:joint29
+    100046: Divinity:joint3
+    100048: Divinity:joint30
+    100050: Divinity:joint31
+    100052: Divinity:joint32
+    100054: Divinity:joint33
+    100056: Divinity:joint34
+    100058: Divinity:joint35
+    100060: Divinity:joint36
+    100062: Divinity:joint37
+    100064: Divinity:joint38
+    100066: Divinity:joint4
+    100068: Divinity:joint5
+    100070: Divinity:joint6
+    100072: Divinity:joint7
+    100074: Divinity:joint8
+    100076: Divinity:joint9
+    100078: Divinity:polySurface10
+    100080: Divinity:polySurface11
+    100082: Divinity:polySurface11 1
+    100084: Divinity:polySurface12
+    100086: Divinity:polySurface12 1
+    100088: Divinity:polySurface13
+    100090: Divinity:polySurface13 1
+    100092: Divinity:polySurface14
+    100094: Divinity:polySurface14 1
+    100096: Divinity:polySurface15
+    100098: Divinity:polySurface16
+    100100: Divinity:polySurface18
+    100102: Divinity:polySurface19
+    100104: Divinity:polySurface19 1
+    100106: Divinity:polySurface20
+    100108: Divinity:polySurface20 1
+    100110: Divinity:polySurface21
+    100112: Divinity:polySurface23
+    100114: Divinity:polySurface24
+    100116: Divinity:polySurface24 1
+    100118: Divinity:polySurface25
+    100120: Divinity:polySurface25 1
+    100122: Divinity:polySurface26
+    100124: Divinity:polySurface8
+    100126: polySurface11
+    100128: polySurface19
+    400000: //RootNode
+    400002: Divinity:joint1
+    400004: Divinity:joint10
+    400006: Divinity:joint11
+    400008: Divinity:joint12
+    400010: Divinity:joint13
+    400012: Divinity:joint14
+    400014: Divinity:joint15
+    400016: Divinity:joint16
+    400018: Divinity:joint17
+    400020: Divinity:joint18
+    400022: Divinity:joint19
+    400024: Divinity:joint2
+    400026: Divinity:joint20
+    400028: Divinity:joint21
+    400030: Divinity:joint22
+    400032: Divinity:joint23
+    400034: Divinity:joint24
+    400036: Divinity:joint25
+    400038: Divinity:joint26
+    400040: Divinity:joint27
+    400042: Divinity:joint28
+    400044: Divinity:joint29
+    400046: Divinity:joint3
+    400048: Divinity:joint30
+    400050: Divinity:joint31
+    400052: Divinity:joint32
+    400054: Divinity:joint33
+    400056: Divinity:joint34
+    400058: Divinity:joint35
+    400060: Divinity:joint36
+    400062: Divinity:joint37
+    400064: Divinity:joint38
+    400066: Divinity:joint4
+    400068: Divinity:joint5
+    400070: Divinity:joint6
+    400072: Divinity:joint7
+    400074: Divinity:joint8
+    400076: Divinity:joint9
+    400078: Divinity:polySurface10
+    400080: Divinity:polySurface11
+    400082: Divinity:polySurface11 1
+    400084: Divinity:polySurface12
+    400086: Divinity:polySurface12 1
+    400088: Divinity:polySurface13
+    400090: Divinity:polySurface13 1
+    400092: Divinity:polySurface14
+    400094: Divinity:polySurface14 1
+    400096: Divinity:polySurface15
+    400098: Divinity:polySurface16
+    400100: Divinity:polySurface18
+    400102: Divinity:polySurface19
+    400104: Divinity:polySurface19 1
+    400106: Divinity:polySurface20
+    400108: Divinity:polySurface20 1
+    400110: Divinity:polySurface21
+    400112: Divinity:polySurface23
+    400114: Divinity:polySurface24
+    400116: Divinity:polySurface24 1
+    400118: Divinity:polySurface25
+    400120: Divinity:polySurface25 1
+    400122: Divinity:polySurface26
+    400124: Divinity:polySurface8
+    400126: polySurface11
+    400128: polySurface19
+    2300000: Divinity:polySurface10
+    2300002: Divinity:polySurface11
+    2300004: Divinity:polySurface11 1
+    2300006: Divinity:polySurface12
+    2300008: Divinity:polySurface12 1
+    2300010: Divinity:polySurface13
+    2300012: Divinity:polySurface13 1
+    2300014: Divinity:polySurface14
+    2300016: Divinity:polySurface14 1
+    2300018: Divinity:polySurface15
+    2300020: Divinity:polySurface16
+    2300022: Divinity:polySurface18
+    2300024: Divinity:polySurface19
+    2300026: Divinity:polySurface19 1
+    2300028: Divinity:polySurface20
+    2300030: Divinity:polySurface20 1
+    2300032: Divinity:polySurface21
+    2300034: Divinity:polySurface23
+    2300036: Divinity:polySurface24
+    2300038: Divinity:polySurface24 1
+    2300040: Divinity:polySurface25
+    2300042: Divinity:polySurface25 1
+    2300044: Divinity:polySurface26
+    2300046: Divinity:polySurface8
+    2300048: polySurface11
+    2300050: polySurface19
+    3300000: Divinity:polySurface10
+    3300002: Divinity:polySurface11
+    3300004: Divinity:polySurface11 1
+    3300006: Divinity:polySurface12
+    3300008: Divinity:polySurface12 1
+    3300010: Divinity:polySurface13
+    3300012: Divinity:polySurface13 1
+    3300014: Divinity:polySurface14
+    3300016: Divinity:polySurface14 1
+    3300018: Divinity:polySurface15
+    3300020: Divinity:polySurface16
+    3300022: Divinity:polySurface18
+    3300024: Divinity:polySurface19
+    3300026: Divinity:polySurface19 1
+    3300028: Divinity:polySurface20
+    3300030: Divinity:polySurface20 1
+    3300032: Divinity:polySurface21
+    3300034: Divinity:polySurface23
+    3300036: Divinity:polySurface24
+    3300038: Divinity:polySurface24 1
+    3300040: Divinity:polySurface25
+    3300042: Divinity:polySurface25 1
+    3300044: Divinity:polySurface26
+    3300046: Divinity:polySurface8
+    3300048: polySurface11
+    3300050: polySurface19
+    4300000: polySurface11
+    4300002: Divinity:polySurface11
+    4300004: Divinity:polySurface12
+    4300006: Divinity:polySurface16
+    4300008: Divinity:polySurface13
+    4300010: Divinity:polySurface14
+    4300012: Divinity:polySurface15
+    4300014: Divinity:polySurface11
+    4300016: Divinity:polySurface12
+    4300018: Divinity:polySurface8
+    4300020: Divinity:polySurface13
+    4300022: Divinity:polySurface14
+    4300024: Divinity:polySurface10
+    4300026: Divinity:polySurface19
+    4300028: Divinity:polySurface20
+    4300030: Divinity:polySurface18
+    4300032: Divinity:polySurface19
+    4300034: Divinity:polySurface20
+    4300036: Divinity:polySurface21
+    4300038: Divinity:polySurface25
+    4300040: Divinity:polySurface24
+    4300042: Divinity:polySurface26
+    4300044: Divinity:polySurface25
+    4300046: Divinity:polySurface24
+    4300048: Divinity:polySurface23
+    4300050: polySurface19
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
