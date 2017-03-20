@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class QuestManager : MonoBehaviour
 {
+    public ParticleSystem[] particles;
     public int sceneID;
     public AudioClip[] audioClips;
     public AudioSource theAudio;
@@ -47,6 +48,7 @@ public class QuestManager : MonoBehaviour
             case 1:
                 break;
             case 2:
+                playerAnimator.Play("Lied Down");
                 RunQuest(1);
                 break;
             case 3:
@@ -142,6 +144,8 @@ public class QuestManager : MonoBehaviour
         switch (step) {
             case 0:
                 intro = true;
+                particles[0].Play();
+                yield return new WaitForSeconds(2);
                 playerAnimator.Play("Get Up");
                 yield return new WaitForSeconds(6);
                 //anim réveil			
@@ -288,7 +292,7 @@ public class QuestManager : MonoBehaviour
                     Debug.Log("KARMA IS GOOD");
                 else
                     Debug.Log("KARMA IS BAD");
-                SceneManager.LoadScene(0);
+                LoadWorld(0);
                 break;
             case 5:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
@@ -415,6 +419,8 @@ public class QuestManager : MonoBehaviour
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
             sailorTr.position = newPos.transform.position;
             chiefTr.position = newPos2.transform.position;
+            sailorNav.enabled = true;
+            chiefNav.enabled = true;
             while (dialogSystem.theText.enabled == true)
                 yield return null;
             while (dialogSystem.theText.enabled == false)
@@ -446,8 +452,12 @@ public class QuestManager : MonoBehaviour
                     Destroy(heldItem);
                     // ASSASSIN FALLS
                     karma += 1;
-                    killer.SetActive(false);
+                    controller.hasControl = false;
                     killerScript.isTalkable = false;
+                    killerScript.lookPlayer = false;
+                    killer.GetComponent<Animator>().Play("Lying Down");
+                    yield return new WaitForSeconds(6);
+                    //killer.SetActive(false);
                     controller.hasControl = true;
                     sailorStep = 4;
                     killerStep = 0;
@@ -483,6 +493,8 @@ public class QuestManager : MonoBehaviour
             GameObject newPos2 = GameObject.Find("ChiefEndPos");
             sailorTr.position = newPos.transform.position;
             chiefTr.position = newPos2.transform.position;
+            sailorNav.enabled = true;
+            chiefNav.enabled = true;
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam6");
             if (!goldGet)
                 dialogSystem.ForceLine(0, null, 2);
@@ -491,7 +503,10 @@ public class QuestManager : MonoBehaviour
             while (dialogSystem.theText.enabled == false)
                 yield return null;
             if (dialogSystem.lastChoice == 0)
+            {
                 harshScript.isTalkable = false;
+                harshScript.lookPlayer = false;
+            }
             else if (dialogSystem.lastChoice == 1)
                 harshStep = 1;
             else if (dialogSystem.lastChoice == 2)
@@ -611,8 +626,11 @@ public class QuestManager : MonoBehaviour
 
     protected void LoadWorld(int worldToLoad)
     {
-        theAudio.clip = audioClips[worldToLoad];
-        theAudio.Play();
+        if (theAudio != null)
+        {
+            theAudio.clip = audioClips[worldToLoad];
+            theAudio.Play();
+        }
         SceneManager.LoadScene(worldToLoad);
     }
 
@@ -620,7 +638,6 @@ public class QuestManager : MonoBehaviour
     [Range(25, 40)] public int maxView;
     bool inInterpolation;
     int numberOfZooms = 0;
-    bool nul = true;
 
     public IEnumerator CameraZoom(bool isZoomIn)
     {
@@ -643,15 +660,9 @@ public class QuestManager : MonoBehaviour
                 while (mainCam.fieldOfView < maxView)
                 {
                     mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, maxView + 2, Time.deltaTime * smoothSpeed);
-                    if (nul)
-                    {
-                        cam.transform.Rotate(cam.transform.right, 8f);
-                        nul = false;
-                    }
-                    
-
                     yield return null;
                 }
+                //cam.transform.Rotate(cam.transform.right, 8f);
             }
             inInterpolation = false;
             numberOfZooms--;

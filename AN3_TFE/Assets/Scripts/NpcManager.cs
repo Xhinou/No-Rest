@@ -8,7 +8,8 @@ public class NpcManager : MonoBehaviour
         isTalkable,
         isClicked,
         notNpc,
-        isMoving;
+        isMoving,
+        lookPlayer;
     [HideInInspector] public GameObject
         scriptSystem,
         player;
@@ -56,11 +57,14 @@ public class NpcManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!notNpc && !isMoving)
+        if (lookPlayer)
         {
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
+            if (!notNpc && !isMoving)
+            {
+                Vector3 direction = (player.transform.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2.5f);
+            }
         }
     }
 
