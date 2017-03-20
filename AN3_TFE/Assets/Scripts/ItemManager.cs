@@ -9,19 +9,21 @@ public class ItemManager : MonoBehaviour
     public bool
         isPicked,
         isClicked;
-    GameObject itemInfoText;
+    GameObject
+        itemInfoText,
+        heldItem,
+        nameCanvas;
     Text itemInfo;
     string getItem = " added to inventory";
     Transform gOTransform;
     CharacterClickingController controller;
-    GameObject heldItem;
     Transform scene;
     SphereCollider trigCol;
     
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        controller = player.GetComponent<CharacterClickingController>();
+        controller = player.GetComponent<CharacterClickingController>();       
     }
 
     void Start()
@@ -30,6 +32,7 @@ public class ItemManager : MonoBehaviour
         itemInfo = itemInfoText.GetComponent<Text>();
         gOTransform = gameObject.transform;
         scene = GameObject.Find("Scene").transform;
+        nameCanvas = gameObject.GetComponent<DisplayName>().canvas;
         trigCol = gameObject.GetComponent<SphereCollider>();
     }
 
@@ -61,11 +64,14 @@ public class ItemManager : MonoBehaviour
         else if (controller.isHolding)
         {
             heldItem = GameObject.FindWithTag("held");
+            DisplayName hDisplayName = heldItem.GetComponent<DisplayName>();
             heldItem.transform.parent = scene;
             heldItem.GetComponent<ItemManager>().isPicked = false;
             heldItem.transform.position = gameObject.transform.position;
             heldItem.transform.rotation = gameObject.transform.rotation;
             heldItem.GetComponent<SphereCollider>().enabled = true;
+            hDisplayName.canvas.SetActive(true);
+            hDisplayName.SetCanvasPos();
             heldItem.tag = "Untagged";
             PutInHand();
         }
@@ -80,6 +86,7 @@ public class ItemManager : MonoBehaviour
         gOTransform.localRotation = new Quaternion(0, 0.7f, 0.7f, 0);
         isPicked = true;
         trigCol.enabled = false;
+        nameCanvas.SetActive(false);
         tag = "held";
     }
 

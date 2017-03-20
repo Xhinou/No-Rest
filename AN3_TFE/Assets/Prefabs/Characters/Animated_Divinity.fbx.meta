@@ -213,7 +213,8 @@ ModelImporter:
     4300046: Divinity:polySurface24
     4300048: Divinity:polySurface23
     4300050: polySurface19
-    7400000: Take 001
+    7400000: Idle
+    7400002: Finger
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -235,11 +236,343 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Divinity:joint1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint3
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint3/Divinity:joint4
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint3/polySurface11
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:joint7
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:joint7/Divinity:joint8
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:joint7/Divinity:polySurface13
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:polySurface14
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:polySurface10
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:joint11
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:joint11/Divinity:joint12
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:joint11/Divinity:polySurface11
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:polySurface12
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:polySurface8
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:joint15
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:joint15/Divinity:joint16
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:joint15/Divinity:polySurface11
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:polySurface12
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:polySurface16
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:joint19
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:joint19/Divinity:joint20
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:joint19/Divinity:polySurface13
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:polySurface14
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:polySurface15
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint29
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint33
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:joint35
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:joint35/Divinity:joint36
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:joint35/Divinity:polySurface19
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:polySurface20
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:polySurface18
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:joint31
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:joint31/Divinity:joint32
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:joint31/Divinity:polySurface19
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:polySurface20
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:polySurface21
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:joint23
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:joint23/Divinity:joint24
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:joint23/Divinity:polySurface25
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:polySurface24
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:polySurface26
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:joint27
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:joint27/Divinity:joint28
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:joint27/Divinity:polySurface25
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:polySurface24
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:polySurface23
+        weight: 1
+      - path: Divinity:joint1/polySurface19
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Finger
+      takeName: Take 001
+      firstFrame: 60
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Divinity:joint1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint3
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint3/Divinity:joint4
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint3/polySurface11
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:joint7
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:joint7/Divinity:joint8
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:joint7/Divinity:polySurface13
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:joint6/Divinity:polySurface14
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint5/Divinity:polySurface10
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:joint11
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:joint11/Divinity:joint12
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:joint11/Divinity:polySurface11
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:joint10/Divinity:polySurface12
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint9/Divinity:polySurface8
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:joint15
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:joint15/Divinity:joint16
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:joint15/Divinity:polySurface11
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:joint14/Divinity:polySurface12
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint13/Divinity:polySurface16
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:joint19
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:joint19/Divinity:joint20
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:joint19/Divinity:polySurface13
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:joint18/Divinity:polySurface14
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint17/Divinity:polySurface15
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint29
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint33
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:joint35
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:joint35/Divinity:joint36
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:joint35/Divinity:polySurface19
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:joint34/Divinity:polySurface20
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint37/Divinity:polySurface18
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:joint31
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:joint31/Divinity:joint32
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:joint31/Divinity:polySurface19
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:joint30/Divinity:polySurface20
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint2/Divinity:joint38/Divinity:polySurface21
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:joint23
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:joint23/Divinity:joint24
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:joint23/Divinity:polySurface25
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:joint22/Divinity:polySurface24
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint21/Divinity:polySurface26
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:joint27
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:joint27/Divinity:joint28
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:joint27/Divinity:polySurface25
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:joint26/Divinity:polySurface24
+          1
+        weight: 1
+      - path: Divinity:joint1/Divinity:joint25/Divinity:polySurface23
+        weight: 1
+      - path: Divinity:joint1/polySurface19
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 30
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

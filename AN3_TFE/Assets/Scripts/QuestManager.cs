@@ -8,8 +8,9 @@ public class QuestManager : MonoBehaviour
     public int sceneID;
     public AudioClip[] audioClips;
     public AudioSource theAudio;
+    Animator playerAnimator;
     GameObject
-       // npc,
+        cam,
         player;
     public GameObject[] triggers = new GameObject[7];
     [HideInInspector] public int karma = 0;
@@ -28,7 +29,9 @@ public class QuestManager : MonoBehaviour
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
-        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cam = GameObject.Find("Main Camera");
+        mainCam = cam.GetComponent<Camera>();
+        playerAnimator = player.GetComponent<Animator>();
         LoadNpc(sceneID);
         if (sceneID != 0)
             RunIntro(sceneID);
@@ -115,7 +118,7 @@ public class QuestManager : MonoBehaviour
             dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
             while (!dialogSystem.isDisabled)
                 yield return null;
-            LoadWorld(2);
+            LoadWorld(1);
         }
     }
     #endregion World 0
@@ -139,6 +142,8 @@ public class QuestManager : MonoBehaviour
         switch (step) {
             case 0:
                 intro = true;
+                playerAnimator.Play("Get Up");
+                yield return new WaitForSeconds(6);
                 //anim réveil			
                 sailorNav.destination = player.transform.position;
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
@@ -299,7 +304,7 @@ public class QuestManager : MonoBehaviour
                     Debug.Log("KARMA IS GOOD");
                 else
                     Debug.Log("KARMA IS BAD");
-                SceneManager.LoadScene(0);
+                LoadWorld(0);
                 break;
             default:
                 break;
@@ -607,6 +612,7 @@ public class QuestManager : MonoBehaviour
     protected void LoadWorld(int worldToLoad)
     {
         theAudio.clip = audioClips[worldToLoad];
+        theAudio.Play();
         SceneManager.LoadScene(worldToLoad);
     }
 
@@ -614,6 +620,7 @@ public class QuestManager : MonoBehaviour
     [Range(25, 40)] public int maxView;
     bool inInterpolation;
     int numberOfZooms = 0;
+    bool nul = true;
 
     public IEnumerator CameraZoom(bool isZoomIn)
     {
@@ -635,7 +642,14 @@ public class QuestManager : MonoBehaviour
             {
                 while (mainCam.fieldOfView < maxView)
                 {
-                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, 42, Time.deltaTime * smoothSpeed);
+                    mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, maxView + 2, Time.deltaTime * smoothSpeed);
+                    if (nul)
+                    {
+                        cam.transform.Rotate(cam.transform.right, 8f);
+                        nul = false;
+                    }
+                    
+
                     yield return null;
                 }
             }

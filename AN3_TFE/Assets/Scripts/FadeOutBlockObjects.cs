@@ -44,9 +44,9 @@ public class FadeOutBlockObjects : MonoBehaviour
         }
     }
 
-    void FindAllChildren(Transform papa)
+    void FindAllChildren(Transform legacy)
     {
-        foreach (Transform child in papa)
+        foreach (Transform child in legacy)
         {
             if (child.GetComponent<Renderer>() != null)
             {
