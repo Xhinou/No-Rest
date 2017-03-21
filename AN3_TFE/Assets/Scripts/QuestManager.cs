@@ -725,9 +725,8 @@ public class QuestManager : MonoBehaviour
     private IEnumerator Desincarnation(int worldToLoad)
     {
         particles[1].Play();
-        yield return new WaitForSeconds(1);
         player.SetActive(false);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         LoadWorld(worldToLoad);
     }
     #endregion Lobby Only

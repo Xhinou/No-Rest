@@ -1,7 +1,7 @@
-<i>Edgar L'Avare</i>: Hé Capitaine! Avez-vous trouvé une pioche?
-<i>Edgar L'Avare</i>: AVEZ-VOUS TROUVÉ une pioche???
-<i>Edgar L'Avare</i>: Mais sérieusement, arrête de me causer!
+ï»¿<i>Edgar L'Avare</i>: HÃ© Capitaine! Avez-vous trouvÃ© une pioche?
+<i>Edgar L'Avare</i>: AVEZ-VOUS TROUVÃ‰ une pioche???
+<i>Edgar L'Avare</i>: Mais sÃ©rieusement, arrÃªte de me causer!
 Va trouver cette pioche ou termine le niveau, mec!
 <i>Edgar L'Avare</i>: Parfait Capitaine! Sinon... je n'ai pas de pioche. Mais prenez donc l'or!
-Vous n'avez qu'à le miner sur ce filon, là-bas.
+Vous n'avez qu'Ã  le miner sur ce filon, lÃ -bas.
 On se revoit plus tard? Je serai ici si vous avez besoin de moi.

@@ -1,13 +1,13 @@
-<i>Le Chef</i>: Maintenant que vous êtes ici, je dois vous avertir que vous êtes
-le premier étranger à participer à la Cérémonie de la Luuuuune.
-<i>Natif</i>: La Cérémonie de la Luuuuune!
-<i>Le Chef</i>: Allongez-vous sur le Grand Autel, s'il vous plaît. Nous allons commencer votre ascension.
-<i>Marin</i>: Ça semble honnête. Faites-le Capitaine! Et rendez-nous riches!
-<i>Marin</i>: Hé Capitaine! Pendant que vous étiez parti j'ai signe le traité. Vous n'étiez pas présent donc je l'ai un peu
+ï»¿<i>Le Chef</i>: Maintenant que vous Ãªtes ici, je dois vous avertir que vous Ãªtes
+le premier Ã©tranger Ã  participer Ã  la CÃ©rÃ©monie de la Luuuuune.
+<i>Natif</i>: La CÃ©rÃ©monie de la Luuuuune!
+<i>Le Chef</i>: Allongez-vous sur le Grand Autel, s'il vous plaÃ®t. Nous allons commencer votre ascension.
+<i>Marin</i>: Ã‡a semble honnÃªte. Faites-le Capitaine! Et rendez-nous riches!
+<i>Marin</i>: HÃ© Capitaine! Pendant que vous Ã©tiez parti j'ai signe le traitÃ©. Vous n'Ã©tiez pas prÃ©sent donc je l'ai un peu
 modifie pour quelques avantages personnels. Vous ne m'en voudrez pas, hein?
-<i>Le Chef</i>: La Cérémonie de la Luuuuune!
-<i>Marin</i>: Ah oui, aussi ces personnes désirent que vous participiez a la Cérémonie de la Lune et-
+<i>Le Chef</i>: La CÃ©rÃ©monie de la Luuuuune!
+<i>Marin</i>: Ah oui, aussi ces personnes dÃ©sirent que vous participiez a la CÃ©rÃ©monie de la Lune et-
 <i>Le Chef</i>: Luuuuune!
-<i>Marin</i>: *hum* la Cérémonie de la Luuuuune!?
+<i>Marin</i>: *hum* la CÃ©rÃ©monie de la Luuuuune!?
 <i>Le Chef</i>: ='D
-<i>Marin</i>: Bon, faites juste ça et on aura notre or. À plus tard!
+<i>Marin</i>: Bon, faites juste Ã§a et on aura notre or. Ã€ plus tard!

@@ -43,8 +43,6 @@ public class DialoguesSystem : MonoBehaviour
 
     void Awake()
     {
-        language = "EN_";
-        print(language);
         player = GameObject.FindWithTag("Player");
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
