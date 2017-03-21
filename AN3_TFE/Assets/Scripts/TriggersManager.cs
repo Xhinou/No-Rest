@@ -69,6 +69,87 @@ public class TriggersManager : MonoBehaviour
                             yield return null;
                         qManager.RunQuest(1);
                         break;
+			case "W1Trigger":
+				GameObject W1 = GameObject.Find("W1");
+				Animator first = W1.GetComponent<Animator>();
+				bool W1Triggered = false;
+				if (isEntering)
+				{
+					W1Triggered = true;
+					first.SetBool("doorTrig", W1Triggered);
+				}
+				else
+				{
+					W1Triggered = false;
+					first.SetBool("doorTrig", W1Triggered);
+				}
+				break;
+
+			case "W2Trigger":
+				GameObject W2 = GameObject.Find("W2");
+				Animator second = W2.GetComponent<Animator>();
+				bool W2Triggered = false;
+				if (isEntering)
+				{
+					W2Triggered = true;
+					second.SetBool("doorTrig", W2Triggered);
+				}
+				else
+				{
+					W2Triggered = false;
+					second.SetBool("doorTrig", W2Triggered);
+				}
+				break;
+
+			case "W3Trigger":
+				GameObject W3 = GameObject.Find("W3");
+				Animator third = W3.GetComponent<Animator>();
+				bool W3Triggered = false;
+				if (isEntering)
+				{
+					W3Triggered = true;
+					third.SetBool("doorTrig", W3Triggered);
+				}
+				else
+				{
+					W3Triggered = false;
+					third.SetBool("doorTrig", W3Triggered);
+				}
+				break;
+
+			case "W4Trigger":
+				GameObject W4 = GameObject.Find("W4");
+				Animator fourth = W4.GetComponent<Animator>();
+				bool W4Triggered = false;
+				if (isEntering)
+				{
+					W4Triggered = true;
+					fourth.SetBool("doorTrig", W4Triggered);
+				}
+				else
+				{
+					W4Triggered = false;
+					fourth.SetBool("doorTrig", W4Triggered);
+				}
+				break;
+
+			case "W5Trigger":
+				GameObject W5 = GameObject.Find("W5");
+				Animator fifth = W5.GetComponent<Animator>();
+				bool W5Triggered = false;
+				if (isEntering)
+				{
+					W5Triggered = true;
+					fifth.SetBool("doorTrig", W5Triggered);
+				}
+				else
+				{
+					W5Triggered = false;
+					fifth.SetBool("doorTrig", W5Triggered);
+				}
+				break;
+
+
                     default:
                         break;
                 }
