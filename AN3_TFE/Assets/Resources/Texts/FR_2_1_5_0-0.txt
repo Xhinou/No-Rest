@@ -1,7 +1,7 @@
-<i>Natif</i>: Hé, regardez! C'est lui! C'est leur capitaine! Il a organisé le meurtre de notre chef!
-Amenez-le à la Cérémonie de la Luuuuune!
-<i>Marin</i>: Oh Capitaine, pourquoi?! Nous étions si près de signer le traité quand
-un taré -vraiment chelou comme mec au passage- est sorti de nulle part et a tué le chef!
-Il nous a dit que vous étiez d'accord avec cela, ainsi vous auriez l'or à vous seul! Vous me décevez énormément.
-<i>Natif</i>: J'AI DIT: à la Cérémonie de la Luuuuune!
-<i>Marin</i>: Par ici Capitaine, j'espère que ça ira pour vous.
+ï»¿<i>Natif</i>: HÃ©, regardez! C'est lui! C'est leur capitaine! Il a organisÃ© le meurtre de notre chef!
+Amenez-le Ã  la CÃ©rÃ©monie de la Luuuuune!
+<i>Marin</i>: Oh Capitaine, pourquoi?! Nous Ã©tions si prÃ¨s de signer le traitÃ© quand
+un tarÃ© -vraiment chelou comme mec au passage- est sorti de nulle part et a tuÃ© le chef!
+Il nous a dit que vous Ã©tiez d'accord avec cela, ainsi vous auriez l'or Ã  vous seul! Vous me dÃ©cevez Ã©normÃ©ment.
+<i>Natif</i>: J'AI DIT: Ã  la CÃ©rÃ©monie de la Luuuuune!
+<i>Marin</i>: Par ici Capitaine, j'espÃ¨re que Ã§a ira pour vous.

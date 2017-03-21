@@ -1,15 +1,15 @@
-<i>???</i>: ...
+ï»¿<i>???</i>: ...
 ...
 ... tiens, salut !
 ...
-... ne me juge pas- enfin je veux dire: ce jeu! Ce n'est même pas une alpha!
-J'espère que tu vas apprécier ces quelques minutes de démo, amuse-toi bien!
-Ah et au passage: je ne sais pas du tout -mais alors pas du tout- où je vais t'envoyer
+... ne me juge pas- enfin je veux dire: ce jeu! Ce n'est mÃªme pas une alpha!
+J'espÃ¨re que tu vas apprÃ©cier ces quelques minutes de dÃ©mo, amuse-toi bien!
+Ah et au passage: je ne sais pas du tout -mais alors pas du tout- oÃ¹ je vais t'envoyer
 Ben ouais! Pourquoi pas? Je vais t'envoyer quelque part!
-Et ça va arriver!
-Très bientôt!
-Ça peut se passer maintenant!
-Après avoir cliqué sur cette boîte de dialogue!
+Et Ã§a va arriver!
+TrÃ¨s bientÃ´t!
+Ã‡a peut se passer maintenant!
+AprÃ¨s avoir cliquÃ© sur cette boÃ®te de dialogue!
 Ou pas!
 Bon, je m'en vais.
 
@@ -17,5 +17,5 @@ Bon, je m'en vais.
 
 <i>???</i>: Surprise!
 C'est encore moi!
-Hé, savais-tu qu'une personne sur deux dans le monde est une FEMME?!
+HÃ©, savais-tu qu'une personne sur deux dans le monde est une FEMME?!
 C'est juste incroy-
