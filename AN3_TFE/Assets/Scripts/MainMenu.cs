@@ -4,7 +4,9 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject particles;
+    public GameObject
+        particles,
+        menuCanvas;
     public Image
         fadeScreenStart,
         fadeScreenPlay,
@@ -31,7 +33,15 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FadeOutStart());
+        if (QuestManager.karmaStep == 0)
+            StartCoroutine(FadeOutStart());
+        else
+        {
+            menuCanvas.SetActive(false);
+            particles.SetActive(false);
+            qManager.RunIntro(qManager.sceneID);
+        }
+        //qManager.player.SetActive(false);
     }
 
     public void RunGame()
@@ -60,7 +70,7 @@ public class MainMenu : MonoBehaviour
         fadeScreenPlay.CrossFadeAlpha(0f, fadeDuration, false);
         particles.SetActive(false);
         StartCoroutine(qManager.CameraZoom(true));
-        yield return new WaitForSeconds(2);       
+        yield return new WaitForSeconds(2);  
         qManager.RunIntro(qManager.sceneID);
     }
 

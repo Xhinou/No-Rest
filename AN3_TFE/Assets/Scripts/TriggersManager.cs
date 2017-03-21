@@ -67,7 +67,7 @@ public class TriggersManager : MonoBehaviour
                         StartCoroutine(qManager.ObjectToPos(player, newPos));
                         while (qManager.isCoroutineRunning)
                             yield return null;
-                        qManager.RunQuest(0);
+                        qManager.RunQuest(1);
                         break;
                     default:
                         break;

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class DialoguesSystem : MonoBehaviour
 {
-    public string language;
+    public static string language;
     public Text theText;
     [HideInInspector] TextAsset
         textFile,
@@ -215,9 +215,9 @@ public class DialoguesSystem : MonoBehaviour
     public void KarmaMod ()
     {
         if (karmaMod == 1)
-            qManager.karma++;
+            QuestManager.karma++;
         else if (karmaMod == 2)
-            qManager.karma--;
+            QuestManager.karma--;
     }
 
     public void SetToDial(string mod, int newOrder, string prev)

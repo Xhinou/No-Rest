@@ -11,10 +11,11 @@ public class QuestManager : MonoBehaviour
     public AudioSource theAudio;
     Animator playerAnimator;
     GameObject
-        cam,
-        player;
+        newPos,
+        newPos2,
+        cam;
     public GameObject[] triggers = new GameObject[7];
-    [HideInInspector] public int karma = 0;
+    [HideInInspector] public static int karma = 0;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -22,7 +23,7 @@ public class QuestManager : MonoBehaviour
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
     Camera mainCam;
-    [HideInInspector] public GameObject scriptSystem;
+    [HideInInspector] public GameObject scriptSystem, player;
 
     void Start()
     {
@@ -30,20 +31,24 @@ public class QuestManager : MonoBehaviour
         scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
+        if (karmaStep != 0)
+            theAudio = GameObject.FindWithTag("Audio").GetComponent<AudioSource>();
         cam = GameObject.Find("Main Camera");
         mainCam = cam.GetComponent<Camera>();
         playerAnimator = player.GetComponent<Animator>();
         LoadNpc(sceneID);
         if (sceneID != 0)
             RunIntro(sceneID);
+        else
+            player.SetActive(false);
     }
 
     public void RunIntro(int _sceneID)
     {
         switch (_sceneID)
         {
-            case 0:                
-                controller.hasControl = true;
+            case 0:
+                StartCoroutine(Incarnation());
                 break;
             case 1:
                 break;
@@ -58,6 +63,8 @@ public class QuestManager : MonoBehaviour
                 break;
         }   
     }
+
+
 
     public void RunQuest(int npcID)
     {
@@ -111,16 +118,46 @@ public class QuestManager : MonoBehaviour
     #region World 0
     //*------------------------------ WORLD 0 - LOBBY ------------------------------*//
 
-    private int karmaStep = 0;
+    public static int karmaStep = 0;
 
     public IEnumerator karmaQuest(int step)
     {
-        if (karmaStep == 0)
+        switch (step)
         {
-            dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
-            while (!dialogSystem.isDisabled)
-                yield return null;
-            LoadWorld(1);
+            case 0:
+                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                StartCoroutine(Desincarnation(2));
+                karmaStep = 1;
+                break;
+            case 1:
+                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+                if (karma > 0) //Karma is GOOD
+                {
+
+                }
+                else //Karma is BAD
+                {
+
+                }
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                StartCoroutine(Desincarnation(1));
+                break;
+            case 2:
+                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+                if (karma > 0) //Karma is GOOD
+                {
+
+                }
+                else //Karma is BAD
+                {
+
+                }
+                break;
+            default:
+                break;
         }
     }
     #endregion World 0
@@ -140,7 +177,6 @@ public class QuestManager : MonoBehaviour
     private bool goldGet = false;    
     public IEnumerator SailorQuest(int step, int npcID)
     {
-        GameObject newPos;
         switch (step) {
             case 0:
                 intro = true;
@@ -148,7 +184,7 @@ public class QuestManager : MonoBehaviour
                 yield return new WaitForSeconds(2);
                 playerAnimator.Play("Get Up");
                 yield return new WaitForSeconds(6);
-                //anim réveil			
+                //anim réveil
                 sailorNav.destination = player.transform.position;
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
                 int w = 0;
@@ -262,8 +298,8 @@ public class QuestManager : MonoBehaviour
                 triggers[5].GetComponent<BoxCollider>().isTrigger = false;
                 while (!dialogSystem.isDisabled)
                     yield return null;
-                 newPos = GameObject.Find("ChiefEndPos");
-                GameObject newPos2 = GameObject.Find("SailorEndPos");
+                newPos = GameObject.Find("ChiefEndPos");
+                newPos2 = GameObject.Find("SailorEndPos");
                 chiefScript.isTalkable = false;
                 sailorScript.isTalkable = false;
                 StartCoroutine(ObjectToPos(sailor, newPos));
@@ -287,6 +323,11 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
                     yield return null;
+                playerAnimator.Play("Lied Down");
+                newPos = GameObject.Find("PlayerEndPos3");
+                player.transform.position = newPos.transform.position;
+                particles[1].Play();
+                yield return new WaitForSeconds(2);
                 triggers[6].GetComponent<BoxCollider>().isTrigger = false;
                 if (karma >= 1)
                     Debug.Log("KARMA IS GOOD");
@@ -327,7 +368,7 @@ public class QuestManager : MonoBehaviour
             if (sailorStep < 3)
             {
                 sailorNav.enabled = false;
-                GameObject newPos = GameObject.Find("SailorPosVillage");
+                newPos = GameObject.Find("SailorPosVillage");
                 sailorTr.position = newPos.transform.position;
                 sailorNav.enabled = true;
                 sailorStep = 3;
@@ -348,8 +389,8 @@ public class QuestManager : MonoBehaviour
                     triggers[5].GetComponent<BoxCollider>().isTrigger = false;
                     if (killerStep != 2)
                     {
-                        GameObject newPos = GameObject.Find("ChiefEndPos");
-                        GameObject newPos2 = GameObject.Find("SailorEndPos");
+                        newPos = GameObject.Find("ChiefEndPos");
+                        newPos2 = GameObject.Find("SailorEndPos");
                         chiefTr.position = newPos.transform.position;
                         sailorTr.position = newPos2.transform.position;
                         chiefScript.isTalkable = true;
@@ -415,8 +456,8 @@ public class QuestManager : MonoBehaviour
             triggers[5].GetComponent<BoxCollider>().isTrigger = false;
             sailorNav.enabled = false;
             chiefNav.enabled = false;
-            GameObject newPos = GameObject.Find("SailorEndPos");
-            GameObject newPos2 = GameObject.Find("ChiefEndPos");
+            newPos = GameObject.Find("SailorEndPos");
+            newPos2 = GameObject.Find("ChiefEndPos");
             sailorTr.position = newPos.transform.position;
             chiefTr.position = newPos2.transform.position;
             sailorNav.enabled = true;
@@ -489,8 +530,8 @@ public class QuestManager : MonoBehaviour
                 sailorStep = 5;
             sailorNav.enabled = false;
             chiefNav.enabled = false;
-            GameObject newPos = GameObject.Find("SailorEndPos");
-            GameObject newPos2 = GameObject.Find("ChiefEndPos");
+            newPos = GameObject.Find("SailorEndPos");
+            newPos2 = GameObject.Find("ChiefEndPos");
             sailorTr.position = newPos.transform.position;
             chiefTr.position = newPos2.transform.position;
             sailorNav.enabled = true;
@@ -669,6 +710,27 @@ public class QuestManager : MonoBehaviour
             Debug.Log("End of Zoom");
         }
     }
+
+    #region Lobby Only
+    private IEnumerator Incarnation()
+    {
+        player.SetActive(false);
+        particles[0].Play();
+        yield return new WaitForSeconds(1);
+        player.SetActive(true);
+        yield return new WaitForSeconds(1);
+        controller.hasControl = true;
+    }
+
+    private IEnumerator Desincarnation(int worldToLoad)
+    {
+        particles[1].Play();
+        yield return new WaitForSeconds(1);
+        player.SetActive(false);
+        yield return new WaitForSeconds(1);
+        LoadWorld(worldToLoad);
+    }
+    #endregion Lobby Only
 
     #endregion Methods
 }

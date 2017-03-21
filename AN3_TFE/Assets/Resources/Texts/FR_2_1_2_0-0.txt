@@ -1,6 +1,6 @@
 <i>Marin</i>: Ramassez quelque chose, Capitaine!
-Je vais restez ici et vous bloquez le chemin sans raison pendant le temps que vous le faites.
-<i>Marin</i>: Doux Jesus Capitaine, vous n'etes pas tres intelli-... je veux dire: c'est pas si mal, allons au village!
-<i>Marin</i>: Trop mignon! Vous allez l'ajouter a votre collection?
-C'est bien assez pour signer le traite, on n'a pas besoin de papier pour cet daube. Maintenant venez, c'est par ici!
-<i>Marin</i>: Ca c'est mon fiston! Maintenant allons-y, le village est par la!
+Je vais restez ici et vous bloquer le chemin sans raison en attendant.
+<i>Marin</i>: Doux Jésus Capitaine, vous n'êtes pas très intelli-... je veux dire: c'est pas si mal, allons au village!
+<i>Marin</i>: Trop mignon! Vous allez l'ajouter à votre collection?
+C'est bien assez pour signer le traité, on n'a pas besoin de papier pour cette daube. Maintenant venez, c'est par ici!
+<i>Marin</i>: Ça c'est mon fiston! Maintenant allons-y, le village est par là!

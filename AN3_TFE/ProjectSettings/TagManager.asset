@@ -12,6 +12,7 @@ TagManager:
   - closeToPlayer
   - talking
   - Fire
+  - Audio
   layers:
   - Default
   - TransparentFX
