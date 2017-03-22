@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.AI;
 
 public class TriggersManager : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class TriggersManager : MonoBehaviour
     QuestManager qManager;
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
+    CameraFollower camFollower;
     bool isEntering;
 
     void Awake()
@@ -19,6 +19,7 @@ public class TriggersManager : MonoBehaviour
         qManager = scriptSystem.GetComponent<QuestManager>();
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
+        camFollower = GameObject.Find("Main Camera").GetComponent<CameraFollower>();
     }
 
     void OnTriggerEnter(Collider colr)
@@ -63,6 +64,7 @@ public class TriggersManager : MonoBehaviour
                         break;
                     case "WhoTrigger":
                         StartCoroutine(qManager.CameraZoom(false));
+                        StartCoroutine(camFollower.CamRotation("Up"));
                         GameObject newPos = GameObject.Find("WhoPos");
                         StartCoroutine(qManager.ObjectToPos(player, newPos));
                         while (qManager.isCoroutineRunning)

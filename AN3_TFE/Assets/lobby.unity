@@ -40335,6 +40335,11 @@ Prefab:
       propertyPath: smooth
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114522857137070006, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
+        type: 2}
+      propertyPath: turningRate
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5ac843ea9e77214d80452e5fe3f9ddf, type: 2}
   m_IsPrefabParent: 0
