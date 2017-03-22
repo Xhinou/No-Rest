@@ -19,23 +19,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-<<<<<<< HEAD:AN3_TFE/Assets/Animations/Looby_welcoming/left.anim
         value: {x: 3.14, y: -1.72, z: 0.40161514}
-=======
-        value: {x: -1.59, y: -1.3148122, z: -5.1983852}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: {x: 0.79999983, y: 5, z: -5.1983852}
-        inSlope: {x: 7.261861, y: 0, z: 0}
-        outSlope: {x: 7.261861, y: 0, z: 0}
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: {x: 3.19, y: -1.3148122, z: -5.1983852}
->>>>>>> a912a62054789621fd338abaeda92b262d49d214:AN3_TFE/Assets/Animations/Looby_welcoming/third.anim
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -86,23 +70,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-<<<<<<< HEAD:AN3_TFE/Assets/Animations/Looby_welcoming/left.anim
         value: 3.14
-=======
-        value: -1.59
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 0.5
-        value: 0.79999983
-        inSlope: 7.261861
-        outSlope: 7.261861
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 3.19
->>>>>>> a912a62054789621fd338abaeda92b262d49d214:AN3_TFE/Assets/Animations/Looby_welcoming/third.anim
         inSlope: 0
         outSlope: 0
         tangentMode: 136

@@ -3419,7 +3419,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 967265883
+  randomSeed: -2019827248
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -55758,7 +55758,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1357465847
+  randomSeed: 221335975
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -64214,7 +64214,7 @@ Prefab:
       objectReference: {fileID: 484667606}
     - target: {fileID: 1843617472308186, guid: 823815365cb5f5649b880d81e1561902, type: 2}
       propertyPath: m_Name
-      value: 'JumpTrigger '
+      value: JumpTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 4837442186229646, guid: 823815365cb5f5649b880d81e1561902, type: 2}
       propertyPath: m_LocalScale.x
