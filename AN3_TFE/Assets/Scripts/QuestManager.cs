@@ -37,6 +37,8 @@ public class QuestManager : MonoBehaviour
         mainCam = cam.GetComponent<Camera>();
         playerAnimator = player.GetComponent<Animator>();
         LoadNpc(sceneID);
+        if (DialoguesSystem.language == null)
+            DialoguesSystem.language = "EN_";
         if (sceneID != 0)
             RunIntro(sceneID);
         else
