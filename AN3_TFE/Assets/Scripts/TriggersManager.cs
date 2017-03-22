@@ -11,6 +11,10 @@ public class TriggersManager : MonoBehaviour
     DialoguesSystem dialogSystem;
     CameraFollower camFollower;
     bool isEntering;
+    [Header("Lobby Particles")]
+    public GameObject lobbyParticle;
+    public bool isRight;
+    Animator jumpParticle;
 
     void Awake()
     {
@@ -19,7 +23,15 @@ public class TriggersManager : MonoBehaviour
         qManager = scriptSystem.GetComponent<QuestManager>();
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
-        camFollower = GameObject.Find("Main Camera").GetComponent<CameraFollower>();
+        camFollower = GameObject.Find("Main Camera").GetComponent<CameraFollower>();        
+        if (gameObject.name == "JumpTrigger")
+        {
+            jumpParticle = lobbyParticle.GetComponent<Animator>();
+            if (isRight)
+                jumpParticle.Play("IdleRight");
+            else
+                jumpParticle.Play("IdleLeft");
+        }
     }
 
     void OnTriggerEnter(Collider colr)
@@ -44,6 +56,7 @@ public class TriggersManager : MonoBehaviour
     {
         switch (qManager.sceneID)
         {
+            #region Lobby
             case 0:
                 switch (gameObject.name)
                 {
@@ -71,93 +84,33 @@ public class TriggersManager : MonoBehaviour
                             yield return null;
                         qManager.RunQuest(1);
                         break;
-			case "W1Trigger":
-				GameObject W1 = GameObject.Find("W1");
-				Animator first = W1.GetComponent<Animator>();
-				bool W1Triggered = false;
-				if (isEntering)
-				{
-					W1Triggered = true;
-					first.SetBool("doorTrig", W1Triggered);
-				}
-				else
-				{
-					W1Triggered = false;
-					first.SetBool("doorTrig", W1Triggered);
-				}
-				break;
-
-			case "W2Trigger":
-				GameObject W2 = GameObject.Find("W2");
-				Animator second = W2.GetComponent<Animator>();
-				bool W2Triggered = false;
-				if (isEntering)
-				{
-					W2Triggered = true;
-					second.SetBool("doorTrig", W2Triggered);
-				}
-				else
-				{
-					W2Triggered = false;
-					second.SetBool("doorTrig", W2Triggered);
-				}
-				break;
-
-			case "W3Trigger":
-				GameObject W3 = GameObject.Find("W3");
-				Animator third = W3.GetComponent<Animator>();
-				bool W3Triggered = false;
-				if (isEntering)
-				{
-					W3Triggered = true;
-					third.SetBool("doorTrig", W3Triggered);
-				}
-				else
-				{
-					W3Triggered = false;
-					third.SetBool("doorTrig", W3Triggered);
-				}
-				break;
-
-			case "W4Trigger":
-				GameObject W4 = GameObject.Find("W4");
-				Animator fourth = W4.GetComponent<Animator>();
-				bool W4Triggered = false;
-				if (isEntering)
-				{
-					W4Triggered = true;
-					fourth.SetBool("doorTrig", W4Triggered);
-				}
-				else
-				{
-					W4Triggered = false;
-					fourth.SetBool("doorTrig", W4Triggered);
-				}
-				break;
-
-			case "W5Trigger":
-				GameObject W5 = GameObject.Find("W5");
-				Animator fifth = W5.GetComponent<Animator>();
-				bool W5Triggered = false;
-				if (isEntering)
-				{
-					W5Triggered = true;
-					fifth.SetBool("doorTrig", W5Triggered);
-				}
-				else
-				{
-					W5Triggered = false;
-					fifth.SetBool("doorTrig", W5Triggered);
-				}
-				break;
-
-
+                    case "JumpTrigger":
+                        if (isEntering)
+                        {
+                            if (isRight)
+                            {
+                                jumpParticle.Play("JumpLeft");
+                                isRight = !isRight;
+                            }
+                            else {
+                                jumpParticle.Play("JumpRight");
+                                isRight = !isRight;
+                            }
+                        }
+                        break;
                     default:
+                        Debug.Log("Can't find the trigger. Check for its name in the code");
                         break;
                 }
                 break;
+            #endregion Lobby
+
+            #region World 1
             case 1:
                 break;
+            #endregion World 1
+
+            #region World 2
             case 2:
                 NpcManager sailorNpc = qManager.sailor.GetComponent<NpcManager>();
                 if (isEntering)
@@ -230,6 +183,7 @@ public class TriggersManager : MonoBehaviour
             default:
                 Debug.Log("Error in scene ID");
                 break;
+            #endregion World 2
         }
     }
 }
