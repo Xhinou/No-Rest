@@ -23,12 +23,12 @@ public class QuestManager : MonoBehaviour
     CharacterClickingController controller;
     DialoguesSystem dialogSystem;
     Camera mainCam;
-    [HideInInspector] public GameObject scriptSystem, player;
+    public GameObject
+        scriptSystem,
+        player;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        scriptSystem = GameObject.Find("ScriptSystem");
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
         if (karmaStep != 0)
@@ -137,11 +137,11 @@ public class QuestManager : MonoBehaviour
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
                 if (karma > 0) //Karma is GOOD
                 {
-
+                    dialogSystem.ForceLine(1, 4, null);
                 }
                 else //Karma is BAD
                 {
-
+                    dialogSystem.ForceLine(6, null, null);
                 }
                 while (!dialogSystem.isDisabled)
                     yield return null;
@@ -728,7 +728,7 @@ public class QuestManager : MonoBehaviour
     {
         particles[1].Play();
         player.SetActive(false);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.3f);
         LoadWorld(worldToLoad);
     }
     #endregion Lobby Only

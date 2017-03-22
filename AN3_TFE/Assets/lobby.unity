@@ -40173,12 +40173,12 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 218508324}
     - target: {fileID: 114764020034580578, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
       propertyPath: scriptSystem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 864640052}
     - target: {fileID: 114764020034580578, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
       propertyPath: buttonTexts.Array.data[0]
@@ -40239,6 +40239,16 @@ Prefab:
       propertyPath: particles.Array.data[1]
       value: 
       objectReference: {fileID: 306747461}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: scriptSystem
+      value: 
+      objectReference: {fileID: 864640052}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 218508324}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
   m_IsPrefabParent: 0
@@ -40474,7 +40484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 476381171}
-  menuCanvas: {fileID: 0}
+  menuCanvas: {fileID: 472154316}
   fadeScreenStart: {fileID: 233090380}
   fadeScreenPlay: {fileID: 922004561}
   title: {fileID: 1890458203}

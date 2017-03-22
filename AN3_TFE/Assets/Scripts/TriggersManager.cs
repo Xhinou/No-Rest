@@ -15,6 +15,9 @@ public class TriggersManager : MonoBehaviour
     public GameObject lobbyParticle;
     public bool isRight;
     Animator jumpParticle;
+    [Header("Houses World 2")]
+    public GameObject houseW2;
+    Animator houseW2Animator;
 
     void Awake()
     {
@@ -23,7 +26,11 @@ public class TriggersManager : MonoBehaviour
         qManager = scriptSystem.GetComponent<QuestManager>();
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
-        camFollower = GameObject.Find("Main Camera").GetComponent<CameraFollower>();        
+        camFollower = GameObject.Find("Main Camera").GetComponent<CameraFollower>();       
+    }
+
+    private void Start()
+    {
         if (gameObject.name == "JumpTrigger")
         {
             jumpParticle = lobbyParticle.GetComponent<Animator>();
@@ -32,6 +39,8 @@ public class TriggersManager : MonoBehaviour
             else
                 jumpParticle.Play("IdleLeft");
         }
+        else if (gameObject.name == "HouseTrigger")
+            houseW2Animator = houseW2.GetComponent<Animator>();
     }
 
     void OnTriggerEnter(Collider colr)
@@ -92,7 +101,8 @@ public class TriggersManager : MonoBehaviour
                                 jumpParticle.Play("JumpLeft");
                                 isRight = !isRight;
                             }
-                            else {
+                            else
+                            {
                                 jumpParticle.Play("JumpRight");
                                 isRight = !isRight;
                             }
@@ -174,8 +184,22 @@ public class TriggersManager : MonoBehaviour
                                 yield return null;
                             qManager.RunQuest(1);
                             break;
+                        case "HouseTrigger":
+                            houseW2Animator.SetBool("isTrig", isEntering);
+                            break;
                         default:
                             Debug.Log("Can't find the trigger. Check for its name in the code");
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (gameObject.name)
+                    {
+                        case "HouseTrigger":
+                            houseW2Animator.SetBool("isTrig", isEntering);
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -183,7 +207,7 @@ public class TriggersManager : MonoBehaviour
             default:
                 Debug.Log("Error in scene ID");
                 break;
-            #endregion World 2
+                #endregion World 2
         }
     }
 }

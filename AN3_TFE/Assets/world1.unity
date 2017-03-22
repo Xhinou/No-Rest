@@ -1593,7 +1593,7 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1828447236}
+      objectReference: {fileID: 1828447238}
     - target: {fileID: 81443910257093488, guid: e5ac843ea9e77214d80452e5fe3f9ddf,
         type: 2}
       propertyPath: m_Enabled
@@ -2209,12 +2209,27 @@ Prefab:
       propertyPath: maxView
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1828447236}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: scriptSystem
+      value: 
+      objectReference: {fileID: 2000685356}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2000685355 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4622171297781240, guid: 2a7f343cb83e7614289fde907255146b,
+    type: 2}
+  m_PrefabInternal: {fileID: 2000685354}
+--- !u!1 &2000685356 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1267536711274812, guid: 2a7f343cb83e7614289fde907255146b,
     type: 2}
   m_PrefabInternal: {fileID: 2000685354}
 --- !u!1001 &2121191893

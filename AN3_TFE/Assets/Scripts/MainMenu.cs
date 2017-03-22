@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
     IEnumerator FadeOutStart()
     {
         fadeScreenStart.CrossFadeAlpha(0f, fadeDuration, false);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         fadeScreenStart.color = new Color(0,0,0,0);
         fadeScreenStart.raycastTarget = false;
     }
