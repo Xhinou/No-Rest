@@ -1,0 +1,9 @@
+﻿<i>Johnny</i>: Hé! C'est pas le joueur là-bas?
+<i>Salé</i>: Mais oui.. tu as raison! C'est lui!
+<i>Bob</i>: Je pensais que le jeu était encore en développement!
+<i>Murlin</i>: Qu'est-ce qu'il fait ici?! Ce monde n'est même pas encore construit!
+<i>Johnny</i>: Oh dieu... Il vient vers nous!
+<i>Bob</i>: Qu'est-ce qu'on va faire?!
+<i>Salé</i>: C'est bon, juste restez calme et agissez normalement.
+<i>Johnny</i>: Pssst! Taisez-vous! Le voilà qui arrive!
+<i>Murlin</i>: Juste. Agissez. Normalement.

@@ -76,9 +76,10 @@ public class QuestManager : MonoBehaviour
         switch (sceneID)
         {
             case 0:
-                StartCoroutine(karmaQuest(karmaStep));
+                StartCoroutine(KarmaQuest(karmaStep));
                 break;
             case 1:
+                StartCoroutine(FunQuest());
                 break;
             case 2:
                 switch (npcID)
@@ -125,11 +126,12 @@ public class QuestManager : MonoBehaviour
 
     public static int karmaStep = 0;
 
-    public IEnumerator karmaQuest(int step)
+    public IEnumerator KarmaQuest(int step)
     {
         switch (step)
         {
             case 0:
+                karma = 0;
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
                 while (!dialogSystem.isDisabled)
                     yield return null;
@@ -149,7 +151,7 @@ public class QuestManager : MonoBehaviour
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 StartCoroutine(Desincarnation(1));
-                karmaStep = 2;
+                karmaStep = 0; //to change
                 break;
             case 2:
                 dialogSystem.DisplayText(2, 0, step, "Main Camera");
@@ -164,7 +166,7 @@ public class QuestManager : MonoBehaviour
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 StartCoroutine(Desincarnation(1));
-                karmaStep = 2;
+                karmaStep = 0;
                 break;
             default:
                 break;
@@ -174,6 +176,17 @@ public class QuestManager : MonoBehaviour
 
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
+
+        IEnumerator FunQuest()
+    {
+        dialogSystem.DisplayText(sceneID, 0, 0, "Main Camera");
+        while (!dialogSystem.isDisabled)
+            yield return null;
+        squireScript.lookPlayer = true;
+        merlinScript.lookPlayer = true;
+        slaughtScript.lookPlayer = true;
+        kingScript.lookPlayer = true;
+    }
     #endregion World 1
 
     #region World 2
@@ -583,7 +596,7 @@ public class QuestManager : MonoBehaviour
     {
         dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera");
     }
-    
+
     #endregion World 2
 
     #region World 3
@@ -591,7 +604,21 @@ public class QuestManager : MonoBehaviour
     #endregion World 3
 
     #region NPCs Loading
+    #region World 1 NPCs
     /*NPCs - WORLD 1*/
+    [HideInInspector]
+    public GameObject
+        squire,
+        merlin,
+        slaught,
+        king;
+    [HideInInspector]
+    public NpcManager
+       squireScript,
+       merlinScript,
+       slaughtScript,
+       kingScript;
+    #endregion World 1 NPCs
     #region World 2 NPCs
     /*NPCs - WORLD 2*/
     [HideInInspector] public GameObject
@@ -619,42 +646,40 @@ public class QuestManager : MonoBehaviour
 
     void LoadNpc(int _sceneID)
     {
-        if (_sceneID == 0)
+        switch (_sceneID)
         {
-            //GameObject deus = GameObject.Find("Deus");
-        }
-        else if (_sceneID == 1)
-        {
-
-        }
-        else if (_sceneID == 2)
-        {
-            sailor = GameObject.Find("Sailor");
-            chief = GameObject.Find("Chief");
-            gold = GameObject.Find("GoldSeam");
-            killer = GameObject.Find("Assassin");
-            harsh = GameObject.Find("HarshNative");
-            sailorTr = sailor.transform;
-            chiefTr = chief.transform;
-            killerTr = killer.transform;
-            sailorNav = sailor.GetComponent<NavMeshAgent>();
-            chiefNav = chief.GetComponent<NavMeshAgent>();
-            killerNav = killer.GetComponent<NavMeshAgent>();
-            sailorScript = sailor.GetComponent<NpcManager>();
-            chiefScript = chief.GetComponent<NpcManager>();
-            goldScript = gold.GetComponent<NpcManager>();
-            killerScript = killer.GetComponent<NpcManager>();
-            harshScript = harsh.GetComponent<NpcManager>();
-        }
-        else if (_sceneID == 3)
-        {
-
-        }
-        else
-        {
-            Debug.Log("Error in scene ID");
-            return;
-        }            
+            case 1:
+                squire = GameObject.Find("Squire");
+                merlin = GameObject.Find("Merlin");
+                slaught = GameObject.Find("Slaughterman");
+                king = GameObject.Find("King");
+                squireScript = squire.GetComponent<NpcManager>();
+                merlinScript = merlin.GetComponent<NpcManager>();
+                slaughtScript = slaught.GetComponent<NpcManager>();
+                kingScript = king.GetComponent<NpcManager>();
+                break;
+            case 2:
+                sailor = GameObject.Find("Sailor");
+                chief = GameObject.Find("Chief");
+                gold = GameObject.Find("GoldSeam");
+                killer = GameObject.Find("Assassin");
+                harsh = GameObject.Find("HarshNative");
+                sailorTr = sailor.transform;
+                chiefTr = chief.transform;
+                killerTr = killer.transform;
+                sailorNav = sailor.GetComponent<NavMeshAgent>();
+                chiefNav = chief.GetComponent<NavMeshAgent>();
+                killerNav = killer.GetComponent<NavMeshAgent>();
+                sailorScript = sailor.GetComponent<NpcManager>();
+                chiefScript = chief.GetComponent<NpcManager>();
+                goldScript = gold.GetComponent<NpcManager>();
+                killerScript = killer.GetComponent<NpcManager>();
+                harshScript = harsh.GetComponent<NpcManager>();
+                break;
+            default:
+                Debug.Log("Error in scene ID");
+                break;
+        }           
     }
     #endregion NPCs Loading
 

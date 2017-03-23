@@ -117,6 +117,14 @@ public class TriggersManager : MonoBehaviour
 
             #region World 1
             case 1:
+                switch (gameObject.name)
+                {
+                    case "Fun":
+                        qManager.RunQuest(0);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             #endregion World 1
 

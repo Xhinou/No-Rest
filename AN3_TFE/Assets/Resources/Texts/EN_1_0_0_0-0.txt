@@ -1,0 +1,9 @@
+﻿<i>Johnny</i>: Hey! Isn't this the player over there?
+<i>Salty</i>: Yeah... you're right! It's him!
+<i>Bob</i>: I thought this game was still in development!
+<i>Murlin</i>: What is he doing here?! This world isn't even built!
+<i>Johnny</i>: Oh god... He's coming to us!
+<i>Bob</i>: What are we going to do?!
+<i>Salty</i>: It's ok. Just be quiet and act normal.
+<i>Johnny</i>: Pssst! Quiet! Here he comes!
+<i>Murlin</i>: Just. Act. Normal.
