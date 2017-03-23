@@ -9,7 +9,7 @@ public class QuestManager : MonoBehaviour
     public int sceneID;
     public AudioClip[] audioClips;
     public AudioSource theAudio;
-    Animator playerAnimator;
+    Animator playerAnimator, godAnimator;
     GameObject
         newPos,
         newPos2,
@@ -42,7 +42,10 @@ public class QuestManager : MonoBehaviour
         if (sceneID != 0)
             RunIntro(sceneID);
         else
+        {
+            godAnimator = GameObject.Find("Divinity").GetComponent<Animator>();
             player.SetActive(false);
+        }          
     }
 
     public void RunIntro(int _sceneID)
@@ -146,17 +149,22 @@ public class QuestManager : MonoBehaviour
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 StartCoroutine(Desincarnation(1));
+                karmaStep = 2;
                 break;
             case 2:
-                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+                dialogSystem.DisplayText(2, 0, step, "Main Camera");
                 if (karma > 0) //Karma is GOOD
                 {
-
+                    dialogSystem.ForceLine(1, 4, null);
                 }
                 else //Karma is BAD
                 {
-
+                    dialogSystem.ForceLine(6, null, null);
                 }
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                StartCoroutine(Desincarnation(1));
+                karmaStep = 2;
                 break;
             default:
                 break;
@@ -183,9 +191,9 @@ public class QuestManager : MonoBehaviour
             case 0:
                 intro = true;
                 particles[0].Play();
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(2.5f);
                 playerAnimator.Play("Get Up");
-                yield return new WaitForSeconds(6);
+                yield return new WaitForSeconds(4f);
                 //anim réveil
                 sailorNav.destination = player.transform.position;
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
@@ -327,6 +335,7 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 playerAnimator.Play("Lied Down");
                 newPos = GameObject.Find("PlayerEndPos3");
+                controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
                 particles[1].Play();
                 yield return new WaitForSeconds(2);
@@ -345,6 +354,12 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
                     yield return null;
+                playerAnimator.Play("Lied Down");
+                newPos = GameObject.Find("PlayerEndPos3");
+                controller.agent.enabled = false;
+                player.transform.position = newPos.transform.position;
+                particles[1].Play();
+                yield return new WaitForSeconds(2);
                 triggers[6].GetComponent<BoxCollider>().isTrigger = false;
                 //END ANIMATION
                 if (karma >= 1)
@@ -726,6 +741,7 @@ public class QuestManager : MonoBehaviour
 
     private IEnumerator Desincarnation(int worldToLoad)
     {
+        godAnimator.Play("Finger");
         particles[1].Play();
         player.SetActive(false);
         yield return new WaitForSeconds(1.3f);
