@@ -1,4 +1,4 @@
-<i>Sailor</i>: This is quite a nice place. And look at those tiny huts. And this lovely people.
+﻿<i>Sailor</i>: This is quite a nice place. And look at those tiny huts. And this lovely people.
 I bet that they can't even read a treaty, ah ah!
 <i>Chief</i>: Welcome, travelers. What brings you here on our ancestral lands by this Mooooon season?
 <i>Sailor</i>: Captain! You're so late! We don't have much time to sign the treaty so please talk quickly to the chief!

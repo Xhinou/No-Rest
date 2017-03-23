@@ -43,21 +43,24 @@ public class CharacterClickingController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
         }
-        if (!agent.pathPending)
+        if (agent.enabled)
         {
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (!agent.pathPending)
             {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    agent.ResetPath();
-                    isMoving = false;
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        agent.ResetPath();
+                        isMoving = false;
+                        anim.SetBool("isMoving", isMoving);
+                    }
+                }
+                else
+                {
+                    isMoving = true;
                     anim.SetBool("isMoving", isMoving);
                 }
-            }
-            else
-            {
-                isMoving = true;
-                anim.SetBool("isMoving", isMoving);
             }
         }
     }

@@ -490,6 +490,8 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = false;
                 newPos = GameObject.Find("AssassinPos");
                 StartCoroutine(ObjectToPos(killer, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
                 killer.SetActive(false);
                 controller.hasControl = true;
                 chief.SetActive(false);

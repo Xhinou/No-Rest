@@ -30,7 +30,7 @@ public class FadeOutBlockObjects : MonoBehaviour
             hitFlag = true;
             foreach (Material mat in materials)
             {
-                mat.SetColor("_OutlineColor", Color.Lerp(hiddenColor, visibleColor, Time.deltaTime * 0.5f));
+                mat.SetColor("_OutlineColor", hiddenColor);
             }
         }
         else if (hitFlag)
@@ -38,7 +38,7 @@ public class FadeOutBlockObjects : MonoBehaviour
             hitFlag = false;
             foreach (Material mat in materials)
             {
-                mat.SetColor("_OutlineColor", Color.Lerp(visibleColor, hiddenColor, Time.deltaTime * 0.5f));
+                mat.SetColor("_OutlineColor", visibleColor);
             }
         }
     }
