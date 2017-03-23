@@ -5351,6 +5351,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eb8f7e27daa752f4eb0b588bddebd7e4, type: 2}
+    - target: {fileID: 100000, guid: 108d7804362a247468798b32a4ade1cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 108d7804362a247468798b32a4ade1cd, type: 3}
   m_IsPrefabParent: 0
@@ -78529,7 +78533,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2003204754
+  randomSeed: -212998360
   InitialModule:
     serializedVersion: 3
     enabled: 1
