@@ -6064,6 +6064,64 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ae291f34757880b4bbd521794a6582c4, type: 3}
   m_PrefabInternal: {fileID: 162286282}
+--- !u!1 &165941796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 165941797}
+  - component: {fileID: 165941799}
+  - component: {fileID: 165941798}
+  m_Layer: 0
+  m_Name: Village
+  m_TagString: trigger
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &165941797
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 165941796}
+  m_LocalRotation: {x: -0, y: -0.020070333, z: -0, w: 0.9997986}
+  m_LocalPosition: {x: 8.28, y: 3.3, z: -114.41}
+  m_LocalScale: {x: 2.9396956, y: 3.416163, z: 21.278128}
+  m_Children: []
+  m_Father: {fileID: 455327511}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: -2.3000002, z: 0}
+--- !u!65 &165941798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 165941796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &165941799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 165941796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9816f50366edf6049a6ec79adc90134d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptSystem: {fileID: 0}
+  player: {fileID: 0}
+  lobbyParticle: {fileID: 0}
+  isRight: 0
+  houseW2: {fileID: 0}
 --- !u!4 &166721271 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4549624409295532, guid: a1b5327121e23eb43b331bb1f8919782,
@@ -17416,6 +17474,9 @@ Transform:
   - {fileID: 373714837}
   - {fileID: 1764778787}
   - {fileID: 566022261}
+  - {fileID: 1058315559}
+  - {fileID: 1838671975}
+  - {fileID: 165941797}
   - {fileID: 591298371}
   - {fileID: 1221651781}
   m_Father: {fileID: 1598816611}
@@ -22541,9 +22602,6 @@ GameObject:
   - component: {fileID: 566022261}
   - component: {fileID: 566022262}
   - component: {fileID: 566022263}
-  - component: {fileID: 566022266}
-  - component: {fileID: 566022265}
-  - component: {fileID: 566022264}
   m_Layer: 0
   m_Name: Village
   m_TagString: trigger
@@ -22592,42 +22650,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &566022264
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 566022260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.46366626, y: 1, z: 1.0455168}
-  m_Center: {x: 0.17521662, y: 0.20000012, z: -4.1008444}
---- !u!65 &566022265
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 566022260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.11323724, y: 1, z: 7.656877}
-  m_Center: {x: 0.0000021062026, y: 0.20000012, z: -7.4052324}
---- !u!65 &566022266
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 566022260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.11323724, y: 1, z: 3.147918}
-  m_Center: {x: -0.70349205, y: 0.20000012, z: -7.049098}
 --- !u!4 &566893699 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 3b1627701ae85434ebc5f9e82fcbf302, type: 3}
@@ -23155,7 +23177,7 @@ Transform:
   m_LocalScale: {x: 3, y: 6.130167, z: 22.584446}
   m_Children: []
   m_Father: {fileID: 455327511}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: -0.70100003, z: 0}
 --- !u!114 &591298372
 MonoBehaviour:
@@ -28376,7 +28398,7 @@ Prefab:
     - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
       propertyPath: triggers.Array.size
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
@@ -28454,7 +28476,7 @@ Prefab:
         type: 2}
       propertyPath: triggers.Array.data[6]
       value: 
-      objectReference: {fileID: 591298370}
+      objectReference: {fileID: 1058315558}
     - target: {fileID: 114764020034580578, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
       propertyPath: theText
@@ -28545,6 +28567,21 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1047514980}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: triggers.Array.data[7]
+      value: 
+      objectReference: {fileID: 1838671974}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: triggers.Array.data[8]
+      value: 
+      objectReference: {fileID: 165941796}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: triggers.Array.data[9]
+      value: 
+      objectReference: {fileID: 591298370}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
   m_IsPrefabParent: 0
@@ -41611,6 +41648,64 @@ Prefab:
     - {fileID: 9500000, guid: 5c9c5c36850f60144ba6467ce262c6f4, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 5c9c5c36850f60144ba6467ce262c6f4, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1058315558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1058315559}
+  - component: {fileID: 1058315561}
+  - component: {fileID: 1058315560}
+  m_Layer: 0
+  m_Name: Village
+  m_TagString: trigger
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1058315559
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1058315558}
+  m_LocalRotation: {x: -0, y: -0.020070333, z: -0, w: 0.9997986}
+  m_LocalPosition: {x: -12.94, y: 3.3, z: -112.2}
+  m_LocalScale: {x: 3.2941165, y: 3.416163, z: 11.626987}
+  m_Children: []
+  m_Father: {fileID: 455327511}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -2.3000002, z: 0}
+--- !u!65 &1058315560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1058315558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1058315561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1058315558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9816f50366edf6049a6ec79adc90134d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptSystem: {fileID: 0}
+  player: {fileID: 0}
+  lobbyParticle: {fileID: 0}
+  isRight: 0
+  houseW2: {fileID: 0}
 --- !u!1 &1058797000
 GameObject:
   m_ObjectHideFlags: 0
@@ -51632,7 +51727,7 @@ Transform:
   m_LocalScale: {x: 74.33779, y: 6.1301594, z: 66.954506}
   m_Children: []
   m_Father: {fileID: 455327511}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -0.70100003, z: 0}
 --- !u!114 &1221651782
 MonoBehaviour:
@@ -82927,6 +83022,64 @@ Prefab:
     - {fileID: 9500000, guid: 2557e090cb93e974ba887dae02c54d8f, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 2557e090cb93e974ba887dae02c54d8f, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1838671974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1838671975}
+  - component: {fileID: 1838671977}
+  - component: {fileID: 1838671976}
+  m_Layer: 0
+  m_Name: Village
+  m_TagString: trigger
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1838671975
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1838671974}
+  m_LocalRotation: {x: -0, y: -0.020070333, z: -0, w: 0.9997986}
+  m_LocalPosition: {x: 13.96, y: 3.3, z: -101.85}
+  m_LocalScale: {x: 15.746135, y: 3.416163, z: 3.0545404}
+  m_Children: []
+  m_Father: {fileID: 455327511}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: -2.3000002, z: 0}
+--- !u!65 &1838671976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1838671974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1838671977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1838671974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9816f50366edf6049a6ec79adc90134d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptSystem: {fileID: 0}
+  player: {fileID: 0}
+  lobbyParticle: {fileID: 0}
+  isRight: 0
+  houseW2: {fileID: 0}
 --- !u!4 &1838977639 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2557e090cb93e974ba887dae02c54d8f, type: 3}

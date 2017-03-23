@@ -27,6 +27,10 @@ public class CharacterClickingController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         if (Input.GetMouseButton(0) && hasControl)
         {
             RaycastHit hit;

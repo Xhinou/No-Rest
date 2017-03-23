@@ -318,7 +318,8 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.ForceLine(3, 2, 0);
                     dialogSystem.SetToDial("", 0, "");
                 }
-                triggers[5].GetComponent<BoxCollider>().isTrigger = false;
+                for (int i = 5; i < 9; i++)
+                    triggers[i].GetComponent<BoxCollider>().isTrigger = false;  
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 newPos = GameObject.Find("ChiefEndPos");
@@ -352,7 +353,7 @@ public class QuestManager : MonoBehaviour
                 player.transform.position = newPos.transform.position;
                 particles[1].Play();
                 yield return new WaitForSeconds(2);
-                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
+                triggers[9].GetComponent<BoxCollider>().isTrigger = false;
                 if (karma >= 1)
                     Debug.Log("KARMA IS GOOD");
                 else
@@ -373,7 +374,7 @@ public class QuestManager : MonoBehaviour
                 player.transform.position = newPos.transform.position;
                 particles[1].Play();
                 yield return new WaitForSeconds(2);
-                triggers[6].GetComponent<BoxCollider>().isTrigger = false;
+                triggers[9].GetComponent<BoxCollider>().isTrigger = false;
                 //END ANIMATION
                 if (karma >= 1)
                     Debug.Log("KARMA IS GOOD");
