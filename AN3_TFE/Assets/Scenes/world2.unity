@@ -26407,7 +26407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: 8
-  isTalkable: 0
+  isTalkable: 1
   isClicked: 0
   notNpc: 1
   isMoving: 0
@@ -76870,6 +76870,26 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -135.845
       objectReference: {fileID: 0}
+    - target: {fileID: 114419416043795294, guid: 396e862ccfd6f0042b0dc841766ae926,
+        type: 2}
+      propertyPath: pickedItem.g
+      value: 0.83006525
+      objectReference: {fileID: 0}
+    - target: {fileID: 114419416043795294, guid: 396e862ccfd6f0042b0dc841766ae926,
+        type: 2}
+      propertyPath: pickedItem.b
+      value: 0.9264706
+      objectReference: {fileID: 0}
+    - target: {fileID: 114419416043795294, guid: 396e862ccfd6f0042b0dc841766ae926,
+        type: 2}
+      propertyPath: pickedItem.r
+      value: 0.14987022
+      objectReference: {fileID: 0}
+    - target: {fileID: 114419416043795294, guid: 396e862ccfd6f0042b0dc841766ae926,
+        type: 2}
+      propertyPath: itemColor
+      value: 26D4ECFF
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 396e862ccfd6f0042b0dc841766ae926, type: 2}
   m_IsPrefabParent: 0
@@ -86559,7 +86579,7 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1293650256}
-    - target: {fileID: 114089802124338114, guid: 45179878998a3294abadf332b3c9c87b,
+    - target: {fileID: 114761916147292426, guid: 45179878998a3294abadf332b3c9c87b,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -86569,11 +86589,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1293650256}
-    - target: {fileID: 114761916147292426, guid: 45179878998a3294abadf332b3c9c87b,
+    - target: {fileID: 114089802124338114, guid: 45179878998a3294abadf332b3c9c87b,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1293650256}
+    - target: {fileID: 114429913924957058, guid: 45179878998a3294abadf332b3c9c87b,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 114046146928893916, guid: 45179878998a3294abadf332b3c9c87b,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45179878998a3294abadf332b3c9c87b, type: 2}
   m_IsPrefabParent: 0
@@ -89732,7 +89762,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2097902235}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2

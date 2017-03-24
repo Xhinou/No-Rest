@@ -7793,7 +7793,7 @@ Prefab:
     - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
       propertyPath: triggers.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
         type: 2}
@@ -7932,6 +7932,11 @@ Prefab:
       propertyPath: scriptSystem
       value: 
       objectReference: {fileID: 2000685356}
+    - target: {fileID: 114292267939272488, guid: 2a7f343cb83e7614289fde907255146b,
+        type: 2}
+      propertyPath: triggers.Array.data[0]
+      value: 
+      objectReference: {fileID: 375690429}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a7f343cb83e7614289fde907255146b, type: 2}
   m_IsPrefabParent: 0

@@ -47,7 +47,6 @@ public class MainMenu : MonoBehaviour
     public void RunGame()
     {
         print("PLAY");
-        DialoguesSystem.language = "EN_";
         StartCoroutine(FadeOutAndPlay());
     }
 

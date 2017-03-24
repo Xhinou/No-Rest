@@ -14,7 +14,7 @@ public class CharacterClickingController : MonoBehaviour
     public GameObject npc;
     public Animator anim;
     public bool isMoving;
-    public Color pickedItem;
+    public string itemColor;
     public GameObject rightHand;
     Camera mainCam;
 

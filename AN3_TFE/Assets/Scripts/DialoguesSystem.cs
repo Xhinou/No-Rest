@@ -231,5 +231,9 @@ public class DialoguesSystem : MonoBehaviour
     public void ChangeLanguage(string _language)
     {
         language = _language;
+        if (language == "EN_")
+            print("Language is: English");
+        else if (language == "FR_")
+            print("Language is: Français");
     }
 }

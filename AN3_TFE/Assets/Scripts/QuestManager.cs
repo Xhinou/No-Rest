@@ -48,6 +48,18 @@ public class QuestManager : MonoBehaviour
         }          
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+        else if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            karma = 0;
+            karmaStep = 0;
+            LoadWorld(0);
+        }
+    }
+
     public void RunIntro(int _sceneID)
     {
         switch (_sceneID)
@@ -68,8 +80,6 @@ public class QuestManager : MonoBehaviour
                 break;
         }   
     }
-
-
 
     public void RunQuest(int npcID)
     {
@@ -140,7 +150,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 1:
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
-                if (karma > 0) //Karma is GOOD
+                if (karma >= 1) //Karma is GOOD
                 {
                     dialogSystem.ForceLine(1, 4, null);
                 }
@@ -186,6 +196,7 @@ public class QuestManager : MonoBehaviour
         merlinScript.lookPlayer = true;
         slaughtScript.lookPlayer = true;
         kingScript.lookPlayer = true;
+        triggers[0].GetComponent<SphereCollider>().isTrigger = false;
     }
     #endregion World 1
 
@@ -510,7 +521,7 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = true;
                 chief.SetActive(false);
                 killerStep = 2;
-                karma -= 1;
+                karma -= 2;
             }
             else
                 killerStep = 1;
@@ -533,7 +544,7 @@ public class QuestManager : MonoBehaviour
                     yield return new WaitForSeconds(6);
                     //killer.SetActive(false);
                     controller.hasControl = true;
-                    sailorStep = 4;
+                    sailorStep = 5;
                     killerStep = 0;
                 }
                 else

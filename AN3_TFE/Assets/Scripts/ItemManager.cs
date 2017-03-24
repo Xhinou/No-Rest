@@ -92,9 +92,11 @@ public class ItemManager : MonoBehaviour
 
     void DisplayText()
     {
-        Color color = controller.pickedItem;
+        string color = controller.itemColor;
         //controller.pickedItem
-        itemInfo.text = "<size=8>" + "<color=" + color + ">" + gameObject.name + "</color></size>" + getItem;
+        
+        int size = itemInfo.fontSize + 5;
+        itemInfo.text = "<size=" + size + ">" + "<color=#" + color + ">" + gameObject.name + "</color></size>" + getItem;
         itemInfoText.GetComponent<Text>().canvasRenderer.SetAlpha(1f);
         itemInfoText.GetComponent<Text>().CrossFadeAlpha(0f, 4f, false);
     }
