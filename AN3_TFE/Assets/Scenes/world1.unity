@@ -1938,7 +1938,7 @@ Transform:
   m_GameObject: {fileID: 375690429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -39.91, y: -2.59, z: -104.39}
-  m_LocalScale: {x: 30.564318, y: 30.56435, z: 30.56435}
+  m_LocalScale: {x: 25.845041, y: 25.845066, z: 25.845066}
   m_Children: []
   m_Father: {fileID: 1630222140}
   m_RootOrder: 0
@@ -7373,7 +7373,7 @@ MonoBehaviour:
   npc: {fileID: 0}
   anim: {fileID: 1828447241}
   isMoving: 0
-  pickedItem: {r: 0, g: 0.87586236, b: 1, a: 1}
+  itemColor: 
   rightHand: {fileID: 1342964513}
 --- !u!95 &1828447241
 Animator:
