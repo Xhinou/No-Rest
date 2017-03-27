@@ -8,7 +8,7 @@ public class BirdPatrol : MonoBehaviour
     public Transform[] points;
     private int destPoint = 0;
     private NavMeshAgent agent;
-    private bool isCoroutineRunning;
+    private bool isCoroutineRunning, lastCoroutine;
     private Animator birdAnim;
     private SphereCollider col;
     private GameObject player;
@@ -55,6 +55,8 @@ public class BirdPatrol : MonoBehaviour
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
         destPoint = (destPoint + 1) % points.Length;
+        /*if (lastCoroutine)
+            agent.enabled = false;*/
         isCoroutineRunning = false;
     }
 
@@ -64,6 +66,7 @@ public class BirdPatrol : MonoBehaviour
         {
             agent.ResetPath();
             col.enabled = false;
+            //lastCoroutine = true;
             agent.enabled = false;
             StartCoroutine(BirdFlying());
         }
@@ -73,7 +76,9 @@ public class BirdPatrol : MonoBehaviour
 
     IEnumerator BirdFlying()
     {
-        transform.Rotate(Vector3.up, 180f);
+        Vector3 direction = (transform.position - player.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        //transform.Rotate(Vector3.up, 90f);
         birdAnim.SetBool("isTrig", true);
         while (transform.position.y < 50)
         {
