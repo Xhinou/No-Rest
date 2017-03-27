@@ -187,7 +187,6 @@ public class DialoguesSystem : MonoBehaviour
             }
 
         }
-        print(textFile.name);
         textLines = (textFile.text.Split('\n'));
         endAtLine = textLines.Length - 1;
     }

@@ -89,7 +89,6 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(KarmaQuest(karmaStep));
                 break;
             case 1:
-                StartCoroutine(FunQuest());
                 break;
             case 2:
                 switch (npcID)
@@ -187,17 +186,6 @@ public class QuestManager : MonoBehaviour
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
 
-        IEnumerator FunQuest()
-    {
-        dialogSystem.DisplayText(sceneID, 0, 0, "Main Camera");
-        while (!dialogSystem.isDisabled)
-            yield return null;
-        squireScript.lookPlayer = true;
-        merlinScript.lookPlayer = true;
-        slaughtScript.lookPlayer = true;
-        kingScript.lookPlayer = true;
-        triggers[0].GetComponent<SphereCollider>().isTrigger = false;
-    }
     #endregion World 1
 
     #region World 2
@@ -330,7 +318,7 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.SetToDial("", 0, "");
                 }
                 for (int i = 5; i < 9; i++)
-                    triggers[i].GetComponent<BoxCollider>().isTrigger = false;  
+                    triggers[i].GetComponent<BoxCollider>().isTrigger = false;
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 newPos = GameObject.Find("ChiefEndPos");
@@ -428,7 +416,8 @@ public class QuestManager : MonoBehaviour
                 if (heldItem.name == "Pickaxe")
                 {
                     dialogSystem.ForceLine(4, null, null);
-                    triggers[5].GetComponent<BoxCollider>().isTrigger = false;
+                    for (int i = 5; i < 9; i++)
+                        triggers[i].GetComponent<BoxCollider>().isTrigger = false;
                     if (killerStep != 2)
                     {
                         newPos = GameObject.Find("ChiefEndPos");
@@ -495,7 +484,8 @@ public class QuestManager : MonoBehaviour
         {
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam5");
             sailorStep = 5;
-            triggers[5].GetComponent<BoxCollider>().isTrigger = false;
+            for (int i = 5; i < 9; i++)
+                triggers[i].GetComponent<BoxCollider>().isTrigger = false;
             sailorNav.enabled = false;
             chiefNav.enabled = false;
             newPos = GameObject.Find("SailorEndPos");

@@ -120,7 +120,6 @@ public class TriggersManager : MonoBehaviour
                 switch (gameObject.name)
                 {
                     case "Fun":
-                        qManager.RunQuest(0);
                         break;
                     default:
                         break;
