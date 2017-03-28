@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 12f4fedd9e2f1f54db32f9ece973589f
-timeCreated: 1490220488
+guid: 2b741fb63b32f8248966c891ad3ce8ab
+timeCreated: 1490711121
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Charette_01:Mesh
+    4300000: table_graal_01:Mesh
   materials:
     importMaterials: 1
     materialName: 0

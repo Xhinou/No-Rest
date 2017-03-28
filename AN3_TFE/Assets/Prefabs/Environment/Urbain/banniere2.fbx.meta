@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 12f4fedd9e2f1f54db32f9ece973589f
-timeCreated: 1490220488
+guid: d64bf442cc63d844e9593733e6f0dbeb
+timeCreated: 1490711121
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Charette_01:Mesh
+    4300000: banniere2:Mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 15
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
