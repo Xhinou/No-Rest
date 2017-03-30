@@ -119,8 +119,6 @@ public class TriggersManager : MonoBehaviour
             case 1:
                 switch (gameObject.name)
                 {
-                    case "Fun":
-                        break;
                     default:
                         break;
                 }

@@ -76,8 +76,8 @@ public class BirdPatrol : MonoBehaviour
 
     IEnumerator BirdFlying()
     {
-        Vector3 direction = (transform.position - player.transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(-direction);
         //transform.Rotate(Vector3.up, 90f);
         birdAnim.SetBool("isTrig", true);
         while (transform.position.y < 50)

@@ -271,23 +271,19 @@ public class QuestManager : MonoBehaviour
                     {
                         karma -= 1;
                         dialogSystem.ForceLine(2, 0, null);
-                        Destroy(heldItem);
-                        controller.isHolding = false;
                     }
                     else if (heldItem.name == "Shell")
                     {
                         karma -= 1;
                         dialogSystem.ForceLine(3, 1, null);
-                        Destroy(heldItem);
-                        controller.isHolding = false;
                     }
                     else if (heldItem.name == "Charcoal")
                     {
                         karma += 1;
                         dialogSystem.ForceLine(5, null, null);
-                        Destroy(heldItem);
-                        controller.isHolding = false;
                     }
+                    Destroy(heldItem);
+                    controller.isHolding = false;
                     for (int i = 0; i < 4; i++)
                         triggers[i].GetComponent<BoxCollider>().isTrigger = false;
                     while (!dialogSystem.isDisabled)
@@ -525,6 +521,7 @@ public class QuestManager : MonoBehaviour
                 {
                     //THROW COCONUT
                     Destroy(heldItem);
+                    controller.isHolding = false;
                     // ASSASSIN FALLS
                     karma += 1;
                     controller.hasControl = false;
@@ -608,14 +605,12 @@ public class QuestManager : MonoBehaviour
     #region NPCs Loading
     #region World 1 NPCs
     /*NPCs - WORLD 1*/
-    [HideInInspector]
-    public GameObject
+    [HideInInspector] public GameObject
         squire,
         merlin,
         slaught,
         king;
-    [HideInInspector]
-    public NpcManager
+    [HideInInspector] public NpcManager
        squireScript,
        merlinScript,
        slaughtScript,
