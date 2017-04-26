@@ -52,6 +52,10 @@ public class QuestManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+        else if (Input.GetKeyDown(KeyCode.F1))
+            LoadWorld(1);
+        else if (Input.GetKeyDown(KeyCode.F2))
+            LoadWorld(2);
         else if (Input.GetKeyDown(KeyCode.Backspace))
         {
             karma = 0;
