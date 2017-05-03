@@ -72,6 +72,7 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(Incarnation());
                 break;
             case 1:
+                RunQuest(1);
                 break;
             case 2:
                 playerAnimator.Play("Lied Down");
@@ -93,6 +94,18 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(KarmaQuest(karmaStep));
                 break;
             case 1:
+                switch (npcID)
+                {
+                    case 0:
+                        Debug.Log("NPC ID must not be less than 1");
+                        break;
+                    case 1:
+                        StartCoroutine(SquireQuest(squireStep, npcID));
+                        break;
+                    default:
+                        SideQuest(npcID);
+                        break;
+                }
                 break;
             case 2:
                 switch (npcID)
@@ -189,6 +202,32 @@ public class QuestManager : MonoBehaviour
 
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
+    private int
+        squireStep = 0;
+
+    public IEnumerator SquireQuest(int step, int npcID)
+    {
+        switch (step)
+        {
+            case 0:
+                intro = true;
+                particles[0].Play();
+                yield return new WaitForSeconds(2.5f);
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                controller.hasControl = true;
+                intro = false;
+                squireScript.isTalkable = true;
+                squireStep = 1;
+                break;
+            case 1:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                break;
+            default:
+                break;
+        }
+    }
 
     #endregion World 1
 
