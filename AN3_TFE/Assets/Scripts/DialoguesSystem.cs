@@ -28,7 +28,9 @@ public class DialoguesSystem : MonoBehaviour
         textBox,
         player,
         scriptSystem;
-    public bool isDisabled;
+    public bool
+        isDisabled,
+        isNextDial = false;
     bool toDial;
     [HideInInspector] /*&&*/ [Range(0,2)]
     public int
@@ -106,7 +108,8 @@ public class DialoguesSystem : MonoBehaviour
     
     public void NextDialog(int choice)
     {
-        order += 1;        
+        isNextDial = true;
+        order += 1;
         lastChoice = choice;
         LoadFiles(choice);
         currentLine = 0;
@@ -204,6 +207,7 @@ public class DialoguesSystem : MonoBehaviour
     void UpdateLine()
     {
         theText.text = textLines[currentLine];
+        isNextDial = false;
     }  
 
     public void KarmaMod ()

@@ -15,7 +15,7 @@ public class QuestManager : MonoBehaviour
         newPos2,
         cam;
     public GameObject[] triggers = new GameObject[7];
-    [HideInInspector] public static int karma = 0;
+    [HideInInspector] public static int karma = -1;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -35,6 +35,7 @@ public class QuestManager : MonoBehaviour
             theAudio = GameObject.FindWithTag("Audio").GetComponent<AudioSource>();
         cam = GameObject.Find("Main Camera");
         mainCam = cam.GetComponent<Camera>();
+        mainCam.fieldOfView = 14;
         playerAnimator = player.GetComponent<Animator>();
         LoadNpc(sceneID);
         if (DialoguesSystem.language == null)
@@ -45,14 +46,14 @@ public class QuestManager : MonoBehaviour
         {
             godAnimator = GameObject.Find("Divinity").GetComponent<Animator>();
             player.SetActive(false);
-        }          
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
-        else if (Input.GetKeyDown(KeyCode.F1))
+     /*   else if (Input.GetKeyDown(KeyCode.F1))
             LoadWorld(1);
         else if (Input.GetKeyDown(KeyCode.F2))
             LoadWorld(2);
@@ -61,7 +62,7 @@ public class QuestManager : MonoBehaviour
             karma = 0;
             karmaStep = 0;
             LoadWorld(0);
-        }
+        }*/
     }
 
     public void RunIntro(int _sceneID)
@@ -157,7 +158,7 @@ public class QuestManager : MonoBehaviour
         switch (step)
         {
             case 0:
-                karma = 0;
+                karma = -1;
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
                 while (!dialogSystem.isDisabled)
                     yield return null;
@@ -166,6 +167,8 @@ public class QuestManager : MonoBehaviour
                 break;
             case 1:
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+               /* while (!dialogSystem.isNextDial)
+                    yield return null;*/
                 if (karma >= 1) //Karma is GOOD
                 {
                     dialogSystem.ForceLine(1, 4, null);
@@ -381,6 +384,7 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.ForceLine(5, null, null);
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = false;
                 newPos = GameObject.Find("PlayerEndPos2");
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
@@ -389,8 +393,9 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("PlayerEndPos3");
                 controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
+                yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(2.5f);
                 triggers[9].GetComponent<BoxCollider>().isTrigger = false;
                 if (karma >= 1)
                     Debug.Log("KARMA IS GOOD");
@@ -402,6 +407,7 @@ public class QuestManager : MonoBehaviour
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = false;
                 newPos = GameObject.Find("PlayerEndPos2");
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
@@ -410,8 +416,9 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("PlayerEndPos3");
                 controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
+                yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(2.5f);
                 triggers[9].GetComponent<BoxCollider>().isTrigger = false;
                 //END ANIMATION
                 if (karma >= 1)
