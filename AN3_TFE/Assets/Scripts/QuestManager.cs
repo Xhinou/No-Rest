@@ -221,11 +221,21 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 controller.hasControl = true;
                 intro = false;
-                squireScript.isTalkable = true;
+                arthurScript.isTalkable = true;
                 squireStep = 1;
                 break;
             case 1:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                if (dialogSystem.lastChoice == 1)
+                {
+                    newPos = GameObject.Find("MidePos");
+                    StartCoroutine(ObjectToPos(arthur, newPos));
+                    squireStep = 2;
+                }
+                break;
+            case 2:
                 break;
             default:
                 break;
@@ -656,13 +666,13 @@ public class QuestManager : MonoBehaviour
     #region World 1 NPCs
     /*NPCs - WORLD 1*/
     [HideInInspector] public GameObject
-        squire,
-        merlin,
+        arthur,
+        merryn,
         slaught,
         king;
     [HideInInspector] public NpcManager
-       squireScript,
-       merlinScript,
+       arthurScript,
+       merrynScript,
        slaughtScript,
        kingScript;
     #endregion World 1 NPCs
@@ -696,12 +706,12 @@ public class QuestManager : MonoBehaviour
         switch (_sceneID)
         {
             case 1:
-                squire = GameObject.Find("Squire");
-                merlin = GameObject.Find("Merlin");
+                arthur = GameObject.Find("Arthur");
+                merryn = GameObject.Find("Merryn");
                 slaught = GameObject.Find("Slaughterman");
                 king = GameObject.Find("King");
-                squireScript = squire.GetComponent<NpcManager>();
-                merlinScript = merlin.GetComponent<NpcManager>();
+                arthurScript = arthur.GetComponent<NpcManager>();
+                merrynScript = merryn.GetComponent<NpcManager>();
                 slaughtScript = slaught.GetComponent<NpcManager>();
                 kingScript = king.GetComponent<NpcManager>();
                 break;
