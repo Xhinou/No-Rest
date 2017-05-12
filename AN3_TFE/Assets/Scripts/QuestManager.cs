@@ -236,7 +236,19 @@ public class QuestManager : MonoBehaviour
                 }
                 break;
             case 2:
-                break;
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam 1.1");
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                if (dialogSystem.lastChoice == 2)
+                {
+                    //open gates
+                }
+                else
+                {
+                    newPos = GameObject.Find("RunAwayPos");
+                    StartCoroutine(ObjectToPos(arthur, newPos));
+                }
+                    break;
             default:
                 break;
         }
