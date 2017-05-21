@@ -16,6 +16,7 @@ public class CharacterClickingController : MonoBehaviour
     public bool isMoving;
     public string itemColor;
     public GameObject rightHand;
+    public AudioSource audioWalk;
     Camera mainCam;
 
     void Start()
@@ -58,12 +59,14 @@ public class CharacterClickingController : MonoBehaviour
                         agent.ResetPath();
                         isMoving = false;
                         anim.SetBool("isMoving", isMoving);
+                        audioWalk.mute = true;
                     }
                 }
                 else
                 {
                     isMoving = true;
                     anim.SetBool("isMoving", isMoving);
+                    audioWalk.mute = false;
                 }
             }
         }
