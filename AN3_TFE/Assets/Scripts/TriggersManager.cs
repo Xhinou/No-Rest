@@ -163,7 +163,7 @@ public class TriggersManager : MonoBehaviour
                             controller.agent.ResetPath();
                             controller.canSkipDial = false;
                             newPos = GameObject.Find("SailorBlockPos");
-                            dialogSystem.DisplayText(qManager.sceneID, 1, 2, "Main Camera");
+                            dialogSystem.DisplayText(qManager.sceneID, 1, 2, "Main Camera", false);
                             dialogSystem.ForceLine(0, 0, null);
                             StartCoroutine(qManager.ObjectToPos(player, newPos));
                             while (qManager.isCoroutineRunning)

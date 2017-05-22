@@ -103,6 +103,18 @@ public class QuestManager : MonoBehaviour
                     case 1:
                         StartCoroutine(SquireQuest(squireStep, npcID));
                         break;
+                    case 4:
+                        if (squireStep == 1 || squireStep == 2)
+                            dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam4.0", true);
+                        break;
+                    case 5:
+                        if (squireStep == 1 || squireStep == 2)
+                            dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam5.0", true);
+                        break;
+                    case 6:
+                        if (squireStep == 1 || squireStep == 2)
+                            dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam6.0", false);
+                        break;
                     default:
                         SideQuest(npcID);
                         break;
@@ -159,14 +171,14 @@ public class QuestManager : MonoBehaviour
         {
             case 0:
                 karma = -1;
-                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 StartCoroutine(Desincarnation(2));
                 karmaStep = 1;
                 break;
             case 1:
-                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera");
+                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera", false);
                /* while (!dialogSystem.isNextDial)
                     yield return null;*/
                 if (karma >= 1) //Karma is GOOD
@@ -183,7 +195,7 @@ public class QuestManager : MonoBehaviour
                 karmaStep = 0; //to change
                 break;
             case 2:
-                dialogSystem.DisplayText(2, 0, step, "Main Camera");
+                dialogSystem.DisplayText(2, 0, step, "Main Camera", false);
                 if (karma > 0) //Karma is GOOD
                 {
                     dialogSystem.ForceLine(1, 4, null);
@@ -216,7 +228,7 @@ public class QuestManager : MonoBehaviour
                 intro = true;
                 particles[0].Play();
                 yield return new WaitForSeconds(2.5f);
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = true;
@@ -225,7 +237,7 @@ public class QuestManager : MonoBehaviour
                 squireStep = 1;
                 break;
             case 1:
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 if (dialogSystem.lastChoice == 1)
@@ -236,7 +248,7 @@ public class QuestManager : MonoBehaviour
                 }
                 break;
             case 2:
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam 1.1");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam 1.1", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 if (dialogSystem.lastChoice == 2)
@@ -276,7 +288,7 @@ public class QuestManager : MonoBehaviour
                 yield return new WaitForSeconds(4f);
                 //anim réveil
                 sailorNav.destination = player.transform.position;
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
                 int w = 0;
                 while (w == 0)
                 {
@@ -304,7 +316,7 @@ public class QuestManager : MonoBehaviour
             case 1:
                 if (hasFollowedSailor)
                 {
-                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
                     karma += 1;
                     dialogSystem.ForceLine(0, 1, null);
                     for (int i = 0; i < 3; i++)
@@ -312,7 +324,7 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
-                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1b");
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1b", false);
                     karma -= 1;
                     dialogSystem.ForceLine(2, null, null);
                     while (!dialogSystem.isDisabled)
@@ -333,7 +345,7 @@ public class QuestManager : MonoBehaviour
             case 2:
                 if (controller.isHolding)
                 {
-                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1");
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
                     GameObject heldItem = GameObject.FindWithTag("held");
                     if (heldItem.name == "Stone")
                     {
@@ -365,12 +377,12 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
-                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
                     dialogSystem.ForceLine(0, 1, null);
                 }
                 break;
             case 3:
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
                 if (greedStep == 0 && killerStep == 0 && harshStep == 0)
                 {
                     dialogSystem.ForceLine(0, 2, null);
@@ -399,7 +411,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 4:
                 karma += 1;
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
                 if (killerStep == 2 || harshStep > 0)
                     dialogSystem.ForceLine(0, 4, null);
                 else
@@ -426,7 +438,7 @@ public class QuestManager : MonoBehaviour
                 LoadWorld(0);
                 break;
             case 5:
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
@@ -460,7 +472,7 @@ public class QuestManager : MonoBehaviour
     {
         if (step == 0)
         { 
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam2");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam2", false);
             for (int i = 0; i < 5; i++)
                 triggers[i].GetComponent<BoxCollider>().isTrigger = false;
             if (sailorStep < 3)
@@ -479,7 +491,7 @@ public class QuestManager : MonoBehaviour
         {         
             if (controller.isHolding)
             {
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam2");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam2", false);
                 GameObject heldItem = GameObject.FindWithTag("held");
                 if (heldItem.name == "Pickaxe")
                 {
@@ -501,7 +513,7 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
-                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
                     if (bored < 2)
                         dialogSystem.ForceLine(bored, 0, null);
                     else
@@ -513,7 +525,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
                 if (bored < 2) 
                     dialogSystem.ForceLine(bored, 0, null);
                 else
@@ -524,7 +536,7 @@ public class QuestManager : MonoBehaviour
             }
         }
         else if (step == 2)
-            dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
     }
 
     void GoldDigging()
@@ -550,7 +562,7 @@ public class QuestManager : MonoBehaviour
     {      
         if (step == 0)
         {
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam5");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam5", false);
             sailorStep = 5;
             for (int i = 5; i < 9; i++)
                 triggers[i].GetComponent<BoxCollider>().isTrigger = false;
@@ -607,16 +619,16 @@ public class QuestManager : MonoBehaviour
                     killerStep = 0;
                 }
                 else
-                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
             }
             else
-                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
         }
     }
 
     void NativeQuest(int step, int npcID)
     {
-        dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
+        dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
         if (sailorStep <= 3)
             dialogSystem.ForceLine(0, 1, null);
         else
@@ -639,7 +651,7 @@ public class QuestManager : MonoBehaviour
             chiefTr.position = newPos2.transform.position;
             sailorNav.enabled = true;
             chiefNav.enabled = true;
-            dialogSystem.DisplayText(sceneID, npcID, step, "Cam6");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Cam6", false);
             if (!goldGet)
                 dialogSystem.ForceLine(0, null, 2);
             while (dialogSystem.theText.enabled == true)
@@ -660,12 +672,7 @@ public class QuestManager : MonoBehaviour
             }
         }
         else if (step >= 1)
-            dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera");
-    }
-
-    void SideQuest(int npcID)
-    {
-        dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera");
+            dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
     }
 
     #endregion World 2
@@ -673,6 +680,11 @@ public class QuestManager : MonoBehaviour
     #region World 3
     //*------------------------------ WORLD 3 - THE OFFICER ------------------------------*//
     #endregion World 3
+
+    void SideQuest(int npcID)
+    {
+        dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera", false);
+    }
 
     #region NPCs Loading
     #region World 1 NPCs

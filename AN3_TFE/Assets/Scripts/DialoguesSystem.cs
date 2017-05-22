@@ -39,9 +39,11 @@ public class DialoguesSystem : MonoBehaviour
     CharacterClickingController controller;
     QuestManager qManager;
     Button resume;
+    GameObject dialCamObj;
     Camera
         mainCam,
         dialCam;
+    Light lightCam;
 
     void Awake()
     {
@@ -63,16 +65,21 @@ public class DialoguesSystem : MonoBehaviour
             resume.interactable = false;
     }
 
-    public void DisplayText(int _sceneID, int _npcID, int _step, string cam)
+    public void DisplayText(int _sceneID, int _npcID, int _step, string cam, bool hasLightCam)
     {
         sceneID = _sceneID;
         npcID = _npcID;
         step = _step;
-        dialCam = GameObject.Find(cam).GetComponent<Camera>();
+        dialCamObj = GameObject.Find(cam);
+        dialCam = dialCamObj.GetComponent<Camera>();
+        if (hasLightCam)
+            lightCam = dialCamObj.GetComponentInChildren<Light>();
         controller.hasControl = false;
         controller.agent.ResetPath();
         mainCam.enabled = false;
         dialCam.enabled = true;
+        if (hasLightCam)
+            lightCam.enabled = true;
         textBox.SetActive(true);
         isDisabled = false;
         order = 0;
@@ -132,6 +139,11 @@ public class DialoguesSystem : MonoBehaviour
         textBox.SetActive(false);
         isDisabled = true;
         dialCam.enabled = false;
+        if (lightCam != null)
+        {
+            if (lightCam.enabled == true)
+                lightCam.enabled = false;
+        }
         mainCam.enabled = true;
         if (!qManager.intro)
             controller.hasControl = true;
