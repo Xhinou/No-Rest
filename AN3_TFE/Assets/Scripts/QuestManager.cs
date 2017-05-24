@@ -264,9 +264,9 @@ public class QuestManager : MonoBehaviour
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
-                if (dialogSystem.lastChoice == 2)
+                if (dialogSystem.lastChoice == 1)
                 {
-                    //open gates
+                    GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
                 }
                 else
                 {
@@ -276,6 +276,7 @@ public class QuestManager : MonoBehaviour
                     StartCoroutine(ObjectToPos(arthur, newPos));
                     while (isCoroutineRunning)
                         yield return null;
+                    GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
                     newPos = GameObject.Find("ArthurWaitPos");
                     arthur.transform.position = newPos.transform.position;
                     arthurScript.GetComponent<NavMeshAgent>().speed /= 2f;
