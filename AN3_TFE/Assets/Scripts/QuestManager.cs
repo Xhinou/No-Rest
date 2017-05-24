@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
@@ -229,6 +230,18 @@ public class QuestManager : MonoBehaviour
                 particles[0].Play();
                 yield return new WaitForSeconds(2.5f);
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
+                while (dialogSystem.theText.enabled == true)
+                    yield return null;
+                while (dialogSystem.theText.enabled == false)
+                    yield return null;
+                while (dialogSystem.theText.enabled == true)
+                    yield return null;
+                GameObject paper = GameObject.Find("Paper");
+                paper.GetComponent<AudioSource>().Play();
+                paper.GetComponent<Image>().enabled = true;
+                while (dialogSystem.theText.enabled == false)
+                    yield return null;
+                paper.SetActive(false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = true;
@@ -248,7 +261,7 @@ public class QuestManager : MonoBehaviour
                 }
                 break;
             case 2:
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam 1.1", false);
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 if (dialogSystem.lastChoice == 2)
@@ -257,8 +270,16 @@ public class QuestManager : MonoBehaviour
                 }
                 else
                 {
+                    controller.hasControl = false;
+                    arthurScript.GetComponent<NavMeshAgent>().speed *= 2f;
                     newPos = GameObject.Find("RunAwayPos");
                     StartCoroutine(ObjectToPos(arthur, newPos));
+                    while (isCoroutineRunning)
+                        yield return null;
+                    newPos = GameObject.Find("ArthurWaitPos");
+                    arthur.transform.position = newPos.transform.position;
+                    arthurScript.GetComponent<NavMeshAgent>().speed /= 2f;
+                    controller.hasControl = true;
                 }
                     break;
             default:
@@ -772,7 +793,10 @@ public class QuestManager : MonoBehaviour
         if (movable == player)
             controller.hasControl = false;
         else
+        {
             movable.GetComponent<NpcManager>().isMoving = true;
+            movable.GetComponent<NpcManager>().isTalkable = false;
+        }
         NavMeshAgent movableAgent = movable.GetComponent<NavMeshAgent>();
         movableAgent.destination = newPos.transform.position;
         while (movableAgent.pathPending)
@@ -786,7 +810,10 @@ public class QuestManager : MonoBehaviour
         if (movable == player)
             controller.hasControl = true;
         else
+        {
             movable.GetComponent<NpcManager>().isMoving = false;
+            movable.GetComponent<NpcManager>().isTalkable = true;
+        }
         isCoroutineRunning = false;
     }
 

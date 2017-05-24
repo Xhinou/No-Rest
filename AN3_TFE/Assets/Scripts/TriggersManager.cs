@@ -117,13 +117,21 @@ public class TriggersManager : MonoBehaviour
 
             #region World 1
             case 1:
-                switch (gameObject.name)
+                if (isEntering)
                 {
-                    case "GateTrigger":
-                        qManager.RunQuest(1);
-                        break;
-                    default:
-                        break;
+                    GameObject newPos;
+                    switch (gameObject.name)
+                    {
+                        case "GateTrigger":
+                            newPos = GameObject.Find("PlayerPosCastle");
+                            StartCoroutine(qManager.ObjectToPos(player, newPos));
+                            while (qManager.isCoroutineRunning)
+                                yield return null;
+                            qManager.RunQuest(1);
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
             #endregion World 1
