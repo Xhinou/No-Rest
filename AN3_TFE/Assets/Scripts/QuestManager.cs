@@ -22,7 +22,8 @@ public class QuestManager : MonoBehaviour
         intro,
         isCoroutineRunning;
     CharacterClickingController controller;
-    DialoguesSystem dialogSystem;
+    public 
+        DialoguesSystem dialogSystem;
     Camera mainCam;
     public GameObject
         scriptSystem,
@@ -267,22 +268,42 @@ public class QuestManager : MonoBehaviour
                 if (dialogSystem.lastChoice == 1)
                 {
                     GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                    squireStep = 4;
                 }
                 else
                 {
                     controller.hasControl = false;
-                    arthurScript.GetComponent<NavMeshAgent>().speed *= 2f;
+                    arthurNav.speed = 9f;
                     newPos = GameObject.Find("RunAwayPos");
                     StartCoroutine(ObjectToPos(arthur, newPos));
                     while (isCoroutineRunning)
                         yield return null;
-                    GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
                     newPos = GameObject.Find("ArthurWaitPos");
+                    arthurNav.ResetPath();
                     arthur.transform.position = newPos.transform.position;
-                    arthurScript.GetComponent<NavMeshAgent>().speed /= 2f;
-                    controller.hasControl = true;
+                    arthurNav.speed = 4.5f;
+                    squireStep = 3;
+                    RunQuest(1);
                 }
-                    break;
+                break;
+            case 3:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                newPos = GameObject.Find("PlayerPosPotence");
+                StartCoroutine(ObjectToPos(player, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                squireStep = 5;
+                RunQuest(1);
+                break;
+            case 4:
+                break;
+            case 5:
+                CameraZoom(false);
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                break;
             default:
                 break;
         }
@@ -721,6 +742,9 @@ public class QuestManager : MonoBehaviour
        merrynScript,
        slaughtScript,
        kingScript;
+    [HideInInspector]
+    public NavMeshAgent
+        arthurNav;
     #endregion World 1 NPCs
     #region World 2 NPCs
     /*NPCs - WORLD 2*/
@@ -760,6 +784,7 @@ public class QuestManager : MonoBehaviour
                 merrynScript = merryn.GetComponent<NpcManager>();
                 slaughtScript = slaught.GetComponent<NpcManager>();
                 kingScript = king.GetComponent<NpcManager>();
+                arthurNav = arthur.GetComponent<NavMeshAgent>();
                 break;
             case 2:
                 sailor = GameObject.Find("Sailor");

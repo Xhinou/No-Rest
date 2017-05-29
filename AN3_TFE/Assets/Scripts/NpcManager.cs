@@ -10,6 +10,7 @@ public class NpcManager : MonoBehaviour
         notNpc,
         isMoving,
         lookPlayer;
+    bool alwaysLookPlayer = false;
     [HideInInspector] public GameObject
         scriptSystem,
         player;
@@ -29,29 +30,38 @@ public class NpcManager : MonoBehaviour
             agent = gameObject.GetComponent<NavMeshAgent>();
             anim = gameObject.GetComponent<Animator>();
         }
+        if (lookPlayer)
+            alwaysLookPlayer = true;
     }
 
     private void Update()
     {
         if (!notNpc)
         {
-            if (!agent.pathPending)
+            if (agent.enabled)
             {
-                if (agent.remainingDistance <= agent.stoppingDistance)
+                if (!agent.pathPending)
                 {
-                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    if (agent.remainingDistance <= agent.stoppingDistance)
                     {
-                        agent.ResetPath();
-                        isMoving = false;
+                        if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                        {
+                            agent.ResetPath();
+                            isMoving = false;
+                            anim.SetBool("isMoving", isMoving);
+                        }
+                    }
+                    else
+                    {
+                        isMoving = true;
                         anim.SetBool("isMoving", isMoving);
                     }
                 }
-                else
-                {
-                    isMoving = true;
-                    anim.SetBool("isMoving", isMoving);
-                }
             }
+            /*if (qManager.dialogSystem.theText.enabled && !lookPlayer)
+                lookPlayer = true;
+            else if (!qManager.dialogSystem.theText.enabled && !alwaysLookPlayer)
+                lookPlayer = false;*/
         }
     }
 
