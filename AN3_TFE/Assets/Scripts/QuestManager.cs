@@ -287,8 +287,9 @@ public class QuestManager : MonoBehaviour
                     StartCoroutine(ObjectToPos(arthur, newPos));
                     while (isCoroutineRunning)
                         yield return null;
-                    newPos = GameObject.Find("ArthurWaitPos");
                     arthurNav.ResetPath();
+                    arthurNav.enabled = false;
+                    newPos = GameObject.Find("ArthurWaitPos");                   
                     arthur.transform.position = newPos.transform.position;
                     arthurNav.speed = 4.5f;
                     squireStep = 3;
@@ -311,14 +312,19 @@ public class QuestManager : MonoBehaviour
                 break;
             case 5:
                 CameraZoom(false);
+                print("hi");
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
                 newPos = GameObject.Find("ArthurWaitPos2");
                 arthur.transform.position = newPos.transform.position;
+                arthurNav.enabled = true;
                 arthurNav.speed = 9f;
                 newPos = GameObject.Find("ArthurKillPos");
                 StartCoroutine(ObjectToPos(arthur, newPos));
                 while (isCoroutineRunning)
                     yield return null;
+                arthurNav.speed = 4.5f;
                 squireStep = 6;
                 RunQuest(1);
                 break;
@@ -799,7 +805,6 @@ public class QuestManager : MonoBehaviour
         killerScript,
         harshScript;
     #endregion World 2 NPCs
-    /*NPCs - WORLD 3*/
 
     void LoadNpc(int _sceneID)
     {
