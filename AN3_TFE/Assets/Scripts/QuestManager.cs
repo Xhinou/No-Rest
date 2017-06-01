@@ -28,7 +28,6 @@ public class QuestManager : MonoBehaviour
     public GameObject
         scriptSystem,
         player;
-
     void Start()
     {
         controller = player.GetComponent<CharacterClickingController>();
@@ -267,7 +266,17 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 if (dialogSystem.lastChoice == 1)
                 {
+                    controller.hasControl = false;
                     GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                    newPos = GameObject.Find("RunAwayPos");
+                    StartCoroutine(ObjectToPos(arthur, newPos));
+                    //yield return new WaitForSeconds(2.5f);
+                    while (isCoroutineRunning)
+                        yield return null;
+                    controller.hasControl = true;
+                    newPos = GameObject.Find("ArthurWaitPos");
+                    arthurNav.ResetPath();
+                    arthur.transform.position = newPos.transform.position;
                     squireStep = 4;
                 }
                 else
@@ -303,6 +312,27 @@ public class QuestManager : MonoBehaviour
             case 5:
                 CameraZoom(false);
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                newPos = GameObject.Find("ArthurWaitPos2");
+                arthur.transform.position = newPos.transform.position;
+                arthurNav.speed = 9f;
+                newPos = GameObject.Find("ArthurKillPos");
+                StartCoroutine(ObjectToPos(arthur, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                squireStep = 6;
+                RunQuest(1);
+                break;
+            case 6:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                king.GetComponent<Animator>().Play("Lying Down");
+                newPos = GameObject.Find("ArthurWaitPos2");
+                StartCoroutine(ObjectToPos(arthur, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                controller.hasControl = true;
+                squireStep = 6;
                 break;
             default:
                 break;
