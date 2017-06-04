@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 272c2b3b5d450dc498700ab610e9359c
-timeCreated: 1489239194
+guid: 2826f28ed2b3e9248a9c12a9c1ba16a7
+timeCreated: 1496537626
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: U1House3:Mesh
+    4300000: MaisonMed_03:Mesh
   materials:
     importMaterials: 1
     materialName: 0
