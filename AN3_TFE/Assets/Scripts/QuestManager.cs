@@ -49,11 +49,15 @@ public class QuestManager : MonoBehaviour
             player.SetActive(false);
         }
     }
-
+    int shot = 0;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+        else if (Input.GetKeyDown(KeyCode.Print))
+        {
+            Application.CaptureScreenshot("Screenshots/Screenshot" + shot + ".png");
+        }
      /*   else if (Input.GetKeyDown(KeyCode.F1))
             LoadWorld(1);
         else if (Input.GetKeyDown(KeyCode.F2))
@@ -506,6 +510,7 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("PlayerEndPos3");
                 controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
+                GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
@@ -529,6 +534,7 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("PlayerEndPos3");
                 controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
+                GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
