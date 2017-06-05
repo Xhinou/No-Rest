@@ -108,6 +108,9 @@ public class QuestManager : MonoBehaviour
                     case 1:
                         StartCoroutine(SquireQuest(squireStep, npcID));
                         break;
+                    case 2:
+                        StartCoroutine(MerrynQuest(merrynStep, npcID));
+                        break;
                     case 4:
                         if (squireStep == 1 || squireStep == 2)
                             dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam4.0", true);
@@ -223,7 +226,8 @@ public class QuestManager : MonoBehaviour
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
     private int
-        squireStep = 0;
+        squireStep = 0,
+        merrynStep = 0;
 
     public IEnumerator SquireQuest(int step, int npcID)
     {
@@ -280,7 +284,9 @@ public class QuestManager : MonoBehaviour
                     controller.hasControl = true;
                     newPos = GameObject.Find("ArthurWaitPos");
                     arthurNav.ResetPath();
+                    arthurNav.enabled = false;
                     arthur.transform.position = newPos.transform.position;
+                    triggers[1].GetComponent<Collider>().enabled = true;
                     squireStep = 4;
                 }
                 else
@@ -305,18 +311,19 @@ public class QuestManager : MonoBehaviour
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                newPos = GameObject.Find("GuardPosPotence");
+                StartCoroutine(ObjectToPos(GameObject.Find("Guard"), newPos));
                 newPos = GameObject.Find("PlayerPosPotence");
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
                     yield return null;
-                squireStep = 5;
+                while (isCoroutineRunning)
+                    yield return null;
+                controller.hasControl = false;
+                squireStep = 4;
                 RunQuest(1);
                 break;
             case 4:
-                break;
-            case 5:
-                CameraZoom(false);
-                print("hi");
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
@@ -325,28 +332,72 @@ public class QuestManager : MonoBehaviour
                 arthurNav.enabled = true;
                 arthurNav.speed = 9f;
                 newPos = GameObject.Find("ArthurKillPos");
-                StartCoroutine(ObjectToPos(arthur, newPos));
+                StartCoroutine(ObjectToPos(arthur, newPos));              
+                GameObject[] leftNpc = GameObject.FindGameObjectsWithTag("npcLeft");
+                newPos = GameObject.Find("NPCrunLeft");
+                foreach (GameObject g in leftNpc)
+                    StartCoroutine(ObjectToPos(g, newPos));
+                GameObject[] rightNpc = GameObject.FindGameObjectsWithTag("npcRight");
+                newPos = GameObject.Find("NPCrunRight");
+                foreach (GameObject g in rightNpc)
+                    StartCoroutine(ObjectToPos(g, newPos));
                 while (isCoroutineRunning)
                     yield return null;
                 arthurNav.speed = 4.5f;
-                squireStep = 6;
+                squireStep = 5;
                 RunQuest(1);
                 break;
-            case 6:
+            case 5:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = false;
+                merrynScript.isTalkable = true;
                 king.GetComponent<Animator>().Play("Lying Down");
                 newPos = GameObject.Find("ArthurWaitPos2");
                 StartCoroutine(ObjectToPos(arthur, newPos));
                 while (isCoroutineRunning)
                     yield return null;
+                arthurNav.ResetPath();
+                yield return null;
+                arthurNav.enabled = false;
+                newPos = GameObject.Find("ArthurChurchPos");
+                arthur.transform.position = newPos.transform.position;
+                arthurNav.enabled = true;
                 controller.hasControl = true;
                 squireStep = 6;
                 break;
             default:
                 break;
         }
+    }
+
+    public IEnumerator MerrynQuest (int step, int npcID)
+    {
+        switch (step)
+        {
+            case 0:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                if (dialogSystem.lastChoice == 0)
+                {
+                    newPos = GameObject.Find("MerrynChurchPos");
+                    merryn.transform.position = newPos.transform.position;
+                    merryn.GetComponent<NavMeshAgent>().enabled = true;
+                }
+                else
+                {
+                    merrynScript.isTalkable = false;
+                    merrynScript.lookPlayer = false;
+                }
+                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2");
+                merrynStep = 1;
+                break;
+            case 1:
+                break;
+        }
+        yield return null;
     }
 
     #endregion World 1
@@ -854,8 +905,11 @@ public class QuestManager : MonoBehaviour
 
     #region Methods
 
+    bool anotherCR = false;
     public IEnumerator ObjectToPos(GameObject movable, GameObject newPos)
     {
+        if (isCoroutineRunning)
+            anotherCR = true;
         isCoroutineRunning = true;
         if (movable == player)
             controller.hasControl = false;
@@ -876,12 +930,17 @@ public class QuestManager : MonoBehaviour
         }
         if (movable == player)
             controller.hasControl = true;
+        else if (movable.tag == "npcLeft" || movable.tag == "npcRight")
+            Destroy(movable);
         else
         {
             movable.GetComponent<NpcManager>().isMoving = false;
             movable.GetComponent<NpcManager>().isTalkable = true;
         }
-        isCoroutineRunning = false;
+        if (!anotherCR)
+            isCoroutineRunning = false;
+        else
+            anotherCR = false;
     }
 
     protected void LoadWorld(int worldToLoad)

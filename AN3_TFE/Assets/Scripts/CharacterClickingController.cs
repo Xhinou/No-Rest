@@ -42,7 +42,7 @@ public class CharacterClickingController : MonoBehaviour
                     hasClicked = false;
             }
         }
-        if (isPlayerTrigger && !hasControl)
+        if (isPlayerTrigger && !hasControl && !isMoving)
         {
             Vector3 direction = (npc.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);

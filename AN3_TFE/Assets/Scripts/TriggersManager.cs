@@ -123,12 +123,28 @@ public class TriggersManager : MonoBehaviour
                     switch (gameObject.name)
                     {
                         case "GateTrigger":
+                            GetComponent<Collider>().enabled = false;
                             newPos = GameObject.Find("PlayerPosCastle");
                             StartCoroutine(qManager.ObjectToPos(player, newPos));
                             while (qManager.isCoroutineRunning)
                                 yield return null;
                             controller.hasControl = false;
                             qManager.RunQuest(1);
+                            break;
+                        case "PotenceTrig":
+                            GameObject.Find("Remparts").GetComponent<Animator>().Play("gridclose");
+                            GetComponent<Collider>().enabled = false;
+                            controller.agent.ResetPath();
+                            newPos = GameObject.Find("PlayerPosPotence");
+                            StartCoroutine(qManager.ObjectToPos(player, newPos));
+                            while (qManager.isCoroutineRunning)
+                                yield return null;
+                            controller.hasControl = false;
+                            qManager.RunQuest(1);
+                            break;
+                        case "OutCityTrig":
+                            GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2close");
+                            GetComponent<Collider>().enabled = false;
                             break;
                         default:
                             break;
