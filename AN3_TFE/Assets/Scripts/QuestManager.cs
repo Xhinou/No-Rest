@@ -17,6 +17,7 @@ public class QuestManager : MonoBehaviour
         cam;
     public GameObject[] triggers = new GameObject[7];
     [HideInInspector] public static int karma = -1;
+    [HideInInspector] public static bool tuto = true;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -997,7 +998,21 @@ public class QuestManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         player.SetActive(true);
         yield return new WaitForSeconds(1);
-        controller.hasControl = true;
+        if (tuto)
+        {
+            dialogSystem.DisplayText(sceneID, 1, 0, "Main Camera", false);
+            dialogSystem.SetToDial("0_1_0_10-0", 1, "0");
+        }
+        while (!dialogSystem.isDisabled)
+            yield return null;
+        while (!controller.isMoving)
+            yield return null;
+        yield return new WaitForSeconds(1);
+        dialogSystem.DisplayText(sceneID, 1, 1, "Main Camera", false);
+        tuto = false;
+        while (!dialogSystem.isDisabled)
+            yield return null;
+            controller.hasControl = true;
     }
 
     private IEnumerator Desincarnation(int worldToLoad)

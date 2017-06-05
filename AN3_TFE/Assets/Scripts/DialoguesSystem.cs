@@ -31,7 +31,7 @@ public class DialoguesSystem : MonoBehaviour
     public bool
         isDisabled,
         isNextDial = false;
-    bool toDial;
+    public bool toDial;
     [HideInInspector] /*&&*/ [Range(0,2)]
     public int
         karmaMod = 0,
@@ -75,7 +75,8 @@ public class DialoguesSystem : MonoBehaviour
         if (hasLightCam)
             lightCam = dialCamObj.GetComponentInChildren<Light>();
         controller.hasControl = false;
-        controller.agent.ResetPath();
+        if (controller.agent != null)
+            controller.agent.ResetPath();
         mainCam.enabled = false;
         dialCam.enabled = true;
         if (hasLightCam)
@@ -118,12 +119,12 @@ public class DialoguesSystem : MonoBehaviour
         isNextDial = true;
         order += 1;
         lastChoice = choice;
+        for (int i = 0; i < choicesCount; i++)
+            buttons[i].SetActive(false);
         LoadFiles(choice);
         currentLine = 0;
         theText.enabled = true;
         resume.interactable = true;
-        for (int i = 0; i < choicesCount; i++)
-            buttons[i].SetActive(false);
         string[] fileName;
         fileName = textFile.name.Split('-');
         choicesCount = int.Parse(fileName[1]);
@@ -172,7 +173,11 @@ public class DialoguesSystem : MonoBehaviour
                     buttonFile = Resources.Load("Texts/" + language + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-buttons") as TextAsset;
                     buttonLines = buttonFile.text.Split('\n');
                     if (buttonFile == null)
-                        Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
+                    {
+                        buttonFile = Resources.Load("Texts/" + language + sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-buttons") as TextAsset;
+                        if (buttonFile == null)
+                            Debug.Log("Some files don't have a right name. Make sure you use the template specified in the README");
+                    }
                 }
                 else
                     buttonFile = null;
