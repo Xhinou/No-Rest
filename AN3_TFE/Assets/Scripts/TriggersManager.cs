@@ -146,9 +146,16 @@ public class TriggersManager : MonoBehaviour
                             GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2close");
                             GetComponent<Collider>().enabled = false;
                             break;
+                        case "ChurchTrig":
+                            qManager.CameraZoom(false);
+                            break;
                         default:
                             break;
                     }
+                } else
+                {
+                    if (gameObject.name == "ChurchTrig")
+                        qManager.CameraZoom(true);
                 }
                 break;
             #endregion World 1
