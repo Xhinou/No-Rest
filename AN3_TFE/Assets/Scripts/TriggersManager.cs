@@ -146,8 +146,12 @@ public class TriggersManager : MonoBehaviour
                             GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2close");
                             GetComponent<Collider>().enabled = false;
                             break;
-                        case "ChurchTrig":
-                            qManager.CameraZoom(false);
+                        case "GraalTrig":
+                            controller.agent.ResetPath();
+                            controller.canSkipDial = false;
+                            controller.hasControl = false;
+                            qManager.squireStep = 10;
+                            qManager.RunQuest(1);
                             break;
                         default:
                             break;

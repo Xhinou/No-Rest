@@ -231,9 +231,8 @@ public class QuestManager : MonoBehaviour
 
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
-    private int
-        squireStep = 0,
-        merrynStep = 0;
+    [HideInInspector] public int squireStep = 0;
+    private int merrynStep = 0;
 
     public IEnumerator SquireQuest(int step, int npcID)
     {
@@ -349,7 +348,6 @@ public class QuestManager : MonoBehaviour
                     StartCoroutine(ObjectToPos(g, newPos));
                 while (isCoroutineRunning)
                     yield return null;
-                arthurNav.speed = 4.5f;
                 squireStep = 5;
                 RunQuest(1);
                 break;
@@ -397,6 +395,7 @@ public class QuestManager : MonoBehaviour
                 GameObject.Find("Church").GetComponent<Animator>().Play("churchopen");
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = true;
                 merrynStep = 3;
                 squireStep = 9;
                 break;
@@ -404,7 +403,35 @@ public class QuestManager : MonoBehaviour
                 dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
                 break;
             case 10:
-                //FIN
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4", false);
+                newPos = GameObject.Find("ArthurGraalPos");
+                StartCoroutine(ObjectToPos(arthur, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                dialogSystem.ResumeDialog();
+                controller.canSkipDial = true;
+                while (dialogSystem.theText.enabled)
+                    yield return null;
+                while (!dialogSystem.theText.enabled)
+                    yield return null;
+                controller.hasControl = false;
+                controller.canSkipDial = false;
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4", false);
+                if (dialogSystem.lastChoice == 0)
+                {
+                    while (!dialogSystem.isDisabled) ;
+                    playerAnimator.Play("Lying down");
+                    yield return new WaitForSeconds(2);
+                    StartCoroutine(Desincarnation(0));
+                }
+                else
+                {
+                    arthur.GetComponent<Animator>().Play("Lying Down");
+                    yield return new WaitForSeconds(1.5f);
+                    playerAnimator.Play("Lying Down");
+                    yield return new WaitForSeconds(2);
+                    StartCoroutine(Desincarnation(0));
+                }
                 break;
             default:
                 break;
@@ -452,8 +479,11 @@ public class QuestManager : MonoBehaviour
 
     void ButtonPushing()
     {
+        controller.agent.ResetPath();
+        controller.hasControl = false;
         buttonchurch.GetComponent<Animator>().Play("buttonpressed");
         squireStep = 8;
+        buttonScript.isTalkable = false;
         RunQuest(1);
     }
 
@@ -870,10 +900,6 @@ public class QuestManager : MonoBehaviour
 
     #endregion World 2
 
-    #region World 3
-    //*------------------------------ WORLD 3 - THE OFFICER ------------------------------*//
-    #endregion World 3
-
     void SideQuest(int npcID)
     {
         dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera", false);
@@ -929,7 +955,7 @@ public class QuestManager : MonoBehaviour
                 arthur = GameObject.Find("Arthur");
                 merryn = GameObject.Find("Merryn");
                 king = GameObject.Find("King");
-                buttonchurch = GameObject.Find("Button");
+                buttonchurch = GameObject.Find("ButtonChurch");
                 arthurScript = arthur.GetComponent<NpcManager>();
                 merrynScript = merryn.GetComponent<NpcManager>();
                 buttonScript = buttonchurch.GetComponent<NpcManager>();
@@ -1073,9 +1099,11 @@ public class QuestManager : MonoBehaviour
 
     private IEnumerator Desincarnation(int worldToLoad)
     {
-        godAnimator.Play("Finger");
+        if (sceneID == 0)
+            godAnimator.Play("Finger");
         particles[1].Play();
-        player.SetActive(false);
+        if (sceneID == 0)
+            player.SetActive(false);
         yield return new WaitForSeconds(1.3f);
         LoadWorld(worldToLoad);
     }
