@@ -29,6 +29,7 @@ public class QuestManager : MonoBehaviour
     public GameObject
         scriptSystem,
         player;
+
     void Start()
     {
         controller = player.GetComponent<CharacterClickingController>();
@@ -50,6 +51,7 @@ public class QuestManager : MonoBehaviour
             player.SetActive(false);
         }
     }
+
     int shot = 0;
     private void Update()
     {
@@ -123,6 +125,9 @@ public class QuestManager : MonoBehaviour
                     case 6:
                         if (squireStep == 1 || squireStep == 2)
                             dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam6.0", false);
+                        break;
+                    case 10:
+                        ButtonPushing();
                         break;
                     default:
                         SideQuest(npcID);
@@ -368,6 +373,39 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = true;
                 squireStep = 6;
                 break;
+            case 6:
+                if (merrynStep == 0)
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                    buttonScript.isTalkable = true;
+                    squireStep = 7;
+                }
+                else
+                {
+                    RunQuest(2);
+                }
+                break;
+            case 7:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+            case 8:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                if (merrynStep == 0)
+                {
+                    dialogSystem.ForceLine(0, 1, null);
+                }
+                GameObject.Find("Church").GetComponent<Animator>().Play("churchopen");
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                merrynStep = 3;
+                squireStep = 9;
+                break;
+            case 9:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+            case 10:
+                //FIN
+                break;
             default:
                 break;
         }
@@ -386,19 +424,37 @@ public class QuestManager : MonoBehaviour
                     newPos = GameObject.Find("MerrynChurchPos");
                     merryn.transform.position = newPos.transform.position;
                     merryn.GetComponent<NavMeshAgent>().enabled = true;
+                    merrynScript.lookPlayer = true;
+                    merrynStep = 1;
                 }
                 else
                 {
                     merrynScript.isTalkable = false;
                     merrynScript.lookPlayer = false;
                 }
-                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2");
-                merrynStep = 1;
+                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2");                
                 break;
             case 1:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                buttonScript.isTalkable = true;
+                squireStep = 7;
+                merrynStep = 2;
+                break;
+            case 2:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+            case 3:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
                 break;
         }
         yield return null;
+    }
+
+    void ButtonPushing()
+    {
+        buttonchurch.GetComponent<Animator>().Play("buttonpressed");
+        squireStep = 8;
+        RunQuest(1);
     }
 
     #endregion World 1
@@ -826,16 +882,17 @@ public class QuestManager : MonoBehaviour
     #region NPCs Loading
     #region World 1 NPCs
     /*NPCs - WORLD 1*/
-    [HideInInspector] public GameObject
+    [HideInInspector]
+    public GameObject
         arthur,
         merryn,
-        slaught,
-        king;
-    [HideInInspector] public NpcManager
+        king,
+        buttonchurch;
+    [HideInInspector]
+    public NpcManager
        arthurScript,
        merrynScript,
-       slaughtScript,
-       kingScript;
+       buttonScript;
     [HideInInspector]
     public NavMeshAgent
         arthurNav;
@@ -871,12 +928,11 @@ public class QuestManager : MonoBehaviour
             case 1:
                 arthur = GameObject.Find("Arthur");
                 merryn = GameObject.Find("Merryn");
-                slaught = GameObject.Find("Slaughterman");
                 king = GameObject.Find("King");
+                buttonchurch = GameObject.Find("Button");
                 arthurScript = arthur.GetComponent<NpcManager>();
                 merrynScript = merryn.GetComponent<NpcManager>();
-                slaughtScript = slaught.GetComponent<NpcManager>();
-                kingScript = king.GetComponent<NpcManager>();
+                buttonScript = buttonchurch.GetComponent<NpcManager>();
                 arthurNav = arthur.GetComponent<NavMeshAgent>();
                 break;
             case 2:
