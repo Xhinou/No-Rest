@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
+    public static float audioLisVolume;
     public ParticleSystem[] particles;
     public int sceneID;
     public AudioClip[] audioClips;
@@ -30,8 +31,14 @@ public class QuestManager : MonoBehaviour
         scriptSystem,
         player;
 
+    private void Awake()
+    {
+        audioLisVolume = AudioListener.volume;
+    }
+
     void Start()
     {
+        AudioListener.volume = audioLisVolume;
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
         if (karmaStep != 0)
