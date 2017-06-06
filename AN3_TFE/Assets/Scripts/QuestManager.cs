@@ -17,6 +17,7 @@ public class QuestManager : MonoBehaviour
         cam;
     public GameObject[] triggers = new GameObject[7];
     [HideInInspector] public static int karma = -1;
+    [HideInInspector] public static bool tuto = true;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -28,6 +29,7 @@ public class QuestManager : MonoBehaviour
     public GameObject
         scriptSystem,
         player;
+
     void Start()
     {
         controller = player.GetComponent<CharacterClickingController>();
@@ -50,10 +52,15 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    int shot = 0;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+        else if (Input.GetKeyDown(KeyCode.Print))
+        {
+            Application.CaptureScreenshot("Screenshots/Screenshot" + shot + ".png");
+        }
      /*   else if (Input.GetKeyDown(KeyCode.F1))
             LoadWorld(1);
         else if (Input.GetKeyDown(KeyCode.F2))
@@ -104,6 +111,9 @@ public class QuestManager : MonoBehaviour
                     case 1:
                         StartCoroutine(SquireQuest(squireStep, npcID));
                         break;
+                    case 2:
+                        StartCoroutine(MerrynQuest(merrynStep, npcID));
+                        break;
                     case 4:
                         if (squireStep == 1 || squireStep == 2)
                             dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam4.0", true);
@@ -115,6 +125,9 @@ public class QuestManager : MonoBehaviour
                     case 6:
                         if (squireStep == 1 || squireStep == 2)
                             dialogSystem.DisplayText(sceneID, npcID, squireStep-1, "Cam6.0", false);
+                        break;
+                    case 10:
+                        ButtonPushing();
                         break;
                     default:
                         SideQuest(npcID);
@@ -219,7 +232,8 @@ public class QuestManager : MonoBehaviour
     #region World 1
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
     private int
-        squireStep = 0;
+        squireStep = 0,
+        merrynStep = 0;
 
     public IEnumerator SquireQuest(int step, int npcID)
     {
@@ -276,7 +290,9 @@ public class QuestManager : MonoBehaviour
                     controller.hasControl = true;
                     newPos = GameObject.Find("ArthurWaitPos");
                     arthurNav.ResetPath();
+                    arthurNav.enabled = false;
                     arthur.transform.position = newPos.transform.position;
+                    triggers[1].GetComponent<Collider>().enabled = true;
                     squireStep = 4;
                 }
                 else
@@ -287,8 +303,9 @@ public class QuestManager : MonoBehaviour
                     StartCoroutine(ObjectToPos(arthur, newPos));
                     while (isCoroutineRunning)
                         yield return null;
-                    newPos = GameObject.Find("ArthurWaitPos");
                     arthurNav.ResetPath();
+                    arthurNav.enabled = false;
+                    newPos = GameObject.Find("ArthurWaitPos");                   
                     arthur.transform.position = newPos.transform.position;
                     arthurNav.speed = 4.5f;
                     squireStep = 3;
@@ -300,43 +317,144 @@ public class QuestManager : MonoBehaviour
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                newPos = GameObject.Find("GuardPosPotence");
+                StartCoroutine(ObjectToPos(GameObject.Find("Guard"), newPos));
                 newPos = GameObject.Find("PlayerPosPotence");
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
                     yield return null;
-                squireStep = 5;
+                while (isCoroutineRunning)
+                    yield return null;
+                controller.hasControl = false;
+                squireStep = 4;
                 RunQuest(1);
                 break;
             case 4:
-                break;
-            case 5:
-                CameraZoom(false);
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
-                newPos = GameObject.Find("ArthurWaitPos2");
-                arthur.transform.position = newPos.transform.position;
-                arthurNav.speed = 9f;
-                newPos = GameObject.Find("ArthurKillPos");
-                StartCoroutine(ObjectToPos(arthur, newPos));
-                while (isCoroutineRunning)
-                    yield return null;
-                squireStep = 6;
-                RunQuest(1);
-                break;
-            case 6:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                newPos = GameObject.Find("ArthurWaitPos2");
+                arthur.transform.position = newPos.transform.position;
+                arthurNav.enabled = true;
+                arthurNav.speed = 9f;
+                newPos = GameObject.Find("ArthurKillPos");
+                StartCoroutine(ObjectToPos(arthur, newPos));              
+                GameObject[] leftNpc = GameObject.FindGameObjectsWithTag("npcLeft");
+                newPos = GameObject.Find("NPCrunLeft");
+                foreach (GameObject g in leftNpc)
+                    StartCoroutine(ObjectToPos(g, newPos));
+                GameObject[] rightNpc = GameObject.FindGameObjectsWithTag("npcRight");
+                newPos = GameObject.Find("NPCrunRight");
+                foreach (GameObject g in rightNpc)
+                    StartCoroutine(ObjectToPos(g, newPos));
+                while (isCoroutineRunning)
+                    yield return null;
+                arthurNav.speed = 4.5f;
+                squireStep = 5;
+                RunQuest(1);
+                break;
+            case 5:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                controller.hasControl = false;
+                merrynScript.isTalkable = true;
                 king.GetComponent<Animator>().Play("Lying Down");
                 newPos = GameObject.Find("ArthurWaitPos2");
                 StartCoroutine(ObjectToPos(arthur, newPos));
                 while (isCoroutineRunning)
                     yield return null;
+                arthurNav.ResetPath();
+                yield return null;
+                arthurNav.enabled = false;
+                newPos = GameObject.Find("ArthurChurchPos");
+                arthur.transform.position = newPos.transform.position;
+                arthurNav.enabled = true;
                 controller.hasControl = true;
                 squireStep = 6;
+                break;
+            case 6:
+                if (merrynStep == 0)
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                    buttonScript.isTalkable = true;
+                    squireStep = 7;
+                }
+                else
+                {
+                    RunQuest(2);
+                }
+                break;
+            case 7:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+            case 8:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                if (merrynStep == 0)
+                {
+                    dialogSystem.ForceLine(0, 1, null);
+                }
+                GameObject.Find("Church").GetComponent<Animator>().Play("churchopen");
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                merrynStep = 3;
+                squireStep = 9;
+                break;
+            case 9:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+            case 10:
+                //FIN
                 break;
             default:
                 break;
         }
+    }
+
+    public IEnumerator MerrynQuest (int step, int npcID)
+    {
+        switch (step)
+        {
+            case 0:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                while (!dialogSystem.isDisabled)
+                    yield return null;
+                if (dialogSystem.lastChoice == 0)
+                {
+                    newPos = GameObject.Find("MerrynChurchPos");
+                    merryn.transform.position = newPos.transform.position;
+                    merryn.GetComponent<NavMeshAgent>().enabled = true;
+                    merrynScript.lookPlayer = true;
+                    merrynStep = 1;
+                }
+                else
+                {
+                    merrynScript.isTalkable = false;
+                    merrynScript.lookPlayer = false;
+                }
+                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2");                
+                break;
+            case 1:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                buttonScript.isTalkable = true;
+                squireStep = 7;
+                merrynStep = 2;
+                break;
+            case 2:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+            case 3:
+                dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                break;
+        }
+        yield return null;
+    }
+
+    void ButtonPushing()
+    {
+        buttonchurch.GetComponent<Animator>().Play("buttonpressed");
+        squireStep = 8;
+        RunQuest(1);
     }
 
     #endregion World 1
@@ -500,6 +618,7 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("PlayerEndPos3");
                 controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
+                GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
@@ -523,6 +642,7 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("PlayerEndPos3");
                 controller.agent.enabled = false;
                 player.transform.position = newPos.transform.position;
+                GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
@@ -762,16 +882,17 @@ public class QuestManager : MonoBehaviour
     #region NPCs Loading
     #region World 1 NPCs
     /*NPCs - WORLD 1*/
-    [HideInInspector] public GameObject
+    [HideInInspector]
+    public GameObject
         arthur,
         merryn,
-        slaught,
-        king;
-    [HideInInspector] public NpcManager
+        king,
+        buttonchurch;
+    [HideInInspector]
+    public NpcManager
        arthurScript,
        merrynScript,
-       slaughtScript,
-       kingScript;
+       buttonScript;
     [HideInInspector]
     public NavMeshAgent
         arthurNav;
@@ -799,7 +920,6 @@ public class QuestManager : MonoBehaviour
         killerScript,
         harshScript;
     #endregion World 2 NPCs
-    /*NPCs - WORLD 3*/
 
     void LoadNpc(int _sceneID)
     {
@@ -808,12 +928,11 @@ public class QuestManager : MonoBehaviour
             case 1:
                 arthur = GameObject.Find("Arthur");
                 merryn = GameObject.Find("Merryn");
-                slaught = GameObject.Find("Slaughterman");
                 king = GameObject.Find("King");
+                buttonchurch = GameObject.Find("Button");
                 arthurScript = arthur.GetComponent<NpcManager>();
                 merrynScript = merryn.GetComponent<NpcManager>();
-                slaughtScript = slaught.GetComponent<NpcManager>();
-                kingScript = king.GetComponent<NpcManager>();
+                buttonScript = buttonchurch.GetComponent<NpcManager>();
                 arthurNav = arthur.GetComponent<NavMeshAgent>();
                 break;
             case 2:
@@ -843,8 +962,11 @@ public class QuestManager : MonoBehaviour
 
     #region Methods
 
+    bool anotherCR = false;
     public IEnumerator ObjectToPos(GameObject movable, GameObject newPos)
     {
+        if (isCoroutineRunning)
+            anotherCR = true;
         isCoroutineRunning = true;
         if (movable == player)
             controller.hasControl = false;
@@ -865,12 +987,17 @@ public class QuestManager : MonoBehaviour
         }
         if (movable == player)
             controller.hasControl = true;
+        else if (movable.tag == "npcLeft" || movable.tag == "npcRight")
+            Destroy(movable);
         else
         {
             movable.GetComponent<NpcManager>().isMoving = false;
             movable.GetComponent<NpcManager>().isTalkable = true;
         }
-        isCoroutineRunning = false;
+        if (!anotherCR)
+            isCoroutineRunning = false;
+        else
+            anotherCR = false;
     }
 
     protected void LoadWorld(int worldToLoad)
@@ -927,7 +1054,21 @@ public class QuestManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         player.SetActive(true);
         yield return new WaitForSeconds(1);
-        controller.hasControl = true;
+        if (tuto)
+        {
+            dialogSystem.DisplayText(sceneID, 1, 0, "Main Camera", false);
+            dialogSystem.SetToDial("0_1_0_10-0", 1, "0");
+        }
+        while (!dialogSystem.isDisabled)
+            yield return null;
+        while (!controller.isMoving)
+            yield return null;
+        yield return new WaitForSeconds(1);
+        dialogSystem.DisplayText(sceneID, 1, 1, "Main Camera", false);
+        tuto = false;
+        while (!dialogSystem.isDisabled)
+            yield return null;
+            controller.hasControl = true;
     }
 
     private IEnumerator Desincarnation(int worldToLoad)

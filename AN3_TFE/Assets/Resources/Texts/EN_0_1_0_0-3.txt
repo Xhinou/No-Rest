@@ -1,0 +1,2 @@
+﻿Hi. I'm Tutorial! Welcome to <i>No Rest</i>, dear player. Start by left-clicking this dialog box with the mouse.
+Congrats! You know what a mouse is! Left-click again and tell me what's your favorite meat.
