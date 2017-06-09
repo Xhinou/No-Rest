@@ -28,6 +28,7 @@ public class DialoguesSystem : MonoBehaviour
         textBox,
         player,
         scriptSystem;
+    [HideInInspector] public bool isNewLine = false;
     public bool
         isDisabled,
         isNextDial = false;
@@ -63,6 +64,11 @@ public class DialoguesSystem : MonoBehaviour
             resume.interactable = true;
         else
             resume.interactable = false;
+    }
+
+    public void NewLineTrue()
+    {
+        isNewLine = true;
     }
 
     public void DisplayText(int _sceneID, int _npcID, int _step, string cam, bool hasLightCam)

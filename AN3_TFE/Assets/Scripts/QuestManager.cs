@@ -17,7 +17,7 @@ public class QuestManager : MonoBehaviour
         newPos2,
         cam;
     public GameObject[] triggers = new GameObject[7];
-    [HideInInspector] public static int karma = -1;
+    public static int karma = -1;
     [HideInInspector] public static bool tuto = true;
     [HideInInspector] public bool
         hasFollowedSailor = true,
@@ -68,16 +68,23 @@ public class QuestManager : MonoBehaviour
         {
             Application.CaptureScreenshot("Screenshots/Screenshot" + shot + ".png");
         }
-     /*   else if (Input.GetKeyDown(KeyCode.F1))
+        else if (Input.GetKeyDown(KeyCode.F1))
             LoadWorld(1);
         else if (Input.GetKeyDown(KeyCode.F2))
             LoadWorld(2);
+        else if (Input.GetKeyDown(KeyCode.F3))
+            LoadWorld(0);
         else if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            karma = 0;
+            karma = -1;
             karmaStep = 0;
+            tuto = true;
             LoadWorld(0);
-        }*/
+        }
+        else if (Input.GetKeyDown(KeyCode.KeypadPlus))
+            karma++;
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+            karma--;
     }
 
     public void RunIntro(int _sceneID)
@@ -200,8 +207,9 @@ public class QuestManager : MonoBehaviour
                 break;
             case 1:
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera", false);
-               /* while (!dialogSystem.isNextDial)
-                    yield return null;*/
+                while (!dialogSystem.isNewLine)
+                    yield return null;
+                dialogSystem.isNewLine = false;
                 if (karma >= 1) //Karma is GOOD
                 {
                     dialogSystem.ForceLine(1, 4, null);
@@ -213,22 +221,32 @@ public class QuestManager : MonoBehaviour
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 StartCoroutine(Desincarnation(1));
-                karmaStep = 0; //to change
+                karmaStep = 2;
                 break;
             case 2:
-                dialogSystem.DisplayText(2, 0, step, "Main Camera", false);
+                dialogSystem.DisplayText(sceneID, 0, step, "Main Camera", false);
                 if (karma > 0) //Karma is GOOD
                 {
                     dialogSystem.ForceLine(1, 4, null);
+                    while (!dialogSystem.isDisabled)
+                        yield return null;
+                    if (dialogSystem.lastChoice == 0)
+                        LoadWorld(1);
+                    else // credits
+                    {
+                        karma = -1;
+                        karmaStep = 0;
+                        LoadWorld(0);
+                    }
                 }
                 else //Karma is BAD
                 {
-                    dialogSystem.ForceLine(6, null, null);
+                    dialogSystem.ForceLine(6, null, 0);
+                    while (!dialogSystem.isDisabled)
+                        yield return null;
                 }
-                while (!dialogSystem.isDisabled)
-                    yield return null;
                 StartCoroutine(Desincarnation(1));
-                karmaStep = 0;
+                karmaStep = 1;
                 break;
             default:
                 break;
@@ -1091,17 +1109,18 @@ public class QuestManager : MonoBehaviour
         {
             dialogSystem.DisplayText(sceneID, 1, 0, "Main Camera", false);
             dialogSystem.SetToDial("0_1_0_10-0", 1, "0");
+
+            while (!dialogSystem.isDisabled)
+                yield return null;
+            while (!controller.isMoving)
+                yield return null;
+            yield return new WaitForSeconds(1);
+            dialogSystem.DisplayText(sceneID, 1, 1, "Main Camera", false);
+            while (!dialogSystem.isDisabled)
+                yield return null;
+            tuto = false;
         }
-        while (!dialogSystem.isDisabled)
-            yield return null;
-        while (!controller.isMoving)
-            yield return null;
-        yield return new WaitForSeconds(1);
-        dialogSystem.DisplayText(sceneID, 1, 1, "Main Camera", false);
-        tuto = false;
-        while (!dialogSystem.isDisabled)
-            yield return null;
-            controller.hasControl = true;
+        controller.hasControl = true;
     }
 
     private IEnumerator Desincarnation(int worldToLoad)
