@@ -109,6 +109,57 @@ ModelImporter:
     100202: RightHand
     100204: RightThumb
     100206: transform1
+    100208: indigene_Walk_0033:Character1_Ctrl_ChestEndEffector
+    100210: indigene_Walk_0033:Character1_Ctrl_ChestOriginEffector
+    100212: indigene_Walk_0033:Character1_Ctrl_Head
+    100214: indigene_Walk_0033:Character1_Ctrl_HeadEffector
+    100216: indigene_Walk_0033:Character1_Ctrl_Hips
+    100218: indigene_Walk_0033:Character1_Ctrl_HipsEffector
+    100220: indigene_Walk_0033:Character1_Ctrl_LeftAnkleEffector
+    100222: indigene_Walk_0033:Character1_Ctrl_LeftArm
+    100224: indigene_Walk_0033:Character1_Ctrl_LeftElbowEffector
+    100226: indigene_Walk_0033:Character1_Ctrl_LeftFoot
+    100228: indigene_Walk_0033:Character1_Ctrl_LeftFootEffector
+    100230: indigene_Walk_0033:Character1_Ctrl_LeftForeArm
+    100232: indigene_Walk_0033:Character1_Ctrl_LeftHand
+    100234: indigene_Walk_0033:Character1_Ctrl_LeftHandMiddle1
+    100236: indigene_Walk_0033:Character1_Ctrl_LeftHandMiddle2
+    100238: indigene_Walk_0033:Character1_Ctrl_LeftHandMiddleEffector
+    100240: indigene_Walk_0033:Character1_Ctrl_LeftHandThumb1
+    100242: indigene_Walk_0033:Character1_Ctrl_LeftHandThumb2
+    100244: indigene_Walk_0033:Character1_Ctrl_LeftHandThumbEffector
+    100246: indigene_Walk_0033:Character1_Ctrl_LeftHipEffector
+    100248: indigene_Walk_0033:Character1_Ctrl_LeftKneeEffector
+    100250: indigene_Walk_0033:Character1_Ctrl_LeftLeg
+    100252: indigene_Walk_0033:Character1_Ctrl_LeftShoulder
+    100254: indigene_Walk_0033:Character1_Ctrl_LeftShoulderEffector
+    100256: indigene_Walk_0033:Character1_Ctrl_LeftToeBase
+    100258: indigene_Walk_0033:Character1_Ctrl_LeftUpLeg
+    100260: indigene_Walk_0033:Character1_Ctrl_LeftWristEffector
+    100262: indigene_Walk_0033:Character1_Ctrl_Neck
+    100264: indigene_Walk_0033:Character1_Ctrl_Reference
+    100266: indigene_Walk_0033:Character1_Ctrl_RightAnkleEffector
+    100268: indigene_Walk_0033:Character1_Ctrl_RightArm
+    100270: indigene_Walk_0033:Character1_Ctrl_RightElbowEffector
+    100272: indigene_Walk_0033:Character1_Ctrl_RightFoot
+    100274: indigene_Walk_0033:Character1_Ctrl_RightFootEffector
+    100276: indigene_Walk_0033:Character1_Ctrl_RightForeArm
+    100278: indigene_Walk_0033:Character1_Ctrl_RightHand
+    100280: indigene_Walk_0033:Character1_Ctrl_RightHandMiddle1
+    100282: indigene_Walk_0033:Character1_Ctrl_RightHandMiddle2
+    100284: indigene_Walk_0033:Character1_Ctrl_RightHandMiddleEffector
+    100286: indigene_Walk_0033:Character1_Ctrl_RightHandThumb1
+    100288: indigene_Walk_0033:Character1_Ctrl_RightHandThumb2
+    100290: indigene_Walk_0033:Character1_Ctrl_RightHandThumbEffector
+    100292: indigene_Walk_0033:Character1_Ctrl_RightHipEffector
+    100294: indigene_Walk_0033:Character1_Ctrl_RightKneeEffector
+    100296: indigene_Walk_0033:Character1_Ctrl_RightLeg
+    100298: indigene_Walk_0033:Character1_Ctrl_RightShoulder
+    100300: indigene_Walk_0033:Character1_Ctrl_RightShoulderEffector
+    100302: indigene_Walk_0033:Character1_Ctrl_RightToeBase
+    100304: indigene_Walk_0033:Character1_Ctrl_RightUpLeg
+    100306: indigene_Walk_0033:Character1_Ctrl_RightWristEffector
+    100308: indigene_Walk_0033:Character1_Ctrl_Spine
     400000: //RootNode
     400002: body
     400004: Character1_Ctrl_ChestEndEffector
@@ -213,6 +264,57 @@ ModelImporter:
     400202: RightHand
     400204: RightThumb
     400206: transform1
+    400208: indigene_Walk_0033:Character1_Ctrl_ChestEndEffector
+    400210: indigene_Walk_0033:Character1_Ctrl_ChestOriginEffector
+    400212: indigene_Walk_0033:Character1_Ctrl_Head
+    400214: indigene_Walk_0033:Character1_Ctrl_HeadEffector
+    400216: indigene_Walk_0033:Character1_Ctrl_Hips
+    400218: indigene_Walk_0033:Character1_Ctrl_HipsEffector
+    400220: indigene_Walk_0033:Character1_Ctrl_LeftAnkleEffector
+    400222: indigene_Walk_0033:Character1_Ctrl_LeftArm
+    400224: indigene_Walk_0033:Character1_Ctrl_LeftElbowEffector
+    400226: indigene_Walk_0033:Character1_Ctrl_LeftFoot
+    400228: indigene_Walk_0033:Character1_Ctrl_LeftFootEffector
+    400230: indigene_Walk_0033:Character1_Ctrl_LeftForeArm
+    400232: indigene_Walk_0033:Character1_Ctrl_LeftHand
+    400234: indigene_Walk_0033:Character1_Ctrl_LeftHandMiddle1
+    400236: indigene_Walk_0033:Character1_Ctrl_LeftHandMiddle2
+    400238: indigene_Walk_0033:Character1_Ctrl_LeftHandMiddleEffector
+    400240: indigene_Walk_0033:Character1_Ctrl_LeftHandThumb1
+    400242: indigene_Walk_0033:Character1_Ctrl_LeftHandThumb2
+    400244: indigene_Walk_0033:Character1_Ctrl_LeftHandThumbEffector
+    400246: indigene_Walk_0033:Character1_Ctrl_LeftHipEffector
+    400248: indigene_Walk_0033:Character1_Ctrl_LeftKneeEffector
+    400250: indigene_Walk_0033:Character1_Ctrl_LeftLeg
+    400252: indigene_Walk_0033:Character1_Ctrl_LeftShoulder
+    400254: indigene_Walk_0033:Character1_Ctrl_LeftShoulderEffector
+    400256: indigene_Walk_0033:Character1_Ctrl_LeftToeBase
+    400258: indigene_Walk_0033:Character1_Ctrl_LeftUpLeg
+    400260: indigene_Walk_0033:Character1_Ctrl_LeftWristEffector
+    400262: indigene_Walk_0033:Character1_Ctrl_Neck
+    400264: indigene_Walk_0033:Character1_Ctrl_Reference
+    400266: indigene_Walk_0033:Character1_Ctrl_RightAnkleEffector
+    400268: indigene_Walk_0033:Character1_Ctrl_RightArm
+    400270: indigene_Walk_0033:Character1_Ctrl_RightElbowEffector
+    400272: indigene_Walk_0033:Character1_Ctrl_RightFoot
+    400274: indigene_Walk_0033:Character1_Ctrl_RightFootEffector
+    400276: indigene_Walk_0033:Character1_Ctrl_RightForeArm
+    400278: indigene_Walk_0033:Character1_Ctrl_RightHand
+    400280: indigene_Walk_0033:Character1_Ctrl_RightHandMiddle1
+    400282: indigene_Walk_0033:Character1_Ctrl_RightHandMiddle2
+    400284: indigene_Walk_0033:Character1_Ctrl_RightHandMiddleEffector
+    400286: indigene_Walk_0033:Character1_Ctrl_RightHandThumb1
+    400288: indigene_Walk_0033:Character1_Ctrl_RightHandThumb2
+    400290: indigene_Walk_0033:Character1_Ctrl_RightHandThumbEffector
+    400292: indigene_Walk_0033:Character1_Ctrl_RightHipEffector
+    400294: indigene_Walk_0033:Character1_Ctrl_RightKneeEffector
+    400296: indigene_Walk_0033:Character1_Ctrl_RightLeg
+    400298: indigene_Walk_0033:Character1_Ctrl_RightShoulder
+    400300: indigene_Walk_0033:Character1_Ctrl_RightShoulderEffector
+    400302: indigene_Walk_0033:Character1_Ctrl_RightToeBase
+    400304: indigene_Walk_0033:Character1_Ctrl_RightUpLeg
+    400306: indigene_Walk_0033:Character1_Ctrl_RightWristEffector
+    400308: indigene_Walk_0033:Character1_Ctrl_Spine
     2300000: body
     2300002: head
     2300004: hips
@@ -290,11 +392,9 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Character1_LeftLeg' has translation animation
-      that will be discarded.\n"
+    animationImportErrors: "Avatar creation failed:\n\tTransform 'Character1_Hips'
+      for human bone 'Hips' not found\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
