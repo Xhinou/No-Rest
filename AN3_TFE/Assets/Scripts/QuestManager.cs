@@ -794,10 +794,22 @@ public class QuestManager : MonoBehaviour
             GameObject heldItem = GameObject.FindWithTag("held");
             if (heldItem.name == "Pickaxe")
             {
+                controller.agent.ResetPath();
+                controller.hasControl = false;
+                controller.anim.Play("Punch");
                 goldGet = true;
+                string color = controller.itemColor;
+                GameObject itemInfoText = GameObject.Find("ItemInfoText");
+                Text itemInfo = itemInfoText.GetComponent<Text>();
+                int size = itemInfo.fontSize + 5;
+                itemInfo.text = "Got " + "<size=" + size + ">" + "<color=#" + color + ">Gold nugget</color></size>" + " !";
+                itemInfoText.GetComponent<Text>().canvasRenderer.SetAlpha(1f);
+                itemInfoText.GetComponent<Text>().CrossFadeAlpha(0f, 4f, false);
                 karma -= 1;
                 goldScript.isTalkable = false;
                 controller.hasControl = true;
+                Destroy(heldItem);
+                controller.isHolding = false;
             }
             else
                 controller.hasControl = true;

@@ -51,7 +51,8 @@ public class BirdPatrol : MonoBehaviour
         yield return new WaitForSeconds(2);
         birdAnim.SetBool("hasStopped", false);
         // Set the agent to go to the currently selected destination.
-        agent.destination = points[destPoint].position;
+        if (agent.enabled == true && agent != null)
+            agent.destination = points[destPoint].position;
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
         destPoint = (destPoint + 1) % points.Length;

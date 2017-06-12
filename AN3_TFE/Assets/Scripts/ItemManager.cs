@@ -13,7 +13,6 @@ public class ItemManager : MonoBehaviour
         heldItem,
         nameCanvas;
     Text itemInfo;
-    string getItem = " added to inventory";
     Transform gOTransform;
     CharacterClickingController controller;
     Transform scene;
@@ -92,10 +91,8 @@ public class ItemManager : MonoBehaviour
     void DisplayText()
     {
         string color = controller.itemColor;
-        //controller.pickedItem
-        
         int size = itemInfo.fontSize + 5;
-        itemInfo.text = "<size=" + size + ">" + "<color=#" + color + ">" + gameObject.name + "</color></size>" + getItem;
+        itemInfo.text = "Got " + "<size=" + size + ">" + "<color=#" + color + ">" + gameObject.name + "</color></size>" + " !";
         itemInfoText.GetComponent<Text>().canvasRenderer.SetAlpha(1f);
         itemInfoText.GetComponent<Text>().CrossFadeAlpha(0f, 4f, false);
     }
