@@ -222,6 +222,7 @@ public class TriggersManager : MonoBehaviour
                             qManager.RunQuest(1);
                             break;
                         case "End":
+                            GetComponent<Collider>().enabled = false;
                             newPos = GameObject.Find("PlayerEndPos");
                             StartCoroutine(qManager.ObjectToPos(player, newPos));
                             while (qManager.isCoroutineRunning)

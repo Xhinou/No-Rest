@@ -173,7 +173,7 @@ public class QuestManager : MonoBehaviour
                         Debug.Log("How the hell did you talk to that guy ?");
                         break;
                     case 8:
-                        GoldDigging();
+                        StartCoroutine(GoldDigging());
                         break;
                     default:
                         SideQuest(npcID);
@@ -669,19 +669,12 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
                     yield return null;
-                playerAnimator.Play("Lied Down");
-                newPos = GameObject.Find("PlayerEndPos3");
-                controller.agent.enabled = false;
-                player.transform.position = newPos.transform.position;
+                playerAnimator.Play("Lie Down");
+                yield return new WaitForSeconds(6f);
                 GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
-                triggers[9].GetComponent<BoxCollider>().isTrigger = false;
-                if (karma >= 1)
-                    Debug.Log("KARMA IS GOOD");
-                else
-                    Debug.Log("KARMA IS BAD");
                 LoadWorld(0);
                 break;
             case 5:
@@ -693,20 +686,12 @@ public class QuestManager : MonoBehaviour
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
                     yield return null;
-                playerAnimator.Play("Lied Down");
-                newPos = GameObject.Find("PlayerEndPos3");
-                controller.agent.enabled = false;
-                player.transform.position = newPos.transform.position;
+                playerAnimator.Play("Lie Down");
+                yield return new WaitForSeconds(6f);
                 GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
-                triggers[9].GetComponent<BoxCollider>().isTrigger = false;
-                //END ANIMATION
-                if (karma >= 1)
-                    Debug.Log("KARMA IS GOOD");
-                else
-                    Debug.Log("KARMA IS BAD");
                 LoadWorld(0);
                 break;
             default:
@@ -787,7 +772,7 @@ public class QuestManager : MonoBehaviour
             dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
     }
 
-    void GoldDigging()
+    IEnumerator GoldDigging()
     {
         if (controller.isHolding)
         {
@@ -797,6 +782,7 @@ public class QuestManager : MonoBehaviour
                 controller.agent.ResetPath();
                 controller.hasControl = false;
                 controller.anim.Play("Punch");
+                yield return new WaitForSeconds(1f);
                 goldGet = true;
                 string color = controller.itemColor;
                 GameObject itemInfoText = GameObject.Find("ItemInfoText");
