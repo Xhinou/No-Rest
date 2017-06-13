@@ -170,7 +170,6 @@ public class QuestManager : MonoBehaviour
                         StartCoroutine(HarshQuest(harshStep, npcID));
                         break;
                     case 7:
-                        Debug.Log("How the hell did you talk to that guy ?");
                         break;
                     case 8:
                         StartCoroutine(GoldDigging());
@@ -288,14 +287,31 @@ public class QuestManager : MonoBehaviour
                 squireStep = 1;
                 break;
             case 1:
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
-                while (!dialogSystem.isDisabled)
-                    yield return null;
-                if (dialogSystem.lastChoice == 1)
+                if (!controller.canSkipDial)
                 {
-                    newPos = GameObject.Find("MidePos");
-                    StartCoroutine(ObjectToPos(arthur, newPos));
-                    squireStep = 2;
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                    dialogSystem.ForceLine(0, null, 0);
+                    newPos = GameObject.Find("PlayerBlockPos");
+                    StartCoroutine(ObjectToPos(player, newPos));
+                    while (isCoroutineRunning)
+                        yield return null;
+                    dialogSystem.EndDialog();
+                    controller.hasControl = true;
+                    controller.canSkipDial = true;
+                }
+                else
+                {
+                    dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
+                    dialogSystem.ForceLine(1, null, null);
+                    while (!dialogSystem.isDisabled)
+                        yield return null;
+                    if (dialogSystem.lastChoice == 1)
+                    {
+                        triggers[0].GetComponent<Collider>().enabled = false;
+                        newPos = GameObject.Find("MidePos");
+                        StartCoroutine(ObjectToPos(arthur, newPos));
+                        squireStep = 2;
+                    }
                 }
                 break;
             case 2:
@@ -316,7 +332,7 @@ public class QuestManager : MonoBehaviour
                     arthurNav.ResetPath();
                     arthurNav.enabled = false;
                     arthur.transform.position = newPos.transform.position;
-                    triggers[1].GetComponent<Collider>().enabled = true;
+                    triggers[2].GetComponent<Collider>().enabled = true;
                     squireStep = 4;
                 }
                 else
@@ -373,7 +389,12 @@ public class QuestManager : MonoBehaviour
                     StartCoroutine(ObjectToPos(g, newPos));
                 while (isCoroutineRunning)
                     yield return null;
-                squireStep = 5;
+                yield return new WaitForSeconds(1f);
+                foreach (GameObject g in leftNpc)
+                    Destroy(g);
+                foreach (GameObject g in rightNpc)
+                    Destroy(g);
+                   squireStep = 5;
                 RunQuest(1);
                 break;
             case 5:
@@ -382,7 +403,9 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 controller.hasControl = false;
                 merrynScript.isTalkable = true;
-                king.GetComponent<Animator>().Play("Lying Down");
+                arthur.GetComponent<Animator>().Play("Punch");
+                king.GetComponent<Animator>().Play("Die");
+                yield return new WaitForSeconds(1f);
                 newPos = GameObject.Find("ArthurWaitPos2");
                 StartCoroutine(ObjectToPos(arthur, newPos));
                 while (isCoroutineRunning)
@@ -1029,19 +1052,20 @@ public class QuestManager : MonoBehaviour
         while (movableAgent.pathPending)
             yield return null;
         float dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
-        while (dist > 0.2f)
+        while (dist > 0.2f && movableAgent != null)
         {
             dist = movableAgent.remainingDistance;//Vector3.Distance(movable.transform.position, newPos.transform.position);
             yield return null;
-        }
+        }       
         if (movable == player)
             controller.hasControl = true;
-        else if (movable.tag == "npcLeft" || movable.tag == "npcRight")
-            Destroy(movable);
         else
         {
-            movable.GetComponent<NpcManager>().isMoving = false;
-            movable.GetComponent<NpcManager>().isTalkable = true;
+            if (movable != null)
+            {
+                movable.GetComponent<NpcManager>().isMoving = false;
+                movable.GetComponent<NpcManager>().isTalkable = true;
+            }
         }
         if (!anotherCR)
             isCoroutineRunning = false;

@@ -122,6 +122,12 @@ public class TriggersManager : MonoBehaviour
                     GameObject newPos;
                     switch (gameObject.name)
                     {
+                        case "BlockTrig":
+                            controller.agent.ResetPath();
+                            controller.hasControl = false;
+                            controller.canSkipDial = false;
+                            qManager.RunQuest(1);
+                            break;
                         case "GateTrigger":
                             GetComponent<Collider>().enabled = false;
                             newPos = GameObject.Find("PlayerPosCastle");

@@ -106,6 +106,7 @@ ModelImporter:
     100196: RightHand
     100198: RightThumb
     100200: //RootNode
+    100202: polySurface15
     400000: body
     400002: Character1_Ctrl_ChestEndEffector
     400004: Character1_Ctrl_ChestOriginEffector
@@ -207,6 +208,7 @@ ModelImporter:
     400196: RightHand
     400198: RightThumb
     400200: //RootNode
+    400202: polySurface15
     2300000: body
     2300002: head
     2300004: hips
@@ -227,6 +229,7 @@ ModelImporter:
     2300034: RightFoot
     2300036: RightHand
     2300038: RightThumb
+    2300040: polySurface15
     3300000: body
     3300002: head
     3300004: hips
@@ -247,6 +250,7 @@ ModelImporter:
     3300034: RightFoot
     3300036: RightHand
     3300038: RightThumb
+    3300040: polySurface15
     4300000: LeftFoot
     4300002: polySurface24
     4300004: polySurface21
@@ -267,6 +271,7 @@ ModelImporter:
     4300034: head
     4300036: body
     4300038: hips
+    4300040: polySurface15
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,1 +1,2 @@
-﻿<i>Arthur</i>: Are you ready to go, my Lord?
+﻿<i>Arthur</i>: My Lord! Please inform our men first and tell me when you are ready!
+<i>Arthur</i>: Are you ready to go, my Lord?
