@@ -1,0 +1,3 @@
+﻿<i>Arthur</i>: Ça s'ouvre!
+<i>Merryn le magicien</i>: Ma magie fonctionne!
+<i>Arthur</i>: Mon Seigneur! Les portes sont ouvertes!

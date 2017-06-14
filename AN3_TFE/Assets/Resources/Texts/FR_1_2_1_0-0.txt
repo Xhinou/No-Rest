@@ -1,0 +1,11 @@
+﻿<i>Merryn le magicien</i>: vous êtes enfin là, étranger!
+Chose étonnante: J'aurais pu me téléporter ici depuis le début! Je ne sais pas pourquoi j'ai cru être en danger.
+Dans tous les cas, je sais tout sur vous et votre quête. Voici la Vieille Cathédrale où se trouve ce que vous cherchez.
+<i>Arthur</i>: Le Graal! Je suis maintenant certain q'il est ici!
+<i>Merryn le magicien</i>: Les portes sont verrouillées par un ancien sortilège, mais je sais comment le rompre! Vous me remercierez plus tard.
+Reculez! Je vais lancer un puissant sortilège!
+...
+"Mellon"!
+...
+Ça devait fonctionner! je le jure!It was supposed to work! I swear!
+<i>Arthur</i>: Sorcier inutile! Il doit y avoir un autre moyen d'ouvrir ces portes!

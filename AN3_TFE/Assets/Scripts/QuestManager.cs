@@ -468,16 +468,16 @@ public class QuestManager : MonoBehaviour
                 if (dialogSystem.lastChoice == 0)
                 {
                     while (!dialogSystem.isDisabled) ;
-                    playerAnimator.Play("Lying down");
+                    playerAnimator.Play("Die");
                     yield return new WaitForSeconds(2);
                     StartCoroutine(Desincarnation(0));
                 }
                 else
                 {
-                    arthur.GetComponent<Animator>().Play("Lying Down");
-                    yield return new WaitForSeconds(1.5f);
-                    playerAnimator.Play("Lying Down");
-                    yield return new WaitForSeconds(2);
+                    arthur.GetComponent<Animator>().Play("Die");
+                    yield return new WaitForSeconds(3f);
+                    playerAnimator.Play("Die");
+                    yield return new WaitForSeconds(2f);
                     StartCoroutine(Desincarnation(0));
                 }
                 break;
@@ -555,7 +555,6 @@ public class QuestManager : MonoBehaviour
                 yield return new WaitForSeconds(2.5f);
                 playerAnimator.Play("Get Up");
                 yield return new WaitForSeconds(4f);
-                //anim réveil
                 sailorNav.destination = player.transform.position;
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
                 int w = 0;
@@ -873,6 +872,8 @@ public class QuestManager : MonoBehaviour
                 if (heldItem.name == "Coconut")
                 {
                     //THROW COCONUT
+                    playerAnimator.Play("Punch");
+                    yield return new WaitForSeconds(1.5f);
                     Destroy(heldItem);
                     controller.isHolding = false;
                     // ASSASSIN FALLS
@@ -880,7 +881,7 @@ public class QuestManager : MonoBehaviour
                     controller.hasControl = false;
                     killerScript.isTalkable = false;
                     killerScript.lookPlayer = false;
-                    killer.GetComponent<Animator>().Play("Lying Down");
+                    killer.GetComponent<Animator>().Play("Die");
                     yield return new WaitForSeconds(6);
                     //killer.SetActive(false);
                     controller.hasControl = true;

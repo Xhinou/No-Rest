@@ -1,0 +1,2 @@
+﻿Salut, je suis le Tutoriel! Bienvenue dans <i>No Rest</i>, cher joueur. Commence par faire un clic gauche avec la souris sur cette boîte de dialogue.
+Bravo! Tu sais ce qu'est une souris! Clic à nouveau et dis-moi quel est ton plat favori.
