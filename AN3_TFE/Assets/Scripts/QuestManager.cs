@@ -871,19 +871,17 @@ public class QuestManager : MonoBehaviour
                 GameObject heldItem = GameObject.FindWithTag("held");
                 if (heldItem.name == "Coconut")
                 {
-                    //THROW COCONUT
+                    controller.agent.ResetPath();
                     playerAnimator.Play("Punch");
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
                     Destroy(heldItem);
                     controller.isHolding = false;
-                    // ASSASSIN FALLS
                     karma += 1;
                     controller.hasControl = false;
                     killerScript.isTalkable = false;
                     killerScript.lookPlayer = false;
                     killer.GetComponent<Animator>().Play("Die");
-                    yield return new WaitForSeconds(6);
-                    //killer.SetActive(false);
+                    yield return new WaitForSeconds(3f);
                     controller.hasControl = true;
                     sailorStep = 5;
                     killerStep = 0;
