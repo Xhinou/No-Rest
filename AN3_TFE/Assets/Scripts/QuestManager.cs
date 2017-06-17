@@ -858,7 +858,7 @@ public class QuestManager : MonoBehaviour
                 killer.SetActive(false);
                 controller.hasControl = true;
                 chief.SetActive(false);
-                killerStep = 2;
+                killerStep = 3;
                 karma -= 2;
             }
             else
@@ -884,7 +884,7 @@ public class QuestManager : MonoBehaviour
                     yield return new WaitForSeconds(3f);
                     controller.hasControl = true;
                     sailorStep = 5;
-                    killerStep = 0;
+                    killerStep = 2;
                 }
                 else
                     dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
