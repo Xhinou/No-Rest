@@ -229,6 +229,7 @@ public class TriggersManager : MonoBehaviour
                             break;
                         case "End":
                             GetComponent<Collider>().enabled = false;
+                            GameObject.Find("EndNative").GetComponent<NpcManager>().isTalkable = false;
                             newPos = GameObject.Find("PlayerEndPos");
                             StartCoroutine(qManager.ObjectToPos(player, newPos));
                             while (qManager.isCoroutineRunning)

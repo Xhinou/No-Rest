@@ -169,8 +169,6 @@ public class QuestManager : MonoBehaviour
                     case 6:
                         StartCoroutine(HarshQuest(harshStep, npcID));
                         break;
-                    case 7:
-                        break;
                     case 8:
                         StartCoroutine(GoldDigging());
                         break;
@@ -681,9 +679,9 @@ public class QuestManager : MonoBehaviour
                 karma += 1;
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
                 if (killerStep == 2 || harshStep > 0)
-                    dialogSystem.ForceLine(0, 4, null);
-                else
                     dialogSystem.ForceLine(5, null, null);
+                else
+                    dialogSystem.ForceLine(0, 4, null);
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
@@ -763,7 +761,6 @@ public class QuestManager : MonoBehaviour
                         sailorScript.isTalkable = true;
                     }
                     goldScript.isTalkable = true;
-                    sailorStep = 4;
                     greedStep = 2;
                 }
                 else
@@ -831,7 +828,6 @@ public class QuestManager : MonoBehaviour
         if (step == 0)
         {
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam5", false);
-            sailorStep = 5;
             for (int i = 5; i < 9; i++)
                 triggers[i].GetComponent<BoxCollider>().isTrigger = false;
             sailorNav.enabled = false;
@@ -859,10 +855,15 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = true;
                 chief.SetActive(false);
                 killerStep = 3;
+                sailorStep = 5;
                 karma -= 2;
             }
             else
+            {
                 killerStep = 1;
+                if (sailorStep < 3)
+                    sailorStep = 3;
+            }
         }
         else if (step == 1)
         {
@@ -883,7 +884,8 @@ public class QuestManager : MonoBehaviour
                     killer.GetComponent<Animator>().Play("Die");
                     yield return new WaitForSeconds(3f);
                     controller.hasControl = true;
-                    sailorStep = 5;
+                    if (sailorStep < 3)
+                        sailorStep = 3;
                     killerStep = 2;
                 }
                 else
@@ -907,10 +909,8 @@ public class QuestManager : MonoBehaviour
     {
         if (step == 0)
         {
-            if (killerStep == 0)
-                sailorStep = 4;
-            else
-                sailorStep = 5;
+            if (sailorStep < 3)
+                sailorStep = 3;
             sailorNav.enabled = false;
             chiefNav.enabled = false;
             newPos = GameObject.Find("SailorEndPos");
