@@ -258,6 +258,7 @@ public class QuestManager : MonoBehaviour
 
     public IEnumerator SquireQuest(int step, int npcID)
     {
+        GameObject remparts = GameObject.Find("Remparts");
         switch (step)
         {
             case 0:
@@ -319,7 +320,8 @@ public class QuestManager : MonoBehaviour
                 if (dialogSystem.lastChoice == 1)
                 {
                     controller.hasControl = false;
-                    GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                    remparts.GetComponent<Animator>().Play("grid");
+                    remparts.GetComponent<AudioSource>().Play();
                     newPos = GameObject.Find("RunAwayPos");
                     StartCoroutine(ObjectToPos(arthur, newPos));
                     //yield return new WaitForSeconds(2.5f);
@@ -354,7 +356,8 @@ public class QuestManager : MonoBehaviour
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
-                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid");
+                remparts.GetComponent<Animator>().Play("grid");
+                remparts.GetComponent<AudioSource>().Play();
                 newPos = GameObject.Find("GuardPosPotence");
                 StartCoroutine(ObjectToPos(GameObject.Find("Guard"), newPos));
                 newPos = GameObject.Find("PlayerPosPotence");
@@ -385,8 +388,13 @@ public class QuestManager : MonoBehaviour
                 newPos = GameObject.Find("NPCrunRight");
                 foreach (GameObject g in rightNpc)
                     StartCoroutine(ObjectToPos(g, newPos));
+                AudioSource foule = triggers[2].GetComponent<AudioSource>();
                 while (isCoroutineRunning)
+                {
+                    foule.volume -= 0.005f;
                     yield return null;
+                }
+                foule.enabled = false;
                 yield return new WaitForSeconds(1f);
                 foreach (GameObject g in leftNpc)
                     Destroy(g);
@@ -486,6 +494,7 @@ public class QuestManager : MonoBehaviour
 
     public IEnumerator MerrynQuest (int step, int npcID)
     {
+        GameObject remparts = GameObject.Find("Remparts");
         switch (step)
         {
             case 0:
@@ -494,6 +503,9 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 if (dialogSystem.lastChoice == 0)
                 {
+                    merryn.GetComponent<AudioSource>().Play();
+                    GameObject.Find("Teleportation").GetComponent<ParticleSystem>().Play();
+                    yield return new WaitForSeconds(1f);
                     newPos = GameObject.Find("MerrynChurchPos");
                     merryn.transform.position = newPos.transform.position;
                     merryn.GetComponent<NavMeshAgent>().enabled = true;
@@ -505,7 +517,9 @@ public class QuestManager : MonoBehaviour
                     merrynScript.isTalkable = false;
                     merrynScript.lookPlayer = false;
                 }
-                GameObject.Find("Remparts").GetComponent<Animator>().Play("grid2");                
+                yield return new WaitForSeconds(2f);
+                remparts.GetComponent<Animator>().Play("grid2");
+                remparts.GetComponent<AudioSource>().Play();
                 break;
             case 1:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
@@ -528,6 +542,7 @@ public class QuestManager : MonoBehaviour
         controller.agent.ResetPath();
         controller.hasControl = false;
         buttonchurch.GetComponent<Animator>().Play("buttonpressed");
+        buttonchurch.GetComponent<AudioSource>().Play();
         squireStep = 8;
         buttonScript.isTalkable = false;
         RunQuest(1);
@@ -948,6 +963,11 @@ public class QuestManager : MonoBehaviour
     void SideQuest(int npcID)
     {
         dialogSystem.DisplayText(sceneID, npcID, 0, "Main Camera", false);
+        if (sceneID == 2 && npcID == 7)
+        {
+            if (sailorStep < 3)
+                sailorStep = 3;
+        }
     }
 
     #region NPCs Loading
