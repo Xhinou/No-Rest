@@ -561,6 +561,7 @@ public class QuestManager : MonoBehaviour
     private bool goldGet = false;    
     public IEnumerator SailorQuest(int step, int npcID)
     {
+        GameObject sword = GameObject.Find("Sword");
         switch (step) {
             case 0:
                 intro = true;
@@ -688,6 +689,7 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 chiefScript.isTalkable = true;
                 sailorScript.isTalkable = true;
+                triggers[9].GetComponent<Collider>().enabled = true;
                 sailorStep = 4;
                 break;
             case 4:
@@ -706,7 +708,8 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 playerAnimator.Play("Lie Down");
                 yield return new WaitForSeconds(6f);
-                GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
+                sword.GetComponent<Animator>().Play("Damocles");
+                sword.GetComponent<AudioSource>().Play();
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
@@ -723,7 +726,8 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 playerAnimator.Play("Lie Down");
                 yield return new WaitForSeconds(6f);
-                GameObject.Find("Sword").GetComponent<Animator>().Play("Damocles");
+                sword.GetComponent<Animator>().Play("Damocles");
+                sword.GetComponent<AudioSource>().Play();
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
@@ -765,16 +769,7 @@ public class QuestManager : MonoBehaviour
                 {
                     dialogSystem.ForceLine(4, null, null);
                     for (int i = 5; i < 9; i++)
-                        triggers[i].GetComponent<BoxCollider>().isTrigger = false;
-                    if (killerStep != 2)
-                    {
-                        newPos = GameObject.Find("ChiefEndPos");
-                        newPos2 = GameObject.Find("SailorEndPos");
-                        chiefTr.position = newPos.transform.position;
-                        sailorTr.position = newPos2.transform.position;
-                        chiefScript.isTalkable = true;
-                        sailorScript.isTalkable = true;
-                    }
+                        triggers[i].GetComponent<Collider>().isTrigger = false;
                     goldScript.isTalkable = true;
                     greedStep = 2;
                 }
@@ -816,6 +811,7 @@ public class QuestManager : MonoBehaviour
                 controller.agent.ResetPath();
                 controller.hasControl = false;
                 controller.anim.Play("Punch");
+                gold.GetComponent<AudioSource>().Play();
                 yield return new WaitForSeconds(1f);
                 goldGet = true;
                 string color = controller.itemColor;
@@ -843,16 +839,6 @@ public class QuestManager : MonoBehaviour
         if (step == 0)
         {
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam5", false);
-            for (int i = 5; i < 9; i++)
-                triggers[i].GetComponent<BoxCollider>().isTrigger = false;
-            sailorNav.enabled = false;
-            chiefNav.enabled = false;
-            newPos = GameObject.Find("SailorEndPos");
-            newPos2 = GameObject.Find("ChiefEndPos");
-            sailorTr.position = newPos.transform.position;
-            chiefTr.position = newPos2.transform.position;
-            sailorNav.enabled = true;
-            chiefNav.enabled = true;
             while (dialogSystem.theText.enabled == true)
                 yield return null;
             while (dialogSystem.theText.enabled == false)
@@ -870,6 +856,13 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = true;
                 chief.SetActive(false);
                 killerStep = 3;
+                sailorNav.enabled = false;
+                newPos = GameObject.Find("SailorEndPos");
+                sailorTr.position = newPos.transform.position;
+                sailorNav.enabled = true;
+                for (int i = 5; i < 9; i++)
+                    triggers[i].GetComponent<Collider>().isTrigger = false;
+                triggers[9].GetComponent<Collider>().enabled = true;
                 sailorStep = 5;
                 karma -= 2;
             }
@@ -899,8 +892,6 @@ public class QuestManager : MonoBehaviour
                     killer.GetComponent<Animator>().Play("Die");
                     yield return new WaitForSeconds(3f);
                     controller.hasControl = true;
-                    if (sailorStep < 3)
-                        sailorStep = 3;
                     killerStep = 2;
                 }
                 else
@@ -926,14 +917,6 @@ public class QuestManager : MonoBehaviour
         {
             if (sailorStep < 3)
                 sailorStep = 3;
-            sailorNav.enabled = false;
-            chiefNav.enabled = false;
-            newPos = GameObject.Find("SailorEndPos");
-            newPos2 = GameObject.Find("ChiefEndPos");
-            sailorTr.position = newPos.transform.position;
-            chiefTr.position = newPos2.transform.position;
-            sailorNav.enabled = true;
-            chiefNav.enabled = true;
             dialogSystem.DisplayText(sceneID, npcID, step, "Cam6", false);
             if (!goldGet)
                 dialogSystem.ForceLine(0, null, 2);
