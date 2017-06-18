@@ -159,13 +159,25 @@ public class TriggersManager : MonoBehaviour
                             qManager.squireStep = 10;
                             qManager.RunQuest(1);
                             break;
+                        case "ChurchTrig":
+                            foreach (AudioSource audio in qManager.ambianceMedWorld)
+                                audio.mute = true;
+                            controller.audioWalk.clip = Resources.Load("Sounds/walk_lobby") as AudioClip;
+                            controller.audioWalk.Play();
+                            break;
                         default:
                             break;
                     }
-                } else
+                }
+                else
                 {
                     if (gameObject.name == "ChurchTrig")
-                        qManager.CameraZoom(true);
+                    {
+                        foreach (AudioSource audio in qManager.ambianceMedWorld)
+                            audio.mute = false;
+                        controller.audioWalk.clip = Resources.Load("Sounds/walk_gravel") as AudioClip;
+                        controller.audioWalk.Play();
+                    }
                 }
                 break;
             #endregion World 1
@@ -239,6 +251,10 @@ public class TriggersManager : MonoBehaviour
                         case "HouseTrigger":
                             houseW2Animator.SetBool("isTrig", isEntering);
                             break;
+                        case "GreatShrine":
+                            controller.audioWalk.clip = Resources.Load("Sounds/walk_lobby") as AudioClip;
+                            controller.audioWalk.Play();
+                            break;
                         default:
                             Debug.Log("Can't find the trigger. Check for its name in the code");
                             break;
@@ -250,6 +266,10 @@ public class TriggersManager : MonoBehaviour
                     {
                         case "HouseTrigger":
                             houseW2Animator.SetBool("isTrig", isEntering);
+                            break;
+                        case "GreatShrine":
+                            controller.audioWalk.clip = Resources.Load("Sounds/walk_gravel") as AudioClip;
+                            controller.audioWalk.Play();
                             break;
                         default:
                             break;

@@ -159,7 +159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4779289385569826}
   - component: {fileID: 82394763206024034}
-  - component: {fileID: 114595624424037118}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -207,7 +206,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2357def482aa75141888c01bbf6d631a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -287,12 +286,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84017f590bf1814c98558697cd403d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneID: 0
-  fadeScreen: {fileID: 1313399125556180}
+  particles: {fileID: 0}
+  menuCanvas: {fileID: 0}
+  fadeScreenStart: {fileID: 0}
+  fadeScreenPlay: {fileID: 0}
+  title: {fileID: 0}
   buttons:
-  - {fileID: 114324930361550444}
-  - {fileID: 114802848980938330}
+  - {fileID: 0}
+  - {fileID: 0}
+  theButtons: []
   fadeDuration: 1.2
+  textToFade: []
 --- !u!114 &114092214949014448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -481,17 +485,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NO REST
---- !u!114 &114595624424037118
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1894107325368528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc362d195b645714c8c4dd8d4a7521d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114600084847856724
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,8 +9,8 @@ public class QuestManager : MonoBehaviour
     public static float audioLisVolume;
     public ParticleSystem[] particles;
     public int sceneID;
-    public AudioClip[] audioClips;
-    public AudioSource theAudio;
+    /*public AudioClip[] audioClips;
+    public AudioSource theAudio;*/
     Animator playerAnimator, godAnimator;
     GameObject
         newPos,
@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
     public GameObject[] triggers = new GameObject[7];
     public static int karma = -1;
     [HideInInspector] public static bool tuto = true;
+    public static bool cheat = false;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -30,6 +31,7 @@ public class QuestManager : MonoBehaviour
     public GameObject
         scriptSystem,
         player;
+    [HideInInspector] public AudioSource[] ambianceMedWorld;
 
     private void Awake()
     {
@@ -41,8 +43,7 @@ public class QuestManager : MonoBehaviour
         AudioListener.volume = audioLisVolume;
         controller = player.GetComponent<CharacterClickingController>();
         dialogSystem = scriptSystem.GetComponent<DialoguesSystem>();
-        if (karmaStep != 0)
-            theAudio = GameObject.FindWithTag("Audio").GetComponent<AudioSource>();
+        //if (karmaStep != 0) theAudio = GameObject.FindWithTag("Audio").GetComponent<AudioSource>();
         cam = GameObject.Find("Main Camera");
         mainCam = cam.GetComponent<Camera>();
         mainCam.fieldOfView = 14;
@@ -52,6 +53,10 @@ public class QuestManager : MonoBehaviour
             DialoguesSystem.language = "EN_";
         if (sceneID != 0)
             RunIntro(sceneID);
+        if (sceneID == 1)
+        {
+            ambianceMedWorld = GameObject.Find("AmbianceAudio").GetComponents<AudioSource>();
+        }
         else
         {
             godAnimator = GameObject.Find("Divinity").GetComponent<Animator>();
@@ -62,29 +67,35 @@ public class QuestManager : MonoBehaviour
     int shot = 0;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
-        else if (Input.GetKeyDown(KeyCode.Print))
+        if (!cheat)
         {
-            Application.CaptureScreenshot("Screenshots/Screenshot" + shot + ".png");
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
         }
-        else if (Input.GetKeyDown(KeyCode.F1))
-            LoadWorld(1);
-        else if (Input.GetKeyDown(KeyCode.F2))
-            LoadWorld(2);
-        else if (Input.GetKeyDown(KeyCode.F3))
-            LoadWorld(0);
-        else if (Input.GetKeyDown(KeyCode.Backspace))
+        else if (cheat)
         {
-            karma = -1;
-            karmaStep = 0;
-            tuto = true;
-            LoadWorld(0);
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+            else if (Input.GetKeyDown(KeyCode.Print))
+                Application.CaptureScreenshot("Screenshots/Screenshot" + shot + ".png");
+            else if (Input.GetKeyDown(KeyCode.F1))
+                SceneManager.LoadScene(1);
+            else if (Input.GetKeyDown(KeyCode.F2))
+                SceneManager.LoadScene(2);
+            else if (Input.GetKeyDown(KeyCode.F3))
+                SceneManager.LoadScene(0);
+            else if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                karma = -1;
+                karmaStep = 0;
+                tuto = true;
+                SceneManager.LoadScene(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.KeypadPlus))
+                karma++;
+            else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+                karma--;
         }
-        else if (Input.GetKeyDown(KeyCode.KeypadPlus))
-            karma++;
-        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            karma--;
     }
 
     public void RunIntro(int _sceneID)
@@ -228,12 +239,12 @@ public class QuestManager : MonoBehaviour
                     while (!dialogSystem.isDisabled)
                         yield return null;
                     if (dialogSystem.lastChoice == 0)
-                        LoadWorld(1);
+                        SceneManager.LoadScene(1);
                     else // credits
                     {
                         karma = -1;
                         karmaStep = 0;
-                        LoadWorld(0);
+                        SceneManager.LoadScene(0);
                     }
                 }
                 else //Karma is BAD
@@ -713,7 +724,7 @@ public class QuestManager : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
-                LoadWorld(0);
+                SceneManager.LoadScene(0);
                 break;
             case 5:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
@@ -731,7 +742,7 @@ public class QuestManager : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
                 particles[1].Play();
                 yield return new WaitForSeconds(2.5f);
-                LoadWorld(0);
+                SceneManager.LoadScene(0);
                 break;
             default:
                 break;
@@ -811,8 +822,8 @@ public class QuestManager : MonoBehaviour
                 controller.agent.ResetPath();
                 controller.hasControl = false;
                 controller.anim.Play("Punch");
-                gold.GetComponent<AudioSource>().Play();
                 yield return new WaitForSeconds(1f);
+                gold.GetComponent<AudioSource>().Play();
                 goldGet = true;
                 string color = controller.itemColor;
                 GameObject itemInfoText = GameObject.Find("ItemInfoText");
@@ -1075,16 +1086,6 @@ public class QuestManager : MonoBehaviour
             anotherCR = false;
     }
 
-    protected void LoadWorld(int worldToLoad)
-    {
-        if (theAudio != null)
-        {
-            theAudio.clip = audioClips[worldToLoad];
-            theAudio.Play();
-        }
-        SceneManager.LoadScene(worldToLoad);
-    }
-
     [Range(1,5)] public float smoothSpeed;
     [Range(25, 40)] public int maxView;
     bool inInterpolation;
@@ -1133,9 +1134,11 @@ public class QuestManager : MonoBehaviour
         {
             dialogSystem.DisplayText(sceneID, 1, 0, "Main Camera", false);
             dialogSystem.SetToDial("0_1_0_10-0", 1, "0");
-
-            while (!dialogSystem.isDisabled)
+            while (dialogSystem.theText.enabled)
                 yield return null;
+            while (!dialogSystem.theText.enabled)
+                yield return null;
+            controller.hasControl = true;
             while (!controller.isMoving)
                 yield return null;
             yield return new WaitForSeconds(1);
@@ -1155,7 +1158,7 @@ public class QuestManager : MonoBehaviour
         if (sceneID == 0)
             player.SetActive(false);
         yield return new WaitForSeconds(1.3f);
-        LoadWorld(worldToLoad);
+        SceneManager.LoadScene(worldToLoad);
     }
     #endregion Lobby Only
 

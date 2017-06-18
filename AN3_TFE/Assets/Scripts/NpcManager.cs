@@ -17,6 +17,7 @@ public class NpcManager : MonoBehaviour
     CharacterClickingController controller;
     NavMeshAgent agent;
     Animator anim;
+    public AudioSource audioWalk;
 
     void Awake()
     {
@@ -46,12 +47,16 @@ public class NpcManager : MonoBehaviour
                             agent.ResetPath();
                             isMoving = false;
                             anim.SetBool("isMoving", isMoving);
+                            if (audioWalk != null)
+                                audioWalk.mute = true;
                         }
                     }
                     else
                     {
                         isMoving = true;
                         anim.SetBool("isMoving", isMoving);
+                        if (audioWalk != null)
+                            audioWalk.mute = false;
                     }
                 }
             }
