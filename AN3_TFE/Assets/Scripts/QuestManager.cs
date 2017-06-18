@@ -17,9 +17,8 @@ public class QuestManager : MonoBehaviour
         newPos2,
         cam;
     public GameObject[] triggers = new GameObject[7];
-    public static int karma = -1;
-    [HideInInspector] public static bool tuto = true;
-    public static bool cheat = false;
+    public static int karma = -1;public static bool tuto = true;
+    public static bool cheat = true;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -30,7 +29,9 @@ public class QuestManager : MonoBehaviour
     Camera mainCam;
     public GameObject
         scriptSystem,
-        player;
+        player,
+        pause,
+        menu;
     [HideInInspector] public AudioSource[] ambianceMedWorld;
 
     private void Awake()
@@ -52,10 +53,12 @@ public class QuestManager : MonoBehaviour
         if (DialoguesSystem.language == null)
             DialoguesSystem.language = "EN_";
         if (sceneID != 0)
-            RunIntro(sceneID);
-        if (sceneID == 1)
         {
-            ambianceMedWorld = GameObject.Find("AmbianceAudio").GetComponents<AudioSource>();
+            if (sceneID == 1)
+            {
+                ambianceMedWorld = GameObject.Find("AmbianceAudio").GetComponents<AudioSource>();
+            }
+            RunIntro(sceneID);
         }
         else
         {
@@ -70,12 +73,12 @@ public class QuestManager : MonoBehaviour
         if (!cheat)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                Application.Quit();
+                PauseGame();
         }
         else if (cheat)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                Application.Quit();
+                PauseGame();
             else if (Input.GetKeyDown(KeyCode.Print))
                 Application.CaptureScreenshot("Screenshots/Screenshot" + shot + ".png");
             else if (Input.GetKeyDown(KeyCode.F1))
@@ -86,10 +89,7 @@ public class QuestManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             else if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                karma = -1;
-                karmaStep = 0;
-                tuto = true;
-                SceneManager.LoadScene(0);
+                Reload();
             }
             else if (Input.GetKeyDown(KeyCode.KeypadPlus))
                 karma++;
@@ -1122,7 +1122,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    #region Lobby Only
     private IEnumerator Incarnation()
     {
         player.SetActive(false);
@@ -1160,7 +1159,43 @@ public class QuestManager : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
         SceneManager.LoadScene(worldToLoad);
     }
-    #endregion Lobby Only
+
+    public void Reload()
+    {
+        karma = -1;
+        karmaStep = 0;
+        tuto = true;
+        SceneManager.LoadScene(0);
+    }
+
+    public void PauseGame()
+    {
+        if (sceneID != 0)
+        {
+            if (!pause.activeInHierarchy)
+            {
+                pause.SetActive(true);
+            }
+            else
+            {
+                pause.SetActive(false);
+            }
+        }
+        else
+        {
+            if (!menu.activeInHierarchy)
+            {
+                if (!pause.activeInHierarchy)
+                {
+                    pause.SetActive(true);
+                }
+                else
+                {
+                    pause.SetActive(false);
+                }
+            }
+        }
+    }
 
     #endregion Methods
 }

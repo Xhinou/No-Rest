@@ -70,7 +70,8 @@ public class MainMenu : MonoBehaviour
         fadeScreenPlay.CrossFadeAlpha(0f, fadeDuration, false);
         particles.SetActive(false);
         StartCoroutine(qManager.CameraZoom(true));
-        yield return new WaitForSeconds(2);  
+        yield return new WaitForSeconds(2);
+        menuCanvas.SetActive(false);
         qManager.RunIntro(qManager.sceneID);
     }
 

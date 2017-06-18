@@ -18,6 +18,14 @@ public class CharacterClickingController : MonoBehaviour
     public GameObject rightHand;
     public AudioSource audioWalk;
     Camera mainCam;
+    QuestManager qManager;
+    GameObject scriptSystem;
+
+    void Awake()
+    {
+        scriptSystem = GameObject.Find("ScriptSystem");
+        qManager = scriptSystem.GetComponent<QuestManager>();
+    }
 
     void Start()
     {
@@ -32,7 +40,7 @@ public class CharacterClickingController : MonoBehaviour
         {
             Application.Quit();
         }
-        if (Input.GetMouseButton(0) && hasControl)
+        if (Input.GetMouseButton(0) && hasControl && !qManager.pause.activeInHierarchy)
         {
             RaycastHit hit;
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, navMap.value))
