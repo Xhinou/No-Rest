@@ -277,6 +277,7 @@ public class QuestManager : MonoBehaviour
                 particles[0].Play();
                 yield return new WaitForSeconds(2.5f);
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
+                arthur.GetComponent<Animator>().Play("Talk");
                 while (dialogSystem.theText.enabled == true)
                     yield return null;
                 while (dialogSystem.theText.enabled == false)
@@ -313,6 +314,7 @@ public class QuestManager : MonoBehaviour
                 {
                     dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.0", false);
                     dialogSystem.ForceLine(1, null, null);
+                    arthur.GetComponent<Animator>().Play("Talk");
                     while (!dialogSystem.isDisabled)
                         yield return null;
                     if (dialogSystem.lastChoice == 1)
@@ -326,6 +328,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 2:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
+                guard.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 if (dialogSystem.lastChoice == 1)
@@ -365,6 +368,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 3:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
+                guard.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 remparts.GetComponent<Animator>().Play("grid");
@@ -383,6 +387,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 4:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                king.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 newPos = GameObject.Find("ArthurWaitPos2");
@@ -416,6 +421,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 5:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                king.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
@@ -440,6 +446,7 @@ public class QuestManager : MonoBehaviour
                 if (merrynStep == 0)
                 {
                     dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                    arthur.GetComponent<Animator>().Play("Talk");
                     buttonScript.isTalkable = true;
                     squireStep = 7;
                 }
@@ -450,9 +457,11 @@ public class QuestManager : MonoBehaviour
                 break;
             case 7:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                arthur.GetComponent<Animator>().Play("Talk");
                 break;
             case 8:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                arthur.GetComponent<Animator>().Play("Talk");
                 if (merrynStep == 0)
                 {
                     dialogSystem.ForceLine(0, 1, null);
@@ -466,6 +475,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 9:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                arthur.GetComponent<Animator>().Play("Talk");
                 break;
             case 10:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4", false);
@@ -482,6 +492,7 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = false;
                 controller.canSkipDial = false;
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4", false);
+                arthur.GetComponent<Animator>().Play("Talk");
                 if (dialogSystem.lastChoice == 0)
                 {
                     while (!dialogSystem.isDisabled) ;
@@ -510,6 +521,7 @@ public class QuestManager : MonoBehaviour
         {
             case 0:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                merryn.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 if (dialogSystem.lastChoice == 0)
@@ -534,15 +546,18 @@ public class QuestManager : MonoBehaviour
                 break;
             case 1:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                merryn.GetComponent<Animator>().Play("Talk");
                 buttonScript.isTalkable = true;
                 squireStep = 7;
                 merrynStep = 2;
                 break;
             case 2:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                merryn.GetComponent<Animator>().Play("Talk");
                 break;
             case 3:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
+                merryn.GetComponent<Animator>().Play("Talk");
                 break;
         }
         yield return null;
@@ -593,6 +608,7 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 }
                 dialogSystem.ForceLine(1, null, null);
+                sailor.GetComponent<Animator>().Play("Talk");
                 controller.canSkipDial = true;
                 while (!dialogSystem.isDisabled)
                     yield return null;
@@ -612,6 +628,7 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
                     karma += 1;
                     dialogSystem.ForceLine(0, 1, null);
+                    sailor.GetComponent<Animator>().Play("Talk");
                     for (int i = 0; i < 3; i++)
                         triggers[i].GetComponent<BoxCollider>().isTrigger = false;
                 }
@@ -620,6 +637,7 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1b", false);
                     karma -= 1;
                     dialogSystem.ForceLine(2, null, null);
+                    sailor.GetComponent<Animator>().Play("Talk");
                     while (!dialogSystem.isDisabled)
                         yield return null;
                     sailor.tag = "Untagged";
@@ -639,6 +657,7 @@ public class QuestManager : MonoBehaviour
                 if (controller.isHolding)
                 {
                     dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.1", false);
+                    sailor.GetComponent<Animator>().Play("Talk");
                     GameObject heldItem = GameObject.FindWithTag("held");
                     if (heldItem.name == "Stone")
                     {
@@ -672,10 +691,12 @@ public class QuestManager : MonoBehaviour
                 {
                     dialogSystem.DisplayText(sceneID, npcID, step, "Main Camera", false);
                     dialogSystem.ForceLine(0, 1, null);
+                    sailor.GetComponent<Animator>().Play("Talk");
                 }
                 break;
             case 3:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.2", false);
+                sailor.GetComponent<Animator>().Play("Talk");
                 if (greedStep == 0 && killerStep == 0 && harshStep == 0)
                 {
                     dialogSystem.ForceLine(0, 2, null);
@@ -710,6 +731,7 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.ForceLine(5, null, null);
                 else
                     dialogSystem.ForceLine(0, 4, null);
+                chief.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
@@ -728,6 +750,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case 5:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
+                GameObject.Find("EndNative").GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
@@ -972,7 +995,8 @@ public class QuestManager : MonoBehaviour
         arthur,
         merryn,
         king,
-        buttonchurch;
+        buttonchurch,
+        guard;
     [HideInInspector]
     public NpcManager
        arthurScript,
@@ -1014,6 +1038,7 @@ public class QuestManager : MonoBehaviour
                 arthur = GameObject.Find("Arthur");
                 merryn = GameObject.Find("Merryn");
                 king = GameObject.Find("King");
+                guard = GameObject.Find("Guard");
                 buttonchurch = GameObject.Find("ButtonChurch");
                 arthurScript = arthur.GetComponent<NpcManager>();
                 merrynScript = merryn.GetComponent<NpcManager>();

@@ -9,7 +9,8 @@ public class NpcManager : MonoBehaviour
         isClicked,
         notNpc,
         isMoving,
-        lookPlayer;
+        lookPlayer,
+        generic;
     [HideInInspector] public GameObject
         scriptSystem,
         player;

@@ -95,6 +95,12 @@ public class DialoguesSystem : MonoBehaviour
         fileName = textFile.name.Split('-');
         choicesCount = int.Parse(fileName[1]);
         UpdateLine();
+        GameObject npcTalk = GameObject.FindWithTag("closeToPlayer");
+        if (npcTalk != null)
+        {
+            if (npcTalk.GetComponent<NpcManager>().generic)
+                npcTalk.GetComponent<Animator>().Play("Talk");
+        }
     }
 
     public void ResumeDialog()
