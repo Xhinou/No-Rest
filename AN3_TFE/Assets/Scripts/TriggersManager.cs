@@ -140,12 +140,12 @@ public class TriggersManager : MonoBehaviour
                         case "PotenceTrig":
                             GameObject.Find("Remparts").GetComponent<Animator>().Play("gridclose");
                             GetComponent<Collider>().enabled = false;
+                            controller.hasControl = false;
                             controller.agent.ResetPath();
                             newPos = GameObject.Find("PlayerPosPotence");
                             StartCoroutine(qManager.ObjectToPos(player, newPos));
                             while (qManager.isCoroutineRunning)
                                 yield return null;
-                            controller.hasControl = false;
                             qManager.RunQuest(1);
                             break;
                         case "OutCityTrig":

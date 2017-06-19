@@ -24,8 +24,7 @@ public class QuestManager : MonoBehaviour
         intro,
         isCoroutineRunning;
     CharacterClickingController controller;
-    public 
-        DialoguesSystem dialogSystem;
+    public DialoguesSystem dialogSystem;
     Camera mainCam;
     public GameObject
         scriptSystem,
@@ -397,6 +396,7 @@ public class QuestManager : MonoBehaviour
                 king.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = false;
                 newPos = GameObject.Find("ArthurWaitPos2");
                 arthur.transform.position = newPos.transform.position;
                 arthurNav.enabled = true;
@@ -537,9 +537,13 @@ public class QuestManager : MonoBehaviour
                 if (dialogSystem.lastChoice == 0)
                 {
                     karma++;
-                    merryn.GetComponent<AudioSource>().Play();
-                    GameObject.Find("Teleportation").GetComponent<ParticleSystem>().Play();
                     yield return new WaitForSeconds(1f);
+                    merryn.GetComponent<AudioSource>().Play();
+                    for (int i = 2; i < 5; i++)
+                    {
+                        if (particles[i] != null)
+                            particles[i].Play();
+                    }
                     newPos = GameObject.Find("MerrynChurchPos");
                     merryn.transform.position = newPos.transform.position;
                     merryn.GetComponent<NavMeshAgent>().enabled = true;
