@@ -168,13 +168,20 @@ public class DialoguesSystem : MonoBehaviour
 
     void LoadFiles(int choice)
     {
-       if (choiceString != "")
+        if (choiceString != "")
             prevChoiceString = choiceString;
         if (choice != -1)
             choiceString = prevChoiceString + choice;
         if (order == 0)
             choiceString = "";
         textFile = null;
+        if (qManager.sceneID == 2)
+        {
+            if (order + choiceString == "41101")
+            {
+                qManager.goodDial = true;
+            }
+        }
         for (int i = 0; i < 4; i++)
         {
             textFile = Resources.Load("Texts/" + language +  sceneID + "_" + npcID + "_" + step + "_" + order + choiceString + "-" + i) as TextAsset;

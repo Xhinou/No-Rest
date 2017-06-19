@@ -47,6 +47,7 @@ public class MainMenu : MonoBehaviour
     public void RunGame()
     {
         print("PLAY");
+        QuestManager.karma = -1;
         StartCoroutine(FadeOutAndPlay());
     }
 
