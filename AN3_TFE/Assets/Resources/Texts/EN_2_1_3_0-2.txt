@@ -1,6 +1,6 @@
-﻿<i>Sailor</i>: This is quite a nice place. And look at those tiny huts. And this lovely people.
+﻿<i>Sailormun</i>: This is quite a nice place. And look at those tiny huts. And this lovely people.
 I bet that they can't even read a treaty, ah ah!
-<i>Chief</i>: Welcome, travelers. What brings you here on our ancestral lands by this Mooooon season?
-<i>Sailor</i>: Captain! You're so late! We don't have much time to sign the treaty so please talk quickly to the chief!
-<i>Chief</i>: I'm sorry that I can't talk with you right now, but I'm quite busy with the Mooooon Ceremony.
+<i>Chiefaak'ab</i>: Welcome, travelers. What brings you here on our ancestral lands by this Mooooon season?
+<i>Sailormun</i>: Captain! You're so late! We don't have much time to sign the treaty so please talk quickly to the chief!
+<i>Chiefaak'ab</i>: I'm sorry that I can't talk with you right now, but I'm quite busy with the Mooooon Ceremony.
 Meet me at the Great Shrine where we could discuss.

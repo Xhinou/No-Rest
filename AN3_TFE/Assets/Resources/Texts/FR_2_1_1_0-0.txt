@@ -1,4 +1,4 @@
-﻿<i>Marin</i>: Oh, Capitaine, j'ai oublié mon stylo pour signer le traité!
+﻿<i>Marin Ade</i>: Oh, Capitaine, j'ai oublié mon stylo pour signer le traité!
 Peut-être pourriez-vous ramasser quelque chose aux alentours pour le remplacer.
-<i>Marin</i>: Seigneur, je me suis perdu! Cette petite jungle est plus grande que je ne le pensais... Oh, vous êtes la Capitaine!
+<i>Marin Ade</i>: Seigneur, je me suis perdu! Cette petite jungle est plus grande que je ne le pensais... Oh, vous êtes la Capitaine!
 Je suis contente que vous ne vous êtes pas perdu comme moi. Venez par ici, le village est proche.

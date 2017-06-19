@@ -1,2 +1,2 @@
-﻿<i>Chief</i>: Follow me then. The Great Shrine is up there, on the cliff.
-<i>Sailor</i>: Well Captain, I guess we have to follow him to this kind of heretic building.
+﻿<i>Chiefaak'ab</i>: Follow me then. The Great Shrine is up there, on the cliff.
+<i>Sailormun</i>: Well Captain, I guess we have to follow him to this kind of heretic building.

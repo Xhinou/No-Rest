@@ -1,7 +1,7 @@
-﻿<i>Natif</i>: Hé, regardez! C'est lui! C'est leur capitaine! Il a organisé le meurtre de notre chef!
+﻿<i>Preparaktun</i>: Hé, regardez! C'est lui! C'est leur capitaine! Il a organisé le meurtre de notre chef!
 Amenez-le à la Cérémonie de la Luuuuune!
-<i>Marin</i>: Oh Capitaine, pourquoi?! Nous étions si près de signer le traité quand
-un taré -vraiment chelou comme mec au passage- est sorti de nulle part et a tué le chef!
+<i>Marin Ade</i>: Oh Capitaine, pourquoi?! Nous étions si près de signer le traité quand
+un taré- vraiment chelou comme mec au passage- est sorti de nulle part et a tué le chef!
 Il nous a dit que vous étiez d'accord avec cela, ainsi vous auriez l'or à vous seul! Vous me décevez énormément.
-<i>Natif</i>: J'AI DIT: à la Cérémonie de la Luuuuune!
+<i>Preparaktun</i>: J'AI DIT: à la Cérémonie de la Luuuuune!
 <i>Marin</i>: Par ici Capitaine, j'espère que ça ira pour vous.

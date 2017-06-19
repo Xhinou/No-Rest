@@ -1,5 +1,5 @@
-﻿<i>Natif</i>: Je suis trop impatient d'être a la Cérémonie de la Luuuuune!
+﻿<i>Helpiix</i>: Je suis trop impatient d'être a la Cérémonie de la Luuuuune!
 Est-ce vrai que vous, étranger, allez transcender cette année?
-<i>Natif</i>: Oh, hé. Heu... Ton ami vient de partir avec notre chef.
+<i>Helpiix</i>: Oh, hé. Heu... Ton ami vient de partir avec notre chef.
 Va au nord, vers la colline du Grand Autel de la Cérémonie de la Luuuuune.
 ...ou ne le fais pas. Mais seulement si tu veux ruiner le scénario.
