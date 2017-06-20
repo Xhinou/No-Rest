@@ -6,17 +6,20 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject
         particles,
-        menuCanvas;
+        menuCanvas,
+        credits,
+        mainMenu;
     public Image
         fadeScreenStart,
         fadeScreenPlay,
         title;
     public GameObject[] buttons;
     public Button[] theButtons;
-    public float fadeDuration;
+    public float fadeDuration, creditsSpeed;
     public Text[] textToFade;
     QuestManager qManager;
     GameObject scriptSystem;
+    public Animator creditsAnimator;
 
     private void Awake()
     {
@@ -34,7 +37,14 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         if (QuestManager.karmaStep == 0)
+        {
             StartCoroutine(FadeOutStart());
+            if (QuestManager.gameOver)
+            {
+                mainMenu.SetActive(false);
+                credits.SetActive(true);
+            }
+        }
         else
         {
             menuCanvas.SetActive(false);
@@ -42,6 +52,17 @@ public class MainMenu : MonoBehaviour
             qManager.RunIntro(qManager.sceneID);
         }
         //qManager.player.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (credits.activeInHierarchy)
+        {
+            if (Input.GetMouseButtonDown(0))
+                creditsAnimator.speed = creditsSpeed;
+            else if (Input.GetMouseButtonUp(0))
+                creditsAnimator.speed = 1;
+        }
     }
 
     public void RunGame()
@@ -75,6 +96,20 @@ public class MainMenu : MonoBehaviour
         menuCanvas.SetActive(false);
         qManager.RunIntro(qManager.sceneID);
     }
+
+   /* IEnumerator FadeInCredits()
+    {
+        fadeScreenStart.canvasRenderer.SetAlpha(1f);
+        fadeScreenStart.CrossFadeAlpha(1f, fadeDuration, false);
+        yield return new WaitForSeconds(1);
+        fadeScreenStart.color = new Color(0, 0, 0, 1);
+        credits.SetActive(true);
+    }
+
+    public void ShowCredits()
+    {
+        StartCoroutine(FadeInCredits());
+    }*/
 
     public void ExitGame()
     {

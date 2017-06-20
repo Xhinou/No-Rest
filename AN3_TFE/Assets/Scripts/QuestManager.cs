@@ -18,7 +18,7 @@ public class QuestManager : MonoBehaviour
         cam;
     public GameObject[] triggers = new GameObject[7];
     public static int karma;
-    public static bool tuto = true, cheat = true;
+    public static bool tuto = true, cheat = true, gameOver = false;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -249,6 +249,7 @@ public class QuestManager : MonoBehaviour
                     {
                         karma = -1;
                         karmaStep = 0;
+                        gameOver = true;
                         SceneManager.LoadScene(0);
                     }
                 }

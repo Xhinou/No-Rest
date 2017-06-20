@@ -1,0 +1,85 @@
+A game made for an
+end-of-study school project
+ESA St-Luc Brussels
+
+
+
+<i>Original concept</i>
+Éloïse Tricoli
+
+<i>Scenario</i>
+Éloïse Tricoli
+Aymeric Steinbach
+
+<i>Storyboard</i>
+Ludivine Reisen
+
+<i>Writing</i>
+Aymeric Steinbach
+
+
+
+<i>Game Design</i>
+Éloïse Tricoli
+Aymeric Steinbach
+Ludivine Reisen
+
+<i>Level Design</i>
+Éloïse Tricoli
+Aymeric Steinbach
+
+<i>Unity Development</i>
+Aymeric Steinbach
+
+
+
+<i>Lead Artist</i>
+Éloïse Tricoli
+
+<i>Concept Artist</i>
+Ludivine Reisen
+
+<i>Environment Design</i>
+Éloïse Tricoli
+Ludivine Reisen
+
+<i>Character Design</i>
+Éloïse Tricoli
+
+<i>Animations</i>
+Éloïse Tricoli
+
+<i>3D modeling</i>
+Éloïse Tricoli
+Ludivine Reisen
+
+<i>3D texturing</i>
+Éloïse Tricoli
+Ludivine Reisen
+
+
+
+<i>Programming</i>
+Aymeric Steinbach
+
+
+
+<i>Sound Design</i>
+Sarah Triquet
+Aymeric Steinbach
+
+<i>Music</i>
+Sarah Triquet
+
+<i>Sounds</i>
+Sarah Triquet
+Sound Fishing Exploitation License (RF)
+http://www.freesfx.co.uk
+
+
+
+<i>Extra Credits</i>
+Thanks to the Digital Arts professors of ESA St-Luc Brussels
+Thanks to every awesome tester
+Thank you, player, for playing the game
+but also for looking at these credits that far
