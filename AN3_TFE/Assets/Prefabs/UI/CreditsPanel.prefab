@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1560510683707180
 GameObject:
   m_ObjectHideFlags: 1
@@ -221,7 +221,7 @@ MonoBehaviour:
     Steinbach\n\n\n\n<i>Lead Artist</i>\n\xC9lo\xEFse Tricoli\n\n<i>Concept Artist</i>\nLudivine
     Reisen\n\n<i>Environment Design</i>\n\xC9lo\xEFse Tricoli\nLudivine Reisen\n\n<i>Character
     Design</i>\n\xC9lo\xEFse Tricoli\n\n<i>Animations</i>\n\xC9lo\xEFse Tricoli\n\n<i>3D
-    modeling</i>\n\xC9lo\xEFse Tricoli\nLudivine Reisen\n\n<i>3D texturing</i>\n\xC9lo\xEFse
+    modeling</i>\n\xC9lo\xEFse Tricoli\nLudivine Reisen\n\n<i>Texturing</i>\n\xC9lo\xEFse
     Tricoli\nLudivine Reisen\n\n\n\n<i>Programming</i>\nAymeric Steinbach\n\n\n\n<i>Sound
     Design</i>\nSarah Triquet\nAymeric Steinbach\n\n<i>Music</i>\nSarah Triquet\n\n<i>Sounds</i>\nSarah
     Triquet\n\rSound Fishing Exploitation License (RF)\nhttp://www.freesfx.co.uk\n\n\n\n<i>Extra

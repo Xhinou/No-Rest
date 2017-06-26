@@ -1,7 +1,7 @@
 ﻿<i>Merryn the wizard</i>: Finally you came here, stranger!
 Fun fact: I could have teleported here since the beginning! I don't know why I thought I was in danger.
-Anyway, I know everything about you and your quest. Here is the Old Cathedral were remains what you seek.
-<i>Arthur</i>: The Grail! I am now certain he is in there!
+Anyway, I know everything about you and your quest. Here is the Old Cathedral where remains what you seek.
+<i>Arthur</i>: The Grail! I am now certain it is in there!
 <i>Merryn the wizard</i>: The doors are locked by ancient sorcery, but I know how to ward it off! You will thank me later.
 Step back! I am casting dangerous magic here!
 ...

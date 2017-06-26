@@ -3,10 +3,10 @@ le premier étranger à participer à la Cérémonie de la Luuuuune.
 <i>Preparaktun</i>: La Cérémonie de la Luuuuune!
 <i>Chefaak'ab</i>: Allongez-vous sur le Grand Autel, s'il vous plaît. Nous allons commencer votre ascension.
 <i>Marin Ade</i>: Ça semble honnête. Faites-le Capitaine! Et rendez-nous riches!
-<i>Marin Ade</i>: Hé Capitaine! Pendant que vous étiez parti j'ai signe le traité. Vous n'étiez pas présent donc je l'ai un peu
-modifie pour quelques avantages personnels. Vous ne m'en voudrez pas, hein?
+<i>Marin Ade</i>: Hé Capitaine! Pendant que vous étiez parti j'ai signé le traité. Vous n'étiez pas présent donc je l'ai un peu
+modifié pour quelques avantages personnels. Vous ne m'en voudrez pas, hein?
 <i>Chefaak'ab</i>: La Cérémonie de la Luuuuune!
-<i>Marin Ade</i>: Ah oui, aussi ces personnes désirent que vous participiez a la Cérémonie de la Lune et-
+<i>Marin Ade</i>: Ah oui, aussi ces personnes désirent que vous participiez à la Cérémonie de la Lune et-
 <i>Chefaak'ab</i>: Luuuuune!
 <i>Marin Ade</i>: *hum* la Cérémonie de la Luuuuune!?
 <i>Chefaak'ab</i>: ='D

@@ -17,8 +17,8 @@ public class QuestManager : MonoBehaviour
         newPos2,
         cam;
     public GameObject[] triggers = new GameObject[7];
-    public static int karma;
-    public static bool tuto = true, cheat = true, gameOver = false;
+    public static int karma = -1;
+    public static bool tuto = true, cheat = false, gameOver = false;
     [HideInInspector] public bool
         hasFollowedSailor = true,
         intro,
@@ -85,7 +85,32 @@ public class QuestManager : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.F2))
                 SceneManager.LoadScene(2);
             else if (Input.GetKeyDown(KeyCode.F3))
-                SceneManager.LoadScene(0);
+            {
+                switch (sceneID)
+                {
+                    case 0:
+                        if (karmaStep == 1)
+                        {
+                            karmaStep = 2;
+                            SceneManager.LoadScene(1);
+                        }
+                        else
+                        {
+                            karmaStep = 1;
+                            SceneManager.LoadScene(2);
+                        }
+                        break;
+                    case 1:
+                        karmaStep = 2;
+                        SceneManager.LoadScene(0);
+                        break;
+                    case 2:
+                        karmaStep = 1;
+                        SceneManager.LoadScene(0);
+                        break;
+                    default: break;
+                }
+            }
             else if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 Reload();
@@ -208,10 +233,10 @@ public class QuestManager : MonoBehaviour
         switch (step)
         {
             case 0:
-                karma = -1;
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera", false);
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = false;
                 karmaStep = 1;
                 StartCoroutine(Desincarnation(2));
                 break;
@@ -230,16 +255,24 @@ public class QuestManager : MonoBehaviour
                 }
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                controller.hasControl = false;
                 karmaStep = 2;
                 StartCoroutine(Desincarnation(1));
                 break;
             case 2:
                 dialogSystem.DisplayText(sceneID, 0, step, "Main Camera", false);
+                while (!dialogSystem.isNewLine)
+                    yield return null;
+                dialogSystem.isNewLine = false;
                 if (karma > 0) //Karma is GOOD
                 {
                     dialogSystem.ForceLine(1, 4, null);
-                    while (!dialogSystem.isDisabled)
+                    while (dialogSystem.theText.enabled)
                         yield return null;
+                    while (!dialogSystem.theText.enabled)
+                        yield return null;
+                    dialogSystem.EndDialog();
+                    controller.hasControl = false;
                     if (dialogSystem.lastChoice == 0)
                     {
                         karmaStep = 1;
@@ -250,6 +283,9 @@ public class QuestManager : MonoBehaviour
                         karma = -1;
                         karmaStep = 0;
                         gameOver = true;
+                        player.SetActive(false);
+                        particles[1].Play();
+                        yield return new WaitForSeconds(2.3f);
                         SceneManager.LoadScene(0);
                     }
                 }
@@ -258,6 +294,7 @@ public class QuestManager : MonoBehaviour
                     dialogSystem.ForceLine(6, null, 0);
                     while (!dialogSystem.isDisabled)
                         yield return null;
+                    controller.hasControl = false;
                     karmaStep = 1;
                     StartCoroutine(Desincarnation(2));
                 }
@@ -272,6 +309,7 @@ public class QuestManager : MonoBehaviour
     //*------------------------------ WORLD 1 - THE KNIGHT ------------------------------*//
     [HideInInspector] public int squireStep = 0;
     private int merrynStep = 0, enigmStep = 0;
+    private bool failPassword = false;
 
     public IEnumerator SquireQuest(int step, int npcID)
     {
@@ -358,6 +396,7 @@ public class QuestManager : MonoBehaviour
                 else
                 {
                     karma--;
+                    failPassword = true;
                     controller.hasControl = false;
                     arthurNav.speed = 9f;
                     newPos = GameObject.Find("RunAwayPos");
@@ -381,15 +420,16 @@ public class QuestManager : MonoBehaviour
                 remparts.GetComponent<Animator>().Play("grid");
                 remparts.GetComponent<AudioSource>().Play();
                 newPos = GameObject.Find("GuardPosPotence");
-                StartCoroutine(ObjectToPos(GameObject.Find("Guard"), newPos));
+                StartCoroutine(ObjectToPos(guard, newPos));
                 newPos = GameObject.Find("PlayerPosPotence");
+                squireStep = 4;
                 StartCoroutine(ObjectToPos(player, newPos));
                 while (isCoroutineRunning)
+                {
+                    controller.hasControl = false;
                     yield return null;
-                while (isCoroutineRunning)
-                    yield return null;
+                }
                 controller.hasControl = false;
-                squireStep = 4;
                 RunQuest(1);
                 break;
             case 4:
@@ -419,12 +459,11 @@ public class QuestManager : MonoBehaviour
                     yield return null;
                 }
                 foule.enabled = false;
-                yield return new WaitForSeconds(1f);
                 foreach (GameObject g in leftNpc)
                     Destroy(g);
                 foreach (GameObject g in rightNpc)
                     Destroy(g);
-                   squireStep = 5;
+                squireStep = 5;
                 RunQuest(1);
                 break;
             case 5:
@@ -435,8 +474,18 @@ public class QuestManager : MonoBehaviour
                 controller.hasControl = false;
                 merrynScript.isTalkable = true;
                 arthur.GetComponent<Animator>().Play("Punch");
+                king.GetComponent<AudioSource>().Play();
                 king.GetComponent<Animator>().Play("Die");
-                yield return new WaitForSeconds(1f);
+                if (failPassword)
+                {
+                    newPos = GameObject.Find("GuardKingPos");
+                    StartCoroutine(ObjectToPos(guard, newPos));
+                    while (isCoroutineRunning)
+                        yield return null;
+                    guard.GetComponent<NpcManager>().isTalkable = false;
+                }
+                else
+                    yield return new WaitForSeconds(1f);
                 newPos = GameObject.Find("ArthurWaitPos2");
                 StartCoroutine(ObjectToPos(arthur, newPos));
                 while (isCoroutineRunning)
@@ -472,7 +521,7 @@ public class QuestManager : MonoBehaviour
                 arthur.GetComponent<Animator>().Play("Talk");
                 if (merrynStep == 0)
                 {
-                    dialogSystem.ForceLine(0, 1, null);
+                    dialogSystem.ForceLine(0, null, null);
                 }
                 GameObject.Find("Church").GetComponent<Animator>().Play("churchopen");
                 while (!dialogSystem.isDisabled)
@@ -488,21 +537,27 @@ public class QuestManager : MonoBehaviour
             case 10:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4", false);
                 newPos = GameObject.Find("ArthurGraalPos");
+                newPos2 = GameObject.Find("PlayerGraalPos");
                 StartCoroutine(ObjectToPos(arthur, newPos));
+                StartCoroutine(ObjectToPos(player, newPos2));
+                controller.LookAtNpc(arthur);
                 while (isCoroutineRunning)
+                {
+                    controller.hasControl = false;
                     yield return null;
+                }
+                controller.hasControl = false;
                 dialogSystem.ResumeDialog();
                 controller.canSkipDial = true;
                 while (dialogSystem.theText.enabled)
                     yield return null;
                 while (!dialogSystem.theText.enabled)
                     yield return null;
-                controller.hasControl = false;
-                controller.canSkipDial = false;
-                dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.4", false);
                 arthur.GetComponent<Animator>().Play("Talk");
                 while (!dialogSystem.isDisabled)
                     yield return null;
+                mainCam.fieldOfView = 14;
+                controller.hasControl = false;
                 if (dialogSystem.lastChoice == 0)
                 {
                     karma--;
@@ -514,7 +569,7 @@ public class QuestManager : MonoBehaviour
                 {
                     karma++;
                     arthur.GetComponent<Animator>().Play("Die");
-                    yield return new WaitForSeconds(3f);
+                    yield return new WaitForSeconds(2f);
                     playerAnimator.Play("Die");
                     yield return new WaitForSeconds(2f);
                     StartCoroutine(Desincarnation(0));
@@ -683,7 +738,6 @@ public class QuestManager : MonoBehaviour
                     StartCoroutine(ObjectToPos(sailor, newPos));
                     while (isCoroutineRunning)
                         yield return null;
-                    sailorScript.isTalkable = true;
                     hasFollowedSailor = true;
                 }
                 sailorStep = 2;
@@ -706,7 +760,7 @@ public class QuestManager : MonoBehaviour
                     }
                     else if (heldItem.name == "Charcoal")
                     {
-                        karma--;
+                        karma++;
                         dialogSystem.ForceLine(5, null, null);
                     }
                     Destroy(heldItem);
@@ -718,9 +772,9 @@ public class QuestManager : MonoBehaviour
                     sailorScript.isTalkable = false;
                      newPos = GameObject.Find("SailorPosVillage");
                     StartCoroutine(ObjectToPos(sailor, newPos));
+                    sailorStep = 3;
                     while (isCoroutineRunning)
                         yield return null;
-                    sailorStep = 3;
                 }
                 else
                 {
@@ -754,20 +808,23 @@ public class QuestManager : MonoBehaviour
                 sailorScript.isTalkable = false;
                 StartCoroutine(ObjectToPos(sailor, newPos));
                 StartCoroutine(ObjectToPos(chief, newPos2));
+                sailorStep = 4;
                 while (isCoroutineRunning)
                     yield return null;
-                chiefScript.isTalkable = true;
-                sailorScript.isTalkable = true;
                 triggers[9].GetComponent<Collider>().enabled = true;
-                sailorStep = 4;
                 break;
             case 4:
                 dialogSystem.DisplayText(sceneID, npcID, step, "Cam1.3", false);
                 if (killerStep == 2 || harshStep > 0)
+                {
                     dialogSystem.ForceLine(5, null, null);
+                    sailor.GetComponent<Animator>().Play("Talk");
+                }
                 else
+                {
                     dialogSystem.ForceLine(0, 4, null);
-                chief.GetComponent<Animator>().Play("Talk");
+                    chief.GetComponent<Animator>().Play("Talk");
+                }
                 while (!dialogSystem.isDisabled)
                     yield return null;
                 controller.hasControl = false;
@@ -952,6 +1009,7 @@ public class QuestManager : MonoBehaviour
                     controller.agent.ResetPath();
                     playerAnimator.Play("Punch");
                     yield return new WaitForSeconds(1f);
+                    killer.GetComponent<AudioSource>().Play();
                     Destroy(heldItem);
                     controller.isHolding = false;
                     karma++;
@@ -1225,6 +1283,7 @@ public class QuestManager : MonoBehaviour
         karma = -1;
         karmaStep = 0;
         tuto = true;
+        gameOver = false;
         SceneManager.LoadScene(0);
     }
 

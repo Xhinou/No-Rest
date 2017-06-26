@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class CharacterClickingController : MonoBehaviour
 {
@@ -15,11 +16,14 @@ public class CharacterClickingController : MonoBehaviour
     public Animator anim;
     public bool isMoving;
     public string itemColor;
-    public GameObject rightHand;
+    public GameObject rightHand, clicCube;
     public AudioSource audioWalk;
     Camera mainCam;
     QuestManager qManager;
-    GameObject scriptSystem;
+    GameObject
+        scriptSystem,
+        npcToLook;
+    public bool lookAtNpc = false;
 
     void Awake()
     {
@@ -36,16 +40,19 @@ public class CharacterClickingController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
         if (Input.GetMouseButton(0) && hasControl && !qManager.pause.activeInHierarchy)
         {
             RaycastHit hit;
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, navMap.value))
             {
                 agent.destination = hit.point;
+                if (Input.GetMouseButtonDown(0) && !hasClicked)
+                {
+                    //StopCoroutine("ClicFeedback");
+                    ClicFeedback(hit);
+                } else if (Input.GetMouseButtonDown(0) && hasClicked) {
+                    Destroy(_theClic);
+                }
                 if (hit.transform.tag == "static")
                     hasClicked = false;
             }
@@ -55,6 +62,13 @@ public class CharacterClickingController : MonoBehaviour
             Vector3 direction = (npc.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
+        }
+        if (!isPlayerTrigger && lookAtNpc)
+        {
+            Vector3 direction = (npcToLook.transform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.5f);
+
         }
         if (agent.enabled)
         {
@@ -83,5 +97,31 @@ public class CharacterClickingController : MonoBehaviour
     public void UnableControl()
     {
         hasControl = false;
+    }
+
+    public void LookAtNpc(GameObject _npcToLook)
+    {
+        lookAtNpc = true;
+        npcToLook = _npcToLook;
+    }
+
+    GameObject _theClic;
+
+    /*IEnumerator ClicFeedback(RaycastHit _hit)
+    {
+        if (_theClic != null)
+            Destroy(_theClic);
+        GameObject theClic = Instantiate(Resources.Load("Clic") as GameObject, agent.destination, Quaternion.identity);
+        _theClic = theClic;
+        yield return new WaitForSeconds(1f);
+        Destroy(theClic);
+    }*/
+
+    void ClicFeedback(RaycastHit _hit)
+    {
+        if (_theClic != null)
+            Destroy(_theClic);
+        GameObject theClic = Instantiate(Resources.Load("Clic") as GameObject, agent.destination, Quaternion.identity);
+        _theClic = theClic;
     }
 }

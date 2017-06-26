@@ -8,7 +8,8 @@ public class MainMenu : MonoBehaviour
         particles,
         menuCanvas,
         credits,
-        mainMenu;
+        mainMenu,
+        tyMenu;
     public Image
         fadeScreenStart,
         fadeScreenPlay,

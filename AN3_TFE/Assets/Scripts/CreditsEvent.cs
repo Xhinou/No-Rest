@@ -13,7 +13,8 @@ public class CreditsEvent : MonoBehaviour {
         }
         else
         {
-            Application.Quit();
+            menu.credits.SetActive(false);
+            menu.tyMenu.SetActive(true);
         }
     }
 }

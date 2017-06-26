@@ -248,6 +248,7 @@ public class TriggersManager : MonoBehaviour
                             StartCoroutine(qManager.ObjectToPos(player, newPos));
                             while (qManager.isCoroutineRunning)
                                 yield return null;
+                            controller.hasControl = false;
                             qManager.RunQuest(1);
                             break;
                         case "HouseTrigger":

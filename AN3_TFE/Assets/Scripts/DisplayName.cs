@@ -15,8 +15,8 @@ public class DisplayName : MonoBehaviour {
 	void Awake () {
         mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
         canvas = Instantiate(Resources.Load("ObjectNameDisplay")) as GameObject;
-        panel = canvas.transform.FindChild("Panel").gameObject;
-        theText = panel.transform.FindChild("Text").gameObject;
+        panel = canvas.transform.Find("Panel").gameObject;
+        theText = panel.transform.Find("Text").gameObject;
         nameText = theText.GetComponent<Text>();
 	}
 

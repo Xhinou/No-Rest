@@ -1,6 +1,6 @@
-﻿<i>Marin Ade</i>: Cet un bel endroit. Et regardez ces petites huttes. Et ces gens adorables.
+﻿<i>Marin Ade</i>: C'est un bel endroit. Et regardez ces petites huttes. Et ces gens adorables.
 Je parie qu'ils ne savent même pas lire un traité, ah ah!
 <i>Chefaak'ab</i>: Salutations, voyageurs. Qu'est-ce qui vous amène sur nos terres ancestrales en cette saison de la Luuuuune?
-<i>Marin Ade</i>: Capitaine! Vous êtes en retard! Nous n'avons plus trop le temps de signer le traité, donc parler-en rapidement avec le chef!
+<i>Marin Ade</i>: Capitaine! Vous êtes en retard! Nous n'avons plus trop le temps de signer le traité, donc parlez-en rapidement avec le chef!
 <i>Chefaak'ab</i>: Je suis désolé, mais je ne peux vous parler maintenant. Je suis assez occupé avec la Cérémonie de la Luuuuune.
-Rejoignez-moi au Grand Autel ou nous pourrons discuter.
+Rejoignez-moi au Grand Autel où nous pourrons discuter.
