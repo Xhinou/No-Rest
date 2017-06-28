@@ -30,12 +30,6 @@ public class CameraFollower : MonoBehaviour
         upRotation = Quaternion.Euler(25.11f, 131.594f, 0);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            StartCoroutine(CamRotation("Up"));
-    }
-
     void LateUpdate()
     {
         if (smooth)
